@@ -7,7 +7,7 @@
   "info": {
     "description": "Propel's query API DataSource",
     "author": {
-      "name": false,
+      "name": "Gabriel Musat Mestre",
       "url": "https://www.propeldata.com/"
     },
     "keywords": [

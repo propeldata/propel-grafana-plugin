@@ -10,7 +10,7 @@
     "sign": "grafana-toolkit plugin:sign",
     "start": "yarn watch"
   },
-  "author": false,
+  "author": "Gabriel Musat Mestre",
   "license": "Apache-2.0",
   "devDependencies": {
     "@grafana/toolkit": "latest",
