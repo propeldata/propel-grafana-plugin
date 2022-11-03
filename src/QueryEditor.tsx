@@ -1,31 +1,31 @@
-import defaults from 'lodash/defaults';
+import defaults from 'lodash/defaults'
 
-import React, { ChangeEvent, PureComponent } from 'react';
-import { LegacyForms } from '@grafana/ui';
-import { QueryEditorProps } from '@grafana/data';
-import { DataSource } from './datasource';
-import { defaultQuery, MyDataSourceOptions, MyQuery } from './types';
+import React, { ChangeEvent, PureComponent } from 'react'
+import { LegacyForms } from '@grafana/ui'
+import { QueryEditorProps } from '@grafana/data'
+import { DataSource } from './datasource'
+import { defaultQuery, MyDataSourceOptions, MyQuery } from './types'
 
-const { FormField } = LegacyForms;
+const { FormField } = LegacyForms
 
-type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
+type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>
 
 export class QueryEditor extends PureComponent<Props> {
-  onQueryTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { onChange, query } = this.props;
-    onChange({ ...query, queryText: event.target.value });
-  };
+  onQueryTextChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { onChange, query } = this.props
+    onChange({ ...query, queryText: event.target.value })
+  }
 
-  onConstantChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { onChange, query, onRunQuery } = this.props;
-    onChange({ ...query, constant: parseFloat(event.target.value) });
+  onConstantChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { onChange, query, onRunQuery } = this.props
+    onChange({ ...query, constant: parseFloat(event.target.value) })
     // executes the query
-    onRunQuery();
-  };
+    onRunQuery()
+  }
 
-  render() {
-    const query = defaults(this.props.query, defaultQuery);
-    const { queryText, constant } = query;
+  render (): React.ReactNode {
+    const query = defaults(this.props.query, defaultQuery)
+    const { queryText, constant } = query
 
     return (
       <div className="gf-form">
@@ -45,6 +45,6 @@ export class QueryEditor extends PureComponent<Props> {
           tooltip="Not used yet"
         />
       </div>
-    );
+    )
   }
 }
