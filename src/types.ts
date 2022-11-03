@@ -9,6 +9,15 @@ export const defaultQuery: Partial<MyQuery> = {
   constant: 6.5
 }
 
+export interface DataPoint {
+  Time: number
+  Value: number
+}
+
+export interface DataSourceResponse {
+  datapoints: DataPoint[]
+}
+
 /**
  * These are options configured for each DataSource instance
  */
@@ -21,4 +30,9 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
  */
 export interface MySecureJsonData {
   apiKey?: string
+}
+
+export interface PluginResponse {
+  status: string
+  message: string
 }
