@@ -1,0 +1,44 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "datasource",
+  "name": "propel-datasource",
+  "id": "propeldata-propel-datasource",
+  "metrics": true,
+  "info": {
+    "description": "Propel's query API DataSource",
+    "author": {
+      "name": false,
+      "url": "https://www.propeldata.com/"
+    },
+    "keywords": [
+      "propel",
+      "data",
+      "analytics",
+      "metric",
+      "datasource",
+      "datapool",
+      "propeldata"
+    ],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/grafana/grafana-starter-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/grafana/grafana-starter-datasource/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "plugins": []
+  }
+}
