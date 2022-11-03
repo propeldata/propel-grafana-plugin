@@ -1,6 +1,6 @@
 import { useAsync } from 'react-use'
 import type { SelectableValue } from '@grafana/data'
-import type { BasicDataSource } from '../../DataSource'
+import { DataSource } from '../../DataSource'
 
 interface AsyncQueryTypeState {
   loading: boolean
@@ -8,11 +8,9 @@ interface AsyncQueryTypeState {
   error: Error | undefined
 }
 
-export function useQueryTypes (datasource: BasicDataSource): AsyncQueryTypeState {
+export function useQueryTypes (datasource: DataSource): AsyncQueryTypeState {
   const result = useAsync(async () => {
-    const { queryTypes } = await datasource.getAvailableQueryTypes()
-
-    return queryTypes.map((queryType) => ({
+    return DataSource.queryTypes.map((queryType) => ({
       label: queryType,
       value: queryType
     }))

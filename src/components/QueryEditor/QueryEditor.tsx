@@ -8,6 +8,14 @@ import { useChangeSelectableValue } from './useChangeSelectableValue'
 import type { EditorProps } from './types'
 import { useChangeString } from './useChangeString'
 
+function getStyles (theme: GrafanaTheme2): { editor: string } {
+  return {
+    editor: css`
+      margin: ${theme.spacing(0, 0.5, 0.5, 0)};
+    `
+  }
+}
+
 export function QueryEditor (props: EditorProps): ReactElement {
   const { datasource, query } = props
   const styles = useStyles2(getStyles)
@@ -49,12 +57,4 @@ export function QueryEditor (props: EditorProps): ReactElement {
       </InlineFieldRow>
     </>
   )
-}
-
-function getStyles (theme: GrafanaTheme2) {
-  return {
-    editor: css`
-      margin: ${theme.spacing(0, 0.5, 0.5, 0)};
-    `
-  }
 }

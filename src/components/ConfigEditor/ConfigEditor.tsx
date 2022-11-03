@@ -1,64 +1,76 @@
 import React, { ReactElement } from 'react'
-import { FieldSet, InlineField, Input, LegacyForms } from '@grafana/ui'
+import { FieldSet, InlineField, Input } from '@grafana/ui'
 import type { EditorProps } from './types'
 import { useChangeOptions } from './useChangeOptions'
-import { useChangeSecureOptions } from './useChangeSecureOptions'
-import { useResetSecureOptions } from './useResetSecureOptions'
 import { testIds } from '../testIds'
 
-const { SecretFormField } = LegacyForms
-
-const defaultUrl = 'https://api.us-east-2.propeldata.com/graphql'
+export const defaultApiUrl = 'https://api.us-east-2.propeldata.com/graphql'
+export const defaultAuthUrl = 'https://auth.us-east-2.propeldata.com/oauth2/token'
 
 export function ConfigEditor (props: EditorProps): ReactElement {
-  const { jsonData, secureJsonData, secureJsonFields } = props.options
-  const onTimeFieldChange = useChangeOptions(props, 'apiUrl')
-  const onClientIdChange = useChangeSecureOptions(props, 'clientId')
-  const onResetClientId = useResetSecureOptions(props, 'clientId')
-  const onClientSecretChange = useChangeSecureOptions(props, 'clientSecret')
-  const onResetClientSecret = useResetSecureOptions(props, 'clientSecret')
+  const { jsonData } = props.options
+  const onApiUrlChange = useChangeOptions(props, 'apiUrl')
+  const onAuthUrlChange = useChangeOptions(props, 'authUrl')
+  const onClientIdChange = useChangeOptions(props, 'clientId')
+  const onClientSecretChange = useChangeOptions(props, 'clientSecret')
 
   return (
     <>
       <FieldSet label="General">
         <InlineField label="Api Url" tooltip="Url for the Propel data Api">
           <Input
-            onChange={onTimeFieldChange}
-            placeholder={defaultUrl}
+            onChange={onApiUrlChange}
+            placeholder={defaultApiUrl}
             width={40}
             data-testid={testIds.configEditor.apiUrl}
             default={true}
-            defaultValue={defaultUrl}
+            defaultValue={defaultApiUrl}
             value={jsonData?.apiUrl ?? ''}
+          />
+        </InlineField>
+        <InlineField label="Auth Url" tooltip="Url for the OAuth flow">
+          <Input
+            onChange={onAuthUrlChange}
+            placeholder={defaultAuthUrl}
+            width={40}
+            data-testid={testIds.configEditor.apiUrl}
+            default={true}
+            defaultValue={defaultAuthUrl}
+            value={jsonData?.authUrl ?? ''}
           />
         </InlineField>
       </FieldSet>
 
       <FieldSet label="Application credentials">
-        <SecretFormField
-          tooltip="Client Id for authenticating as an Application"
-          isConfigured={Boolean(secureJsonFields.clientId)}
-          value={secureJsonData?.clientId ?? ''}
+        <InlineField
           label="Client Id"
-          placeholder="Client Id"
-          labelWidth={8}
-          inputWidth={20}
-          data-testid={testIds.configEditor.clientId}
-          onReset={onResetClientId}
-          onChange={onClientIdChange}
-        />
-        <SecretFormField
-          tooltip="Client Secret for authenticating as an Application"
-          isConfigured={Boolean(secureJsonFields.clientSecret)}
-          value={secureJsonData?.clientSecret ?? ''}
+          labelWidth={16}
+          tooltip="Client Id for authenticating as an Application"
+        >
+          <Input
+            onChange={onClientIdChange}
+            placeholder={'Client Id'}
+            label={'Client Id'}
+            width={40}
+            data-testid={testIds.configEditor.clientId}
+            value={jsonData?.clientId ?? ''}
+          />
+        </InlineField>
+        <InlineField
           label="Client Secret"
-          placeholder="Client Secret"
-          labelWidth={8}
-          inputWidth={20}
-          data-testid={testIds.configEditor.clientSecret}
-          onReset={onResetClientSecret}
-          onChange={onClientSecretChange}
-        />
+          labelWidth={16}
+          tooltip="Client Secret for authenticating as an Application"
+        >
+          <Input
+            onChange={onClientSecretChange}
+            label="Client Secret"
+            placeholder="Client Secret"
+            type={'password'}
+            width={40}
+            data-testid={testIds.configEditor.clientSecret}
+            value={jsonData?.clientSecret ?? ''}
+          />
+        </InlineField>
       </FieldSet>
     </>
   )

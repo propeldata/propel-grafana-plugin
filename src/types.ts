@@ -9,16 +9,12 @@ export interface BasicQuery extends DataQuery {
  */
 export interface BasicDataSourceOptions extends DataSourceJsonData {
   apiUrl?: string
-}
-
-/**
- * Value that is used in the backend, but never sent over HTTP to the frontend
- */
-export interface BasicSecureJsonData {
+  authUrl?: string
   clientId?: string
   clientSecret?: string
 }
 
-export interface QueryTypesResponse {
-  queryTypes: string[]
+export interface TestResponse {
+  status: 'error' | 'success'
+  message: string
 }
