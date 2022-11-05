@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { FieldSet, InlineField, Input } from '@grafana/ui'
 import type { EditorProps } from './types'
 import { useChangeOptions } from './useChangeOptions'
-import { testIds } from '../testIds'
+import { testIds } from './testIds'
 
 export const defaultApiUrl = 'https://api.us-east-2.propeldata.com/graphql'
 export const defaultAuthUrl = 'https://auth.us-east-2.propeldata.com/oauth2/token'

@@ -1,4 +1,6 @@
+import { QueryEditorProps } from '@grafana/data'
 import type { DataQuery, DataSourceJsonData } from '@grafana/data'
+import { DataSource } from './DataSource'
 import { CounterInput, LeaderboardInput, TimeSeriesInput } from './generated/graphql'
 
 export interface CounterQuery {
@@ -37,3 +39,5 @@ export interface TestResponse {
   status: 'error' | 'success'
   message: string
 }
+
+export type EditorProps = QueryEditorProps<DataSource, BasicQuery, BasicDataSourceOptions>

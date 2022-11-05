@@ -1,6 +1,5 @@
 import { useCallback } from 'react'
-import type { BasicQuery } from '../../../types'
-import type { EditorProps } from '../types'
+import type { BasicQuery, EditorProps } from '../../../types'
 
 type OnChangeType<T> = (value: T) => void
 

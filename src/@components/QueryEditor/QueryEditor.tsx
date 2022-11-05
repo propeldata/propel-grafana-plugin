@@ -14,7 +14,7 @@ import GroupByColumnsEditor from './@components/GroupByColumnsEditor'
 import { useChangeSelectableValue } from './@hooks/useChangeSelectableValue'
 import { useChangeValue } from './@hooks/useChangeValue'
 import useMetrics from './@hooks/useMetrics'
-import type { EditorProps } from './types'
+import type { EditorProps } from '../../types'
 
 const defaultGranularity = TimeSeriesGranularity.Day
 const queryFireDelay = 0
