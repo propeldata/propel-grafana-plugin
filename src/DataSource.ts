@@ -156,10 +156,20 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
    */
   async testDatasource (): Promise<TestResponse> {
     return this.authTokenService.getAuthToken()
-      .then(() => ({
-        status: 'success' as const,
-        message: 'Success'
-      }))
+      .then(async () => {
+        const metrics = await this.metrics()
+        if (metrics.length > 0) {
+          return {
+            status: 'success' as const,
+            message: `Success, this application has access to ${metrics.length} metrics`
+          }
+        } else {
+          return {
+            status: 'error' as const,
+            message: 'The Application is correctly configured, but does not have access to any Metric'
+          }
+        }
+      })
       .catch((err: Error) => ({
         status: 'error' as const,
         message: err.message
