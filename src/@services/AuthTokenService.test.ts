@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import raise from '../@utils/raise'
-import { defaultAuthUrl } from '../components/ConfigEditor/ConfigEditor'
+import { defaultAuthUrl } from '../@components/ConfigEditor/ConfigEditor'
 import AuthTokenService from './AuthTokenService'
 dotenv.config()
 

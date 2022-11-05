@@ -7,7 +7,7 @@ import {
 } from '@grafana/data'
 import AuthTokenService from './@services/AuthTokenService'
 import MetricQueryService from './@services/MetricQueryService'
-import { defaultApiUrl, defaultAuthUrl } from './components/ConfigEditor/ConfigEditor'
+import { defaultApiUrl, defaultAuthUrl } from './@components/ConfigEditor/ConfigEditor'
 import { CounterInput, MetricInfoFragment, TimeSeriesInput } from './generated/graphql'
 import { BasicQuery, BasicDataSourceOptions, TestResponse, MetricQuery } from './types'
 
