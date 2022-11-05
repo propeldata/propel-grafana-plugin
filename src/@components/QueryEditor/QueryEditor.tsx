@@ -1,19 +1,21 @@
 import { css } from '@emotion/css'
 import { SelectableValue } from '@grafana/data'
 import { Alert, InlineField, InlineFieldRow, Select, useStyles2 } from '@grafana/ui'
-import React, { ReactElement, useCallback, useMemo } from 'react'
+import React, { ReactElement, useCallback, useEffect, useMemo, useRef } from 'react'
 
 import { DataSource } from '../../DataSource'
 import { MetricInfoFragment, TimeSeriesGranularity } from '../../generated/graphql'
-import { BasicQuery, MetricQuery } from '../../types'
+import { MetricQuery } from '../../types'
 import FilterEditor from './@components/FilterEditor'
 import GranularityEditor from './@components/GranularityEditor'
+import GroupByColumnsEditor from './@components/GroupByColumnsEditor'
 import { useChangeSelectableValue } from './@hooks/useChangeSelectableValue'
 import { useChangeValue } from './@hooks/useChangeValue'
 import useMetrics from './@hooks/useMetrics'
 import type { EditorProps } from './types'
 
 const defaultGranularity = TimeSeriesGranularity.Day
+const queryFireDelay = 0
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function style () {
@@ -30,26 +32,28 @@ function copyMetricQuery (query: MetricQuery): MetricQuery {
 }
 
 export function QueryEditor (props: EditorProps): ReactElement {
-  const { datasource, query } = props
+  const { datasource, query, onRunQuery } = props
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    if (timeoutRef.current != null) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+    if (query.query === undefined || query.metricId === undefined) return
+    const timeout = setTimeout(() => onRunQuery(), queryFireDelay)
+    timeoutRef.current = timeout
+    return () => clearTimeout(timeout)
+  }, [query.query, query.metricId, onRunQuery])
 
   const C = useStyles2(style)
 
   const metrics = useMetrics(datasource)
 
-  const runQueryCondition = useCallback((before: BasicQuery, after: BasicQuery) => {
-    return after.query !== undefined &&
-      after.metricId !== undefined
-  }, [])
+  const onChangeMetricQuery = useChangeValue<MetricQuery | undefined>(props, 'query')
 
-  const onChangeMetricQuery = useChangeValue<MetricQuery | undefined>(props, {
-    propertyName: 'query',
-    runQueryCondition
-  })
-
-  const onChangeMetricId = useChangeSelectableValue<string>(props, {
-    propertyName: 'metricId',
-    runQueryCondition
-  })
+  const onChangeMetricId = useChangeSelectableValue<string>(props, 'metricId')
 
   const filters = useMemo(() => query.query?.input.filters ?? [], [query.query?.input.filters])
 
@@ -111,6 +115,18 @@ export function QueryEditor (props: EditorProps): ReactElement {
               const newQuery = copyMetricQuery((query.query ?? {}) as MetricQuery)
               if (newQuery.type !== 'time-series') return
               newQuery.input.granularity = granularity
+              onChangeMetricQuery(newQuery)
+            }}
+        />
+      }
+      {query.query?.type === 'leaderboard' &&
+        <GroupByColumnsEditor
+            dimensions={activeMetric?.dimensions ?? []}
+            columns={query.query.input.dimensions.map(_ => _.columnName)}
+            onColumns={columns => {
+              const newQuery = copyMetricQuery((query.query ?? {}) as MetricQuery)
+              if (newQuery.type !== 'leaderboard') return
+              newQuery.input.dimensions = columns.map(columnName => ({ columnName }))
               onChangeMetricQuery(newQuery)
             }}
         />

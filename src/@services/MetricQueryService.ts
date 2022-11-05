@@ -1,7 +1,8 @@
 import { GraphQLClient } from 'graphql-request'
+import filterInvalidDimensions from '../@utils/filterInvalidDimensions'
 import filterInvalidFilters from '../@utils/filterInvalidFilters'
 import raise from '../@utils/raise'
-import { CounterInput, getSdk, MetricInfoFragment, Sdk, TimeSeriesInput } from '../generated/graphql'
+import { CounterInput, getSdk, LeaderboardInput, MetricInfoFragment, Sdk, TimeSeriesInput } from '../generated/graphql'
 
 export interface MetricQueryServiceOptions {
   apiUrl: string
@@ -41,4 +42,37 @@ export default class MetricQueryService {
       (result.metric?.timeSeries?.values ?? raise('Could not query timeSeries')).map(v => Number(v))
     ]
   }
+
+  async leaderboard (metricId: string, input: LeaderboardInput): Promise<{ header: string[], columns: Array<Array<number | string>> }> {
+    const client = await this.makeClient()
+    input = { ...input, filters: filterInvalidFilters(input.filters ?? []), dimensions: filterInvalidDimensions(input.dimensions) }
+    const result = await client.metricLeaderboard({ id: metricId, input })
+    const header = result.metric?.leaderboard?.headers ?? []
+    const rows = result.metric?.leaderboard?.rows ?? []
+    const columns: Array<Array<string | null>> = []
+    for (let i = 0; i < header.length; i++) {
+      const column: Array<string | null> = []
+      for (const row of rows) column.push(row[i])
+      columns.push(column)
+    }
+    return {
+      header,
+      columns: columns.map(column => {
+        if (rowIsNumeric(column)) {
+          return column.map(el => Number(el))
+        } else {
+          return column.map(el => el ?? '')
+        }
+      }) ?? []
+    }
+  }
+}
+
+function rowIsNumeric (column: any[]): boolean {
+  for (const el of column) {
+    if (el == null) continue
+    if (el === '') return false
+    return !isNaN(el)
+  }
+  return false
 }
