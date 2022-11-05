@@ -11,6 +11,9 @@
     "standard-with-typescript",
     "plugin:react-hooks/recommended"
   ],
+  "ignorePatterns": [
+    "src/generated/**"
+  ],
   "parserOptions": {
     "project": "tsconfig.json"
   },
