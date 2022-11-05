@@ -20,8 +20,8 @@
       "propeldata"
     ],
     "logos": {
-      "small": "img/logo.png",
-      "large": "img/logo.png"
+      "small": "img/logo-small.svg",
+      "large": "img/logo-big.svg"
     },
     "links": [
       {
