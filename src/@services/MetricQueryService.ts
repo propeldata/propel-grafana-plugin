@@ -1,14 +1,11 @@
 import { GraphQLClient } from 'graphql-request'
+import filterInvalidFilters from '../@utils/filterInvalidFilters'
 import raise from '../@utils/raise'
-import { CounterInput, getSdk, Sdk, TimeSeriesInput, MetricInfoFragment, FilterInput } from '../generated/graphql'
+import { CounterInput, getSdk, MetricInfoFragment, Sdk, TimeSeriesInput } from '../generated/graphql'
 
 export interface MetricQueryServiceOptions {
   apiUrl: string
   tokenGetter: () => Promise<string>
-}
-
-function filterInvalidFilters (filters: FilterInput[]): FilterInput[] {
-  return filters.filter(f => f.column !== '' && f.value !== '')
 }
 
 export default class MetricQueryService {

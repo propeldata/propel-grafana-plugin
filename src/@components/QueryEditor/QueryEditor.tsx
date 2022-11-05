@@ -4,9 +4,10 @@ import { Alert, InlineField, InlineFieldRow, Select, useStyles2 } from '@grafana
 import React, { ReactElement, useCallback, useMemo } from 'react'
 
 import { DataSource } from '../../DataSource'
-import { FilterInput, MetricInfoFragment, TimeSeriesGranularity } from '../../generated/graphql'
+import { MetricInfoFragment, TimeSeriesGranularity } from '../../generated/graphql'
 import { BasicQuery, MetricQuery } from '../../types'
 import FilterEditor from './@components/FilterEditor'
+import GranularityEditor from './@components/GranularityEditor'
 import { useChangeSelectableValue } from './@hooks/useChangeSelectableValue'
 import { useChangeValue } from './@hooks/useChangeValue'
 import useMetrics from './@hooks/useMetrics'
@@ -17,7 +18,7 @@ const defaultGranularity = TimeSeriesGranularity.Day
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function style () {
   return {
-    header: css`margin-top: 10px`
+    marginTop: css`margin-top: 10px`
   }
 }
 
@@ -35,8 +36,9 @@ export function QueryEditor (props: EditorProps): ReactElement {
 
   const metrics = useMetrics(datasource)
 
-  const runQueryCondition = useCallback((query: BasicQuery) => {
-    return (query.query !== undefined && query.metricId !== undefined)
+  const runQueryCondition = useCallback((before: BasicQuery, after: BasicQuery) => {
+    return after.query !== undefined &&
+      after.metricId !== undefined
   }, [])
 
   const onChangeMetricQuery = useChangeValue<MetricQuery | undefined>(props, {
@@ -62,12 +64,6 @@ export function QueryEditor (props: EditorProps): ReactElement {
     }
   }, [filters, onChangeMetricQuery])
 
-  const onChangeFilters = useCallback((filters: FilterInput[]) => {
-    const newQuery = copyMetricQuery((query.query ?? {}) as MetricQuery)
-    newQuery.input.filters = filters
-    onChangeMetricQuery(newQuery)
-  }, [onChangeMetricQuery, query.query])
-
   const selectableMetrics = useMemo(() =>
     Object.values(metrics.metrics).map(m => ({ label: m.uniqueName ?? m.id, value: m.id })),
   [metrics])
@@ -79,7 +75,7 @@ export function QueryEditor (props: EditorProps): ReactElement {
   return (
     <>
       {metrics.error != null && <Alert title={metrics.error.message}/>}
-      <InlineFieldRow className={C.header}>
+      <InlineFieldRow className={C.marginTop}>
         <InlineField label="Metric" grow>
           <Select
             options={selectableMetrics}
@@ -97,13 +93,28 @@ export function QueryEditor (props: EditorProps): ReactElement {
           />
         </InlineField>
       </InlineFieldRow>
-      <InlineFieldRow>
-        <FilterEditor
-          filters={filters}
-          dimensions={activeMetric?.dimensions ?? []}
-          onFilters={onChangeFilters}
+      <FilterEditor
+        className={C.marginTop}
+        filters={filters}
+        dimensions={activeMetric?.dimensions ?? []}
+        onFilters={(filters) => {
+          const newQuery = copyMetricQuery((query.query ?? {}) as MetricQuery)
+          newQuery.input.filters = filters
+          onChangeMetricQuery(newQuery)
+        }}
+      />
+      {query.query?.type === 'time-series' &&
+        <GranularityEditor
+            className={C.marginTop}
+            granularity={query.query.input.granularity}
+            onGranularity={(granularity) => {
+              const newQuery = copyMetricQuery((query.query ?? {}) as MetricQuery)
+              if (newQuery.type !== 'time-series') return
+              newQuery.input.granularity = granularity
+              onChangeMetricQuery(newQuery)
+            }}
         />
-      </InlineFieldRow>
+      }
     </>
   )
 }

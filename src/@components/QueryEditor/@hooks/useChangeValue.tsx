@@ -10,12 +10,14 @@ export function useChangeValue<T> (props: EditorProps, options: ChangeOptions<Ba
 
   return useCallback(
     (selectable: T) => {
-      onChange({
+      const before = query
+      const after = {
         ...query,
         [propertyName]: selectable
-      })
+      }
+      onChange(after)
 
-      if (runQueryCondition(query)) {
+      if (runQueryCondition(before, after)) {
         onRunQuery()
       }
     },

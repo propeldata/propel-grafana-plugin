@@ -15,12 +15,15 @@ export function useChangeSelectableValue<T> (props: EditorProps, options: Change
         return
       }
 
-      onChange({
+      const before = query
+      const after = {
         ...query,
         [propertyName]: selectable.value
-      })
+      }
 
-      if (runQueryCondition(query)) {
+      onChange(after)
+
+      if (runQueryCondition(before, after)) {
         onRunQuery()
       }
     },

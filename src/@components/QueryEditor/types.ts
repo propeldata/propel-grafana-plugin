@@ -6,5 +6,5 @@ export type EditorProps = QueryEditorProps<DataSource, BasicQuery, BasicDataSour
 
 export interface ChangeOptions<T> {
   propertyName: keyof T
-  runQueryCondition: (query: BasicQuery) => boolean
+  runQueryCondition: (before: BasicQuery, after: BasicQuery) => boolean
 }
