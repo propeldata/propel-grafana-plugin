@@ -1,11 +1,13 @@
 import { css } from '@emotion/css'
 import { SelectableValue } from '@grafana/data'
 import { Alert, InlineField, InlineFieldRow, Select, useStyles2 } from '@grafana/ui'
-import React, { ReactElement, useCallback, useEffect, useMemo, useRef } from 'react'
+import React, { ChangeEvent, ReactElement, useCallback, useEffect, useMemo, useRef } from 'react'
+import clamp from '../../@utils/clamp'
 
 import { DataSource } from '../../DataSource'
 import { MetricInfoFragment, TimeSeriesGranularity } from '../../generated/graphql'
 import { MetricQuery } from '../../types'
+import DelayedInput from './@components/DelayedInput'
 import FilterEditor from './@components/FilterEditor'
 import GranularityEditor from './@components/GranularityEditor'
 import GroupByColumnsEditor from './@components/GroupByColumnsEditor'
@@ -120,16 +122,33 @@ export function QueryEditor (props: EditorProps): ReactElement {
         />
       }
       {query.query?.type === 'leaderboard' &&
-        <GroupByColumnsEditor
-            dimensions={activeMetric?.dimensions ?? []}
-            columns={query.query.input.dimensions.map(_ => _.columnName)}
-            onColumns={columns => {
-              const newQuery = copyMetricQuery((query.query ?? {}) as MetricQuery)
-              if (newQuery.type !== 'leaderboard') return
-              newQuery.input.dimensions = columns.map(columnName => ({ columnName }))
-              onChangeMetricQuery(newQuery)
-            }}
-        />
+        <>
+          <GroupByColumnsEditor
+              dimensions={activeMetric?.dimensions ?? []}
+              columns={query.query.input.dimensions.map(_ => _.columnName)}
+              onColumns={columns => {
+                const newQuery = copyMetricQuery((query.query ?? {}) as MetricQuery)
+                if (newQuery.type !== 'leaderboard') return
+                newQuery.input.dimensions = columns.map(columnName => ({ columnName }))
+                onChangeMetricQuery(newQuery)
+              }}
+          />
+            <InlineFieldRow>
+                <InlineField label={'Number of rows'}>
+                    <DelayedInput
+                        inputDelay={1000}
+                        type={'number'}
+                        value={query.query.input.rowLimit}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          const newQuery = copyMetricQuery((query.query ?? {}) as MetricQuery)
+                          if (newQuery.type !== 'leaderboard') return
+                          newQuery.input.rowLimit = clamp(3, e.target.value, 100)
+                          onChangeMetricQuery(newQuery)
+                        }}
+                    />
+                </InlineField>
+            </InlineFieldRow>
+        </>
       }
     </>
   )
