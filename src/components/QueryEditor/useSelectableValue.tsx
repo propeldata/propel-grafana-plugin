@@ -1,15 +1,15 @@
-import { useMemo } from 'react';
-import type { SelectableValue } from '@grafana/data';
+import { useMemo } from 'react'
+import type { SelectableValue } from '@grafana/data'
 
-export function useSelectableValue(value: string | undefined, label?: string): SelectableValue<string> | undefined {
+export function useSelectableValue<T extends { toString: () => string }> (value: T, label?: string): SelectableValue<T> | undefined {
   return useMemo(() => {
-    if (!value) {
-      return;
+    if (value == null) {
+      return
     }
 
     return {
-      label: label ?? value,
-      value: value,
-    };
-  }, [label, value]);
+      label: label ?? value.toString(),
+      value: value
+    }
+  }, [label, value])
 }

@@ -2,21 +2,17 @@ import { useCallback } from 'react'
 import type { BasicQuery } from '../../types'
 import type { ChangeOptions, EditorProps } from './types'
 
-type OnChangeType = (value: string) => void
+type OnChangeType<T> = (value: T) => void
 
-export function useChangeString (props: EditorProps, options: ChangeOptions<BasicQuery>): OnChangeType {
+export function useChangeValue<T> (props: EditorProps, options: ChangeOptions<BasicQuery>): OnChangeType<T> {
   const { onChange, onRunQuery, query } = props
   const { propertyName, runQuery } = options
 
   return useCallback(
-    (value: string) => {
-      if (!value) {
-        return
-      }
-
+    (selectable: T) => {
       onChange({
         ...query,
-        [propertyName]: value
+        [propertyName]: selectable
       })
 
       if (runQuery) {

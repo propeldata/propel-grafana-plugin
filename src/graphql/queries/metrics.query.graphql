@@ -1,0 +1,7 @@
+query metrics {
+    metrics(first: 100) {
+        nodes {
+            ...MetricInfoFragment
+        }
+    }
+}

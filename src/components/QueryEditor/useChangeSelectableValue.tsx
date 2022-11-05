@@ -3,15 +3,15 @@ import type { SelectableValue } from '@grafana/data'
 import type { BasicQuery } from '../../types'
 import type { ChangeOptions, EditorProps } from './types'
 
-type OnChangeType = (value: SelectableValue<string>) => void
+type OnChangeType<T> = (value: SelectableValue<T>) => void
 
-export function useChangeSelectableValue (props: EditorProps, options: ChangeOptions<BasicQuery>): OnChangeType {
+export function useChangeSelectableValue<T> (props: EditorProps, options: ChangeOptions<BasicQuery>): OnChangeType<T> {
   const { onChange, onRunQuery, query } = props
   const { propertyName, runQuery } = options
 
   return useCallback(
-    (selectable: SelectableValue<string>) => {
-      if (!selectable?.value) {
+    (selectable: SelectableValue<T>) => {
+      if (selectable?.value == null) {
         return
       }
 

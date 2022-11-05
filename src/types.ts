@@ -1,7 +1,26 @@
 import type { DataQuery, DataSourceJsonData } from '@grafana/data'
+import { CounterInput, LeaderboardInput, TimeSeriesInput } from './generated/graphql'
+
+export interface CounterQuery {
+  type: 'counter'
+  input: Omit<CounterInput, 'timeRange'>
+}
+
+export interface TimeSeriesQuery {
+  type: 'time-series'
+  input: Omit<TimeSeriesInput, 'timeRange'>
+}
+
+export interface LeaderboardQuery {
+  type: 'leaderboard'
+  input: Omit<LeaderboardInput, 'timeRange'>
+}
+
+export type MetricQuery = CounterQuery | TimeSeriesQuery | LeaderboardQuery
 
 export interface BasicQuery extends DataQuery {
-  rawQuery: string
+  metricId?: string
+  query?: MetricQuery
 }
 
 /**

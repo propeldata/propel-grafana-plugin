@@ -3,99 +3,127 @@ import {
   DataQueryResponse, DataSourceApi,
   DataSourceInstanceSettings,
   FieldType,
-  MutableDataFrame
+  MutableDataFrame, MutableField
 } from '@grafana/data'
+import AuthTokenService from './@services/AuthTokenService'
+import MetricQueryService from './@services/MetricQueryService'
 import { defaultApiUrl, defaultAuthUrl } from './components/ConfigEditor/ConfigEditor'
-import { BasicQuery, BasicDataSourceOptions, TestResponse } from './types'
+import { CounterInput, MetricInfoFragment, TimeSeriesInput } from './generated/graphql'
+import { BasicQuery, BasicDataSourceOptions, TestResponse, MetricQuery } from './types'
 
 export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions> {
-  static queryTypes = ['counter', 'timeseries', 'leaderboard'] as const
+  static queryTypes = ['counter', 'time-series', 'leaderboard'] as Array<MetricQuery['type']>
 
+  private readonly authTokenService: AuthTokenService
   apiUrl: string
-  authUrl: string
-  clientId?: string
-  clientSecret?: string
 
   constructor (instanceSettings: DataSourceInstanceSettings<BasicDataSourceOptions>) {
     super(instanceSettings)
-    console.log(instanceSettings)
+    let authUrl = instanceSettings.jsonData.authUrl
+    if (authUrl === '') authUrl = undefined
+    let apiUrl = instanceSettings.jsonData.apiUrl
+    if (apiUrl === '') apiUrl = undefined
+    this.authTokenService = new AuthTokenService({
+      authUrl: authUrl ?? defaultAuthUrl,
+      clientId: instanceSettings.jsonData.clientId ?? '',
+      clientSecret: instanceSettings.jsonData.clientSecret ?? ''
+    })
+    this.apiUrl = apiUrl ?? defaultApiUrl
+  }
 
-    this.apiUrl = instanceSettings.jsonData.apiUrl ?? defaultApiUrl
-    this.authUrl = instanceSettings.jsonData.authUrl ?? defaultAuthUrl
-    this.clientId = instanceSettings.jsonData.clientId
-    this.clientSecret = instanceSettings.jsonData.clientSecret
+  async metrics (): Promise<MetricInfoFragment[]> {
+    const metricQueryService = new MetricQueryService({
+      apiUrl: this.apiUrl,
+      tokenGetter: async () => this.authTokenService.getAuthToken()
+    })
+    return metricQueryService.metrics()
+  }
+
+  private async mutableDfFromCounter (metricId: string, input: CounterInput): Promise<Array<MutableField<number>>> {
+    const metricQueryService = new MetricQueryService({
+      apiUrl: this.apiUrl,
+      tokenGetter: async () => this.authTokenService.getAuthToken()
+    })
+
+    const result = await metricQueryService.counter(metricId, input)
+    const values: number[] = [result]
+    return [
+      {
+        name: 'Value',
+        type: FieldType.number,
+        config: { },
+        values: values as any
+      }
+    ]
+  }
+
+  private async mutableDfFromTimeSeries (metricId: string, input: TimeSeriesInput): Promise<Array<MutableField<number>>> {
+    const metricQueryService = new MetricQueryService({
+      apiUrl: this.apiUrl,
+      tokenGetter: async () => this.authTokenService.getAuthToken()
+    })
+
+    const [labels, values] = await metricQueryService.timeSeries(metricId, input)
+    return [
+      {
+        name: 'Value',
+        type: FieldType.number,
+        config: {},
+        values: values as any
+      },
+      {
+        name: 'Label',
+        type: FieldType.time,
+        config: {},
+        values: labels.map(l => l.getTime()) as any
+      }
+    ]
   }
 
   async query (options: DataQueryRequest<BasicQuery>): Promise<DataQueryResponse> {
     const promises = options.targets.map(async (target) => {
-      const dataPoints: any = '' // todo
-
-      const timestamps: number[] = []
-      const values: number[] = []
-
-      for (let i = 0; i < dataPoints.length; i++) {
-        timestamps.push(dataPoints[i].Time)
-        values.push(dataPoints[i].Value)
+      if (target.metricId === undefined || target.query === undefined) {
+        return new MutableDataFrame({
+          refId: target.refId,
+          fields: []
+        })
+      }
+      const timeRange: CounterInput['timeRange'] = {
+        start: options.range.from.toISOString(),
+        stop: options.range.to.toISOString()
+      }
+      let fields: MutableField[]
+      switch (target.query.type) {
+        case 'counter':
+          fields = await this.mutableDfFromCounter(target.metricId, {
+            ...target.query.input,
+            timeRange
+          })
+          break
+        case 'time-series':
+          fields = await this.mutableDfFromTimeSeries(target.metricId, {
+            ...target.query.input,
+            timeRange
+          })
+          break
+        default:
+          throw new Error('Unknown query type'+target.query.type)
       }
 
       return new MutableDataFrame({
         refId: target.refId,
-        fields: [
-          { name: 'Time', type: FieldType.time, values: timestamps },
-          { name: 'Value', type: FieldType.number, values: values }
-        ]
+        fields
       })
     })
 
-    return Promise.all(promises).then((data) => ({ data })) as any
-  }
-
-  static async getAuthToken (clientId?: string, clientSecret?: string, authUrl?: string): Promise<string> {
-    if ((clientId ?? '') === '') {
-      throw new Error('Client Id is not set')
-    } else if ((clientSecret ?? '') === '') {
-      throw new Error('Client secret is not set')
-    }
-    const response = await fetch(
-      authUrl ?? defaultAuthUrl,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-          grant_type: 'client_credentials',
-          client_id: clientId ?? '',
-          client_secret: clientSecret ?? ''
-        })
-      }
-    )
-    if (response.status !== 200) {
-      throw new Error(`Received unexpected status code ${response.status}`)
-    }
-    let data: { access_token?: string }
-    const result = await response.text()
-    try {
-      data = await JSON.parse(result)
-    } catch (e) {
-      throw new Error('Failed to parse response as Json: '+result)
-    }
-    if ('access_token' in data && typeof data.access_token === 'string') {
-      return data.access_token
-    } else {
-      throw new Error(`Unexpected response format from ${authUrl}: ${JSON.stringify(data)}`)
-    }
+    return Promise.all(promises).then((data) => ({ data }))
   }
 
   /**
    * Checks whether we can connect to the API.
    */
   async testDatasource (): Promise<TestResponse> {
-    return DataSource.getAuthToken(
-      this.clientId,
-      this.clientSecret,
-      this.authUrl
-    )
+    return this.authTokenService.getAuthToken()
       .then(() => ({
         status: 'success' as const,
         message: 'Success'

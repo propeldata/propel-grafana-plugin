@@ -1,0 +1,11 @@
+query metricLeaderboard($id: ID!, $input: LeaderboardInput!) {
+    metric(id: $id) {
+        leaderboard(input: $input) {
+            headers
+            rows
+            query {
+                ...QueryInfoFragment
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+overwrite: true
+schema: ./propel.graphql
+documents:
+  - 'src/graphql/fragments/*.graphql'
+  - 'src/graphql/queries/*.graphql'
+generates:
+  src/generated/graphql.ts:
+    config:
+      dedupeOperationSuffix: true
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request

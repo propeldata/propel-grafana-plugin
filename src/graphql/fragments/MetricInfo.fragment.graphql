@@ -1,0 +1,14 @@
+fragment MetricInfoFragment on Metric {
+    id
+    uniqueName
+    dimensions {
+        ...DimensionFragment
+    }
+    timestamp {
+        ...DimensionFragment
+    }
+    measure {
+        ...DimensionFragment
+    }
+    type
+}

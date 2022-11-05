@@ -1,0 +1,10 @@
+query metricCounter($id: ID!, $input: CounterInput!) {
+    metric(id: $id) {
+        counter(input: $input) {
+            value
+            query {
+                ...QueryInfoFragment
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
-import type { BasicDataSourceOptions, BasicSecureJsonData } from '../../types';
+import { DataSourcePluginOptionsEditorProps } from '@grafana/data'
+import type { BasicDataSourceOptions } from '../../types'
 
-export type EditorProps = DataSourcePluginOptionsEditorProps<BasicDataSourceOptions, BasicSecureJsonData>;
+export type EditorProps = DataSourcePluginOptionsEditorProps<BasicDataSourceOptions>

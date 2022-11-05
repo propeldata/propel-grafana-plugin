@@ -1,57 +1,76 @@
+import { InlineField, InlineFieldRow, Select, Alert } from '@grafana/ui'
 import React, { ReactElement } from 'react'
-import { css } from '@emotion/css'
-import { InlineFieldRow, InlineField, Select, CodeEditor, useStyles2 } from '@grafana/ui'
-import { GrafanaTheme2 } from '@grafana/data'
-import { useQueryTypes } from './useQueryTypes'
-import { useSelectableValue } from './useSelectableValue'
-import { useChangeSelectableValue } from './useChangeSelectableValue'
+import { useAsync } from 'react-use'
+import { DataSource } from '../../DataSource'
+import { MetricInfoFragment, TimeSeriesGranularity } from '../../generated/graphql'
+import { MetricQuery } from '../../types'
 import type { EditorProps } from './types'
-import { useChangeString } from './useChangeString'
+import { useChangeSelectableValue } from './useChangeSelectableValue'
+import { useChangeValue } from './useChangeValue'
 
-function getStyles (theme: GrafanaTheme2): { editor: string } {
+interface AsyncMetricsState {
+  loading: boolean
+  metrics: Record<string, MetricInfoFragment>
+  error: Error | undefined
+}
+
+function useMetrics (datasource: DataSource): AsyncMetricsState {
+  const result = useAsync(async () => {
+    const metrics = await datasource.metrics()
+    const result: Record<string, MetricInfoFragment> = {}
+    metrics.forEach(m => { result[m.id] = m })
+    return result
+  }, [datasource])
+
   return {
-    editor: css`
-      margin: ${theme.spacing(0, 0.5, 0.5, 0)};
-    `
+    loading: result.loading,
+    error: result.error,
+    metrics: result.value ?? {}
   }
 }
 
 export function QueryEditor (props: EditorProps): ReactElement {
   const { datasource, query } = props
-  const styles = useStyles2(getStyles)
 
-  const { loading, queryTypes, error } = useQueryTypes(datasource)
-  const queryType = useSelectableValue(query.queryType)
+  const metrics = useMetrics(datasource)
 
-  const onChangeQueryType = useChangeSelectableValue(props, {
-    propertyName: 'queryType',
+  const onChangeMetricQuery = useChangeValue<MetricQuery | undefined>(props, {
+    propertyName: 'query',
     runQuery: true
   })
 
-  const onChangeRawQuery = useChangeString(props, {
-    propertyName: 'rawQuery',
+  const onChangeMetricId = useChangeSelectableValue<string>(props, {
+    propertyName: 'metricId',
     runQuery: true
   })
 
   return (
     <>
-      <div className={styles.editor}>
-        <CodeEditor
-          height="200px"
-          showLineNumbers={true}
-          language="sql"
-          onBlur={onChangeRawQuery}
-          value={query.rawQuery}
-        />
-      </div>
+      {metrics.error != null && <Alert title={metrics.error.message}/>}
       <InlineFieldRow>
+        <InlineField label="Metrics" grow>
+          <Select
+            options={Object.values(metrics.metrics).map(m => ({ label: m.uniqueName ?? m.id, value: m.id }))}
+            onChange={onChangeMetricId}
+            isLoading={metrics.loading}
+            disabled={!(metrics.error == null)}
+            value={metrics.metrics[query.metricId ?? '']?.uniqueName ?? query.metricId}
+          />
+        </InlineField>
         <InlineField label="Query type" grow>
           <Select
-            options={queryTypes}
-            onChange={onChangeQueryType}
-            isLoading={loading}
-            disabled={!(error == null)}
-            value={queryType}
+            options={DataSource.queryTypes.map(v => ({ value: v, label: v }))}
+            onChange={(v) => {
+              switch (v.value) {
+                case 'counter':
+                  return onChangeMetricQuery({ type: 'counter', input: {} })
+                case 'time-series':
+                  return onChangeMetricQuery({ type: 'time-series', input: { granularity: TimeSeriesGranularity.Day } })
+                case 'leaderboard':
+                  return onChangeMetricQuery({ type: 'leaderboard', input: { dimensions: [], rowLimit: 10 } })
+              }
+            }}
+            value={query.query?.type}
           />
         </InlineField>
       </InlineFieldRow>

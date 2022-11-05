@@ -1,0 +1,11 @@
+query metricTimeSeries($id: ID!, $input: TimeSeriesInput!) {
+    metric(id: $id) {
+        timeSeries(input: $input) {
+            labels
+            values
+            query {
+                ...QueryInfoFragment
+            }
+        }
+    }
+}

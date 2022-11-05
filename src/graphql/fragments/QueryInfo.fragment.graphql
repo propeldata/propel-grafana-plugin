@@ -1,0 +1,11 @@
+fragment QueryInfoFragment on QueryInfo {
+    id
+    bytesProcessed
+    durationInMilliseconds
+    recordsProcessed
+    resultingBytes
+    resultingRecords
+    booster {
+        id
+    }
+}
