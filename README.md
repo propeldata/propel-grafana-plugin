@@ -1,49 +1,35 @@
-## ⚠️ Deprecated!
+<p align="center">
+   <img height="78" alt="Propel" src="src/img/grafana.png">
+   <img height="64" alt="Propel" src="src/img/logo-big.svg">
+</p>
 
-**This repository is deprecated.** <br />
-A more up-to-date version of examples is available here: https://github.com/grafana/grafana-plugin-examples
+# Propel data source grafana plugin
+
+Grafana plugin that allows creating dashboards using your Propel's powered Metrics.
 
 ---
 
-# Grafana Data Source Plugin Template
+## Usage
 
-[![Build](https://github.com/grafana/grafana-starter-datasource/workflows/CI/badge.svg)](https://github.com/grafana/grafana-starter-datasource/actions?query=workflow%3A%22CI%22)
+1. Create an application in Propel's console with `Admin` access, this is needed
+for listing the Metrics.
+2. Configure a `propel` data source in grafana using your application's client id and secret.
+3. Create dashboards using the configured data source.
 
-This template is a starting point for building Grafana Data Source Plugins
+## Development
 
-## What is Grafana Data Source Plugin?
-
-Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There’s a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. Grafana Data Source Plugins enables integrating such solutions with Grafana.
-
-## Getting started
-
-1. Install dependencies
-
-   ```bash
-   yarn install
+1. Run a Grafana docker instance:
+   ```shell
+   docker run -d -p 3000:3000 -v $PWD:/var/lib/grafana/plugins --name=grafana-dev -e GF_DEFAULT_APP_MODE=development grafana/grafana
    ```
 
-2. Build plugin in development mode or run in watch mode
-
-   ```bash
-   yarn dev
-   ```
-
-   or
-
+2. Run the Plugin in development mode
    ```bash
    yarn watch
    ```
 
-3. Build plugin in production mode
-
-   ```bash
-   yarn build
+3. Whenever you do changes, restart the grafana docker container 
+   so that the plugin is reloaded
+   ```shell
+   docker restart grafana-dev
    ```
-
-## Learn more
-
-- [Build a data source plugin tutorial](https://grafana.com/tutorials/build-a-data-source-plugin)
-- [Grafana documentation](https://grafana.com/docs/)
-- [Grafana Tutorials](https://grafana.com/tutorials/) - Grafana Tutorials are step-by-step guides that help you make the most of Grafana
-- [Grafana UI Library](https://developers.grafana.com/ui) - UI components to help you build interfaces using Grafana Design System
