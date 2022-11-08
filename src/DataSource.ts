@@ -7,7 +7,7 @@ import {
 } from '@grafana/data'
 import AuthTokenService from './@services/AuthTokenService'
 import MetricQueryService from './@services/MetricQueryService'
-import { defaultApiUrl, defaultAuthUrl } from './@components/ConfigEditor/ConfigEditor'
+import { defaultApiUrl, defaultAuthUrl } from './ConfigEditor/ConfigEditor'
 import { CounterInput, LeaderboardInput, MetricInfoFragment, TimeSeriesInput } from './generated/graphql'
 import { BasicQuery, BasicDataSourceOptions, TestResponse, MetricQuery } from './types'
 
@@ -39,7 +39,7 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
     return metricQueryService.metrics()
   }
 
-  private async mutableDfFromCounter (metricId: string, input: CounterInput): Promise<Array<MutableField<number>>> {
+  private async mutableDfFromCounter (metricId: string, input: CounterInput, label?: string): Promise<Array<MutableField<number>>> {
     const metricQueryService = new MetricQueryService({
       apiUrl: this.apiUrl,
       tokenGetter: async () => this.authTokenService.getAuthToken()
@@ -49,7 +49,7 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
     const values: number[] = [result]
     return [
       {
-        name: 'Value',
+        name: (label != null) ? label : 'value',
         type: FieldType.number,
         config: { },
         values: values as any
@@ -57,7 +57,7 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
     ]
   }
 
-  private async mutableDfFromTimeSeries (metricId: string, input: TimeSeriesInput): Promise<Array<MutableField<number>>> {
+  private async mutableDfFromTimeSeries (metricId: string, input: TimeSeriesInput, label?: string): Promise<Array<MutableField<number>>> {
     const metricQueryService = new MetricQueryService({
       apiUrl: this.apiUrl,
       tokenGetter: async () => this.authTokenService.getAuthToken()
@@ -66,7 +66,7 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
     const [labels, values] = await metricQueryService.timeSeries(metricId, input)
     return [
       {
-        name: 'Value',
+        name: (label != null) ? label : 'value',
         type: FieldType.number,
         config: {},
         values: values as any
@@ -124,13 +124,13 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
           fields = await this.mutableDfFromCounter(target.metricId, {
             ...target.query.input,
             timeRange
-          })
+          }, target.label)
           break
         case 'time-series':
           fields = await this.mutableDfFromTimeSeries(target.metricId, {
             ...target.query.input,
             timeRange
-          })
+          }, target.label)
           break
         case 'leaderboard':
           fields = await this.mutableDfFromLeaderboard(target.metricId, {

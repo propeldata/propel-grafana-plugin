@@ -1,6 +1,6 @@
 import { Button, FieldSet, InlineFieldRow, InlineField, Select } from '@grafana/ui'
 import React, { HTMLProps, ReactElement } from 'react'
-import { DimensionFragment } from '../../../generated/graphql'
+import { DimensionFragment } from '../../generated/graphql'
 
 export interface GroupByColumnsEditorProps extends HTMLProps<HTMLFieldSetElement> {
   dimensions: DimensionFragment[]

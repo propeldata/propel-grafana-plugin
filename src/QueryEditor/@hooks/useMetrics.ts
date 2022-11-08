@@ -1,6 +1,6 @@
 import { useAsync } from 'react-use'
-import { DataSource } from '../../../DataSource'
-import { MetricInfoFragment } from '../../../generated/graphql'
+import { DataSource } from '../../DataSource'
+import { MetricInfoFragment } from '../../generated/graphql'
 
 export interface AsyncMetricsState {
   loading: boolean

@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import raise from '../@utils/raise'
-import { defaultApiUrl, defaultAuthUrl } from '../@components/ConfigEditor/ConfigEditor'
+import { defaultApiUrl, defaultAuthUrl } from '../ConfigEditor/ConfigEditor'
 import AuthTokenService from './AuthTokenService'
 import MetricQueryService from './MetricQueryService'
 dotenv.config()

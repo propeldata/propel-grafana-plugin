@@ -1,12 +1,12 @@
 import { css } from '@emotion/css'
 import { SelectableValue } from '@grafana/data'
-import { Alert, InlineField, InlineFieldRow, Select, useStyles2 } from '@grafana/ui'
+import { Alert, InlineField, InlineFieldRow, Input, Select, useStyles2 } from '@grafana/ui'
 import React, { ChangeEvent, ReactElement, useCallback, useEffect, useMemo, useRef } from 'react'
-import clamp from '../../@utils/clamp'
+import clamp from '../@utils/clamp'
 
-import { DataSource } from '../../DataSource'
-import { MetricInfoFragment, TimeSeriesGranularity } from '../../generated/graphql'
-import { MetricQuery } from '../../types'
+import { DataSource } from '../DataSource'
+import { MetricInfoFragment, TimeSeriesGranularity } from '../generated/graphql'
+import { MetricQuery } from '../types'
 import DelayedInput from './@components/DelayedInput'
 import FilterEditor from './@components/FilterEditor'
 import GranularityEditor from './@components/GranularityEditor'
@@ -14,7 +14,7 @@ import GroupByColumnsEditor from './@components/GroupByColumnsEditor'
 import { useChangeSelectableValue } from './@hooks/useChangeSelectableValue'
 import { useChangeValue } from './@hooks/useChangeValue'
 import useMetrics from './@hooks/useMetrics'
-import type { EditorProps } from '../../types'
+import type { EditorProps } from '../types'
 
 const defaultGranularity = TimeSeriesGranularity.Day
 const queryFireDelay = 0
@@ -53,7 +53,8 @@ export function QueryEditor (props: EditorProps): ReactElement {
 
   const metrics = useMetrics(datasource)
 
-  const onChangeMetricQuery = useChangeValue<MetricQuery | undefined>(props, 'query')
+  const onChangeMetricQuery = useChangeValue(props, 'query')
+  const onChangeLabel = useChangeValue(props, 'label')
 
   const onChangeMetricId = useChangeSelectableValue<string>(props, 'metricId')
 
@@ -150,6 +151,15 @@ export function QueryEditor (props: EditorProps): ReactElement {
             </InlineFieldRow>
         </>
       }
+
+      <InlineFieldRow>
+        <InlineField label={'Label'}>
+          <Input
+            value={query.label}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeLabel(e.target.value)}
+          />
+        </InlineField>
+      </InlineFieldRow>
     </>
   )
 }

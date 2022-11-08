@@ -1,6 +1,6 @@
 import { FieldSet, InlineField, Select } from '@grafana/ui'
 import React, { HTMLProps, ReactElement } from 'react'
-import { TimeSeriesGranularity } from '../../../generated/graphql'
+import { TimeSeriesGranularity } from '../../generated/graphql'
 
 export interface GranularityEditorProps extends HTMLProps<HTMLFieldSetElement> {
   granularity: TimeSeriesGranularity

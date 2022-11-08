@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import jwtDecode from 'jwt-decode'
-import { defaultAuthUrl } from '../@components/ConfigEditor/ConfigEditor'
+import { defaultAuthUrl } from '../ConfigEditor/ConfigEditor'
 
 export interface AuthTokenServiceOptions {
   clientId: string

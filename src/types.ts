@@ -22,6 +22,7 @@ export type MetricQuery = CounterQuery | TimeSeriesQuery | LeaderboardQuery
 
 export interface BasicQuery extends DataQuery {
   metricId?: string
+  label?: string
   query?: MetricQuery
 }
 

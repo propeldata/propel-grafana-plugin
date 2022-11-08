@@ -1,6 +1,6 @@
 import { Button, FieldSet, InlineField, InlineFieldRow, Select } from '@grafana/ui'
 import React, { ChangeEvent, HTMLProps, ReactElement } from 'react'
-import { DimensionFragment, Filter, FilterInput, FilterOperator } from '../../../generated/graphql'
+import { DimensionFragment, Filter, FilterInput, FilterOperator } from '../../generated/graphql'
 import DelayedInput from './DelayedInput'
 
 export interface FilterEditorProps extends HTMLProps<HTMLFieldSetElement> {

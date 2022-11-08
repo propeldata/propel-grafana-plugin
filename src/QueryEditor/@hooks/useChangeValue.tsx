@@ -1,13 +1,16 @@
 import { useCallback } from 'react'
-import type { BasicQuery, EditorProps } from '../../../types'
+import type { BasicQuery, EditorProps } from '../../types'
 
 type OnChangeType<T> = (value: T) => void
 
-export function useChangeValue<T> (props: EditorProps, property: keyof BasicQuery): OnChangeType<T> {
+export function useChangeValue<T extends keyof BasicQuery> (
+  props: EditorProps,
+  property: T
+): OnChangeType<EditorProps['query'][T]> {
   const { onChange, query } = props
 
   return useCallback(
-    (selectable: T) => {
+    (selectable: EditorProps['query'][T]) => {
       onChange({
         ...query,
         [property]: selectable
