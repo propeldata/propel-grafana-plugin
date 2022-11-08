@@ -45,3 +45,8 @@ jobs:
 
       - name: Build and test frontend
         run: yarn build
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          EXPIRED_TOKEN: ${{ secrets.EXPIRED_TOKEN }}
+          METRIC_ID: ${{ secrets.METRIC_ID }}
