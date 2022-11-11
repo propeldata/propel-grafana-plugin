@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
-  "name": "propel",
-  "id": "propeldata-propel-datasource",
+  "name": "Propel's Grafana Data Source",
+  "id": "propeldata-graphql-datasource",
   "metrics": true,
   "info": {
-    "description": "Propel's query API DataSource",
+    "description": "Propel's Grafana Data Source",
     "author": {
       "name": "Gabriel Musat Mestre",
       "url": "https://www.propeldata.com/"
@@ -25,12 +25,12 @@
     },
     "links": [
       {
-        "name": "Website",
-        "url": "https://github.com/grafana/grafana-starter-datasource"
+        "name": "Github",
+        "url": "https://github.com/propeldata/propel-grafana-plugin"
       },
       {
         "name": "License",
-        "url": "https://github.com/grafana/grafana-starter-datasource/blob/master/LICENSE"
+        "url": "https://github.com/propeldata/propel-grafana-plugin/blob/main/LICENSE"
       }
     ],
     "screenshots": [],
