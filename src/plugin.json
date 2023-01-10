@@ -4,6 +4,7 @@
   "name": "Propel's Grafana Data Source",
   "id": "propeldata-graphql-datasource",
   "metrics": true,
+  "alerting": true,
   "info": {
     "description": "Propel's Grafana Data Source",
     "author": {
