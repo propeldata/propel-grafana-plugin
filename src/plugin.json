@@ -1,14 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
-  "name": "Propel's Grafana Data Source",
+  "name": "Propel",
   "id": "propeldata-graphql-datasource",
   "metrics": true,
   "alerting": true,
   "info": {
-    "description": "Propel's Grafana Data Source",
+    "description": "Grafana data source plugin to connect to Propel",
     "author": {
-      "name": "Gabriel Musat Mestre",
+      "name": "Propel",
       "url": "https://www.propeldata.com/"
     },
     "keywords": [
