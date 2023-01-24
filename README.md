@@ -18,21 +18,7 @@ To learn more about Propel, [read the documentation](https://www.propeldata.com/
 Browse to the plugin on the plugin marketplace and click on install.
 
 ### Local Grafana
-1. Run a Grafana docker instance:
-   ```shell
-   docker run -d -p 3000:3000 -v $PWD:/var/lib/grafana/plugins --name=grafana-dev -e GF_DEFAULT_APP_MODE=development grafana/grafana
-   ```
-
-2. Run the Plugin in development mode
-   ```bash
-   yarn watch
-   ```
-
-3. Whenever you do changes, restart the grafana docker container
-   so that the plugin is reloaded
-   ```shell
-   docker restart grafana-dev
-   ```
+Copy the plugin files to the plugin directory. [More installation instructions](https://grafana.com/docs/grafana/v8.4/plugins/installation/).
 
 ### Setup
 
