@@ -7,18 +7,15 @@ import { FetchResponse, getBackendSrv } from '@grafana/runtime'
 
 export interface MetricQueryServiceOptions {
   apiUrl: string
-  tokenGetter?: () => Promise<string>
 }
 
 export default class MetricQueryService {
   constructor (private readonly options: MetricQueryServiceOptions) {}
 
   private async makeClient (): Promise<Sdk> {
-    const token = await this.options.tokenGetter?.()
     return getSdk(new GraphQLClient(
       this.options.apiUrl,
       {
-        headers: token != null ? { authorization: 'Bearer ' + token } : {},
         fetch: async (url: string, options: RequestInit): Promise<any> => {
           try {
             const response = await getBackendSrv().datasourceRequest({
