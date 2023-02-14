@@ -4,7 +4,6 @@
   "name": "Propel",
   "id": "propeldata-graphql-datasource",
   "metrics": true,
-  "alerting": true,
   "info": {
     "description": "Grafana data source plugin to connect to Propel",
     "author": {
