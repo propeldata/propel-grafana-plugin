@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
 import type { SelectableValue } from '@grafana/data'
-import type { BasicQuery, EditorProps } from '../../types'
+import type { PropelQuery, EditorProps } from '../../types'
 
 type OnChangeType<T> = (value: SelectableValue<T>) => void
 
-export function useChangeSelectableValue<T> (props: EditorProps, property: keyof BasicQuery): OnChangeType<T> {
+export function useChangeSelectableValue<T> (props: EditorProps, property: keyof PropelQuery): OnChangeType<T> {
   const { onChange, query } = props
 
   return useCallback(

@@ -46,5 +46,31 @@
   "dependencies": {
     "grafanaDependency": ">=9.1.2",
     "plugins": []
-  }
+  },
+  "routes": [
+    {
+      "path": "prod",
+      "url": "https://api.us-east-2.propeldata.com/graphql",
+      "tokenAuth": {
+        "url": "https://auth.us-east-2.propeldata.com/oauth2/token",
+        "params": {
+          "grant_type": "client_credentials",
+          "client_id": "{{ .SecureJsonData.clientId }}",
+          "client_secret": "{{ .SecureJsonData.clientSecret }}"
+        }
+      }
+    },
+    {
+      "path": "dev",
+      "url": "https://api.us-east-2.dev.propeldata.com/graphql",
+      "tokenAuth": {
+        "url": "https://auth.us-east-2.dev.propeldata.com/oauth2/token",
+        "params": {
+          "grant_type": "client_credentials",
+          "client_id": "{{ .SecureJsonData.clientId }}",
+          "client_secret": "{{ .SecureJsonData.clientSecret }}"
+        }
+      }
+    }
+  ]
 }

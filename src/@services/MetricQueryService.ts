@@ -3,20 +3,38 @@ import filterInvalidDimensions from '../@utils/filterInvalidDimensions'
 import filterInvalidFilters from '../@utils/filterInvalidFilters'
 import raise from '../@utils/raise'
 import { CounterInput, getSdk, LeaderboardInput, MetricInfoFragment, Sdk, TimeSeriesInput } from '../generated/graphql'
+import { FetchResponse, getBackendSrv } from '@grafana/runtime'
 
 export interface MetricQueryServiceOptions {
   apiUrl: string
-  tokenGetter: () => Promise<string>
+  tokenGetter?: () => Promise<string>
 }
 
 export default class MetricQueryService {
   constructor (private readonly options: MetricQueryServiceOptions) {}
 
   private async makeClient (): Promise<Sdk> {
-    const token = await this.options.tokenGetter()
+    const token = await this.options.tokenGetter?.()
     return getSdk(new GraphQLClient(
       this.options.apiUrl,
-      { headers: { authorization: 'Bearer ' + token } }
+      {
+        headers: token != null ? { authorization: 'Bearer ' + token } : {},
+        fetch: async (url: string, options: RequestInit): Promise<any> => {
+          try {
+            const response = await getBackendSrv().datasourceRequest({
+              url,
+              method: 'POST',
+              headers: options.headers,
+              data: options.body,
+              responseType: 'text'
+            })
+            return new Response(response.data, response)
+          } catch (err) {
+            const response = err as FetchResponse
+            return new Response(response.data, response)
+          }
+        }
+      }
     ))
   }
 
