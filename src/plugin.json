@@ -48,7 +48,7 @@
   },
   "routes": [
     {
-      "path": "prod",
+      "path": "us-east-2/prod",
       "url": "https://api.us-east-2.propeldata.com/graphql",
       "tokenAuth": {
         "url": "https://auth.us-east-2.propeldata.com/oauth2/token",
@@ -60,7 +60,7 @@
       }
     },
     {
-      "path": "dev",
+      "path": "us-east-2/dev",
       "url": "https://api.us-east-2.dev.propeldata.com/graphql",
       "tokenAuth": {
         "url": "https://auth.us-east-2.dev.propeldata.com/oauth2/token",

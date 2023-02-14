@@ -1,12 +1,16 @@
 import React, { ChangeEvent, ReactElement } from 'react'
-import { FieldSet, InlineField, InlineSwitch, SecretInput } from '@grafana/ui'
+import { FieldSet, InlineField, InlineSwitch, SecretInput, Select } from '@grafana/ui'
 import type { EditorProps } from './types'
 import { useChangeOptions, useChangeSecureOptions, useResetSecureOption } from './useChangeOptions'
 import { testIds } from './testIds'
+import { PropelRegion } from '../types'
+
+const REACT_APP_DEVELOPMENT = false
 
 export function ConfigEditor (props: EditorProps): ReactElement {
   const { jsonData, secureJsonFields } = props.options
   const onEnvironmentChange = useChangeOptions(props, 'environment')
+  const onRegionChange = useChangeOptions(props, 'region')
   const onClientIdChange = useChangeSecureOptions(props, 'clientId')
   const onClientSecretChange = useChangeSecureOptions(props, 'clientSecret')
   const onResetClientId = useResetSecureOption(props, 'clientId')
@@ -17,15 +21,28 @@ export function ConfigEditor (props: EditorProps): ReactElement {
   return (
     <>
       <FieldSet label="General">
+        {REACT_APP_DEVELOPMENT &&
+            <InlineField
+                label="Dev"
+                labelWidth={16}
+                tooltip="Whether to use the development API or not"
+            >
+                <InlineSwitch
+                    label={'dev'}
+                    value={isDev}
+                    onClick={() => onEnvironmentChange(isDev ? 'prod' : 'dev')}
+                />
+            </InlineField>
+        }
         <InlineField
-          label="Dev"
+          label="Region"
           labelWidth={16}
-          tooltip="Whether to use the development API or not"
+          tooltip="Region where the data lives"
         >
-          <InlineSwitch
-            label={'dev'}
-            value={isDev}
-            onClick={() => onEnvironmentChange(isDev ? 'prod' : 'dev')}
+          <Select<PropelRegion>
+            value={jsonData.region ?? PropelRegion.UsEast2}
+            options={Object.values(PropelRegion).map(value => ({ value, label: value }))}
+            onChange={selected => selected.value != null && onRegionChange(selected.value)}
           />
         </InlineField>
       </FieldSet>
