@@ -20,19 +20,28 @@ export interface LeaderboardQuery {
 
 export type MetricQuery = CounterQuery | TimeSeriesQuery | LeaderboardQuery
 
-export interface BasicQuery extends DataQuery {
+export interface PropelQuery extends DataQuery {
   metricId?: string
   label?: string
   query?: MetricQuery
 }
 
-/**
- * These are options configured for each DataSource instance
- */
-export interface BasicDataSourceOptions extends DataSourceJsonData {
-  apiUrl?: string
-  authUrl?: string
+export enum PropelEnvironment {
+  Dev = 'dev',
+  Prod = 'prod'
+}
+
+export enum PropelRegion {
+  UsEast2 = 'us-east-2'
+}
+
+export interface PropelDataSourceOptions extends DataSourceJsonData {
+  environment?: PropelEnvironment
+  region?: PropelRegion
   clientId?: string
+}
+
+export interface PropelDataSourceSecureOptions {
   clientSecret?: string
 }
 
@@ -41,4 +50,4 @@ export interface TestResponse {
   message: string
 }
 
-export type EditorProps = QueryEditorProps<DataSource, BasicQuery, BasicDataSourceOptions>
+export type EditorProps = QueryEditorProps<DataSource, PropelQuery, PropelDataSourceOptions>

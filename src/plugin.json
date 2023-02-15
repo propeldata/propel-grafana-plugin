@@ -4,7 +4,6 @@
   "name": "Propel",
   "id": "propeldata-graphql-datasource",
   "metrics": true,
-  "alerting": true,
   "info": {
     "description": "Grafana data source plugin to connect to Propel",
     "author": {
@@ -46,5 +45,31 @@
   "dependencies": {
     "grafanaDependency": ">=9.1.2",
     "plugins": []
-  }
+  },
+  "routes": [
+    {
+      "path": "us-east-2/prod",
+      "url": "https://api.us-east-2.propeldata.com/graphql",
+      "tokenAuth": {
+        "url": "https://auth.us-east-2.propeldata.com/oauth2/token",
+        "params": {
+          "grant_type": "client_credentials",
+          "client_id": "{{ .JsonData.clientId }}",
+          "client_secret": "{{ .SecureJsonData.clientSecret }}"
+        }
+      }
+    },
+    {
+      "path": "us-east-2/dev",
+      "url": "https://api.us-east-2.dev.propeldata.com/graphql",
+      "tokenAuth": {
+        "url": "https://auth.us-east-2.dev.propeldata.com/oauth2/token",
+        "params": {
+          "grant_type": "client_credentials",
+          "client_id": "{{ .JsonData.clientId }}",
+          "client_secret": "{{ .SecureJsonData.clientSecret }}"
+        }
+      }
+    }
+  ]
 }

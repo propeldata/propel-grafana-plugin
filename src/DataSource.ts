@@ -1,51 +1,38 @@
 import {
   DataQueryRequest,
-  DataQueryResponse, DataSourceApi,
+  DataQueryResponse,
+  DataSourceApi,
   DataSourceInstanceSettings,
   FieldType,
-  MutableDataFrame, MutableField
+  MutableDataFrame,
+  MutableField
 } from '@grafana/data'
-import AuthTokenService from './@services/AuthTokenService'
 import MetricQueryService from './@services/MetricQueryService'
-import { defaultApiUrl, defaultAuthUrl } from './ConfigEditor/ConfigEditor'
 import { CounterInput, LeaderboardInput, MetricInfoFragment, TimeSeriesInput } from './generated/graphql'
-import { BasicQuery, BasicDataSourceOptions, TestResponse, MetricQuery } from './types'
+import { MetricQuery, PropelDataSourceOptions, PropelEnvironment, PropelQuery, PropelRegion, TestResponse } from './types'
 
-export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions> {
+export class DataSource extends DataSourceApi<PropelQuery, PropelDataSourceOptions> {
   static queryTypes = ['counter', 'time-series', 'leaderboard'] as Array<MetricQuery['type']>
 
-  private readonly authTokenService: AuthTokenService
-  apiUrl: string
+  private readonly metricQueryService: MetricQueryService
 
-  constructor (instanceSettings: DataSourceInstanceSettings<BasicDataSourceOptions>) {
+  constructor (instanceSettings: DataSourceInstanceSettings<PropelDataSourceOptions>) {
     super(instanceSettings)
-    let authUrl = instanceSettings.jsonData.authUrl
-    if (authUrl === '') authUrl = undefined
-    let apiUrl = instanceSettings.jsonData.apiUrl
-    if (apiUrl === '') apiUrl = undefined
-    this.authTokenService = new AuthTokenService({
-      authUrl: authUrl ?? defaultAuthUrl,
-      clientId: instanceSettings.jsonData.clientId ?? '',
-      clientSecret: instanceSettings.jsonData.clientSecret ?? ''
-    })
-    this.apiUrl = apiUrl ?? defaultApiUrl
+    const { url, jsonData } = instanceSettings
+    if (url !== undefined) {
+      const apiUrl = `${url}/${jsonData.region ?? PropelRegion.UsEast2}/${jsonData.environment ?? PropelEnvironment.Prod}`
+      this.metricQueryService = new MetricQueryService({ apiUrl })
+    } else {
+      throw new Error('Internal plugin error: instanceSettings.url is undefined')
+    }
   }
 
   async metrics (): Promise<MetricInfoFragment[]> {
-    const metricQueryService = new MetricQueryService({
-      apiUrl: this.apiUrl,
-      tokenGetter: async () => this.authTokenService.getAuthToken()
-    })
-    return metricQueryService.metrics()
+    return this.metricQueryService.metrics()
   }
 
   private async mutableDfFromCounter (metricId: string, input: CounterInput, label?: string): Promise<Array<MutableField<number>>> {
-    const metricQueryService = new MetricQueryService({
-      apiUrl: this.apiUrl,
-      tokenGetter: async () => this.authTokenService.getAuthToken()
-    })
-
-    const result = await metricQueryService.counter(metricId, input)
+    const result = await this.metricQueryService.counter(metricId, input)
     const values: number[] = [result]
     return [
       {
@@ -58,12 +45,7 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
   }
 
   private async mutableDfFromTimeSeries (metricId: string, input: TimeSeriesInput, label?: string): Promise<Array<MutableField<number>>> {
-    const metricQueryService = new MetricQueryService({
-      apiUrl: this.apiUrl,
-      tokenGetter: async () => this.authTokenService.getAuthToken()
-    })
-
-    const [labels, values] = await metricQueryService.timeSeries(metricId, input)
+    const [labels, values] = await this.metricQueryService.timeSeries(metricId, input)
     return [
       {
         name: (label != null) ? label : 'value',
@@ -81,12 +63,7 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
   }
 
   private async mutableDfFromLeaderboard (metricId: string, input: LeaderboardInput): Promise<Array<MutableField<number>>> {
-    const metricQueryService = new MetricQueryService({
-      apiUrl: this.apiUrl,
-      tokenGetter: async () => this.authTokenService.getAuthToken()
-    })
-
-    const { header, columns } = await metricQueryService.leaderboard(metricId, input)
+    const { header, columns } = await this.metricQueryService.leaderboard(metricId, input)
     const result: MutableField[] = []
     for (let i = 0; i < header.length; i++) {
       const column = columns[i]
@@ -106,7 +83,7 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
     return result
   }
 
-  async query (options: DataQueryRequest<BasicQuery>): Promise<DataQueryResponse> {
+  async query (options: DataQueryRequest<PropelQuery>): Promise<DataQueryResponse> {
     const promises = options.targets.map(async (target) => {
       if (target.metricId === undefined || target.query === undefined) {
         return new MutableDataFrame({
@@ -155,24 +132,24 @@ export class DataSource extends DataSourceApi<BasicQuery, BasicDataSourceOptions
    * Checks whether we can connect to the API.
    */
   async testDatasource (): Promise<TestResponse> {
-    return this.authTokenService.getAuthToken()
-      .then(async () => {
-        const metrics = await this.metrics()
-        if (metrics.length > 0) {
-          return {
-            status: 'success' as const,
-            message: `Success, this application has access to ${metrics.length} metrics`
-          }
-        } else {
-          return {
-            status: 'error' as const,
-            message: 'The Application is correctly configured, but does not have access to any Metric'
-          }
+    try {
+      const metrics = await this.metrics()
+      if (metrics.length > 0) {
+        return {
+          status: 'success' as const,
+          message: `Success, this application has access to ${metrics.length} metrics`
         }
-      })
-      .catch((err: Error) => ({
+      } else {
+        return {
+          status: 'error' as const,
+          message: 'The Application is correctly configured, but does not have access to any Metric'
+        }
+      }
+    } catch (err) {
+      return {
         status: 'error' as const,
-        message: err.message
-      }))
+        message: (err as Error).message
+      }
+    }
   }
 }

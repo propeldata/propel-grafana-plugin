@@ -1,42 +1,47 @@
-import React, { ReactElement } from 'react'
-import { FieldSet, InlineField, Input } from '@grafana/ui'
+import React, { ChangeEvent, ReactElement } from 'react'
+import { FieldSet, InlineField, InlineSwitch, Input, SecretInput, Select } from '@grafana/ui'
 import type { EditorProps } from './types'
-import { useChangeOptions } from './useChangeOptions'
+import { useChangeOptions, useChangeSecureOptions, useResetSecureOption } from './useChangeOptions'
 import { testIds } from './testIds'
+import { PropelRegion } from '../types'
 
-export const defaultApiUrl = 'https://api.us-east-2.propeldata.com/graphql'
-export const defaultAuthUrl = 'https://auth.us-east-2.propeldata.com/oauth2/token'
+const REACT_APP_DEVELOPMENT = false
 
 export function ConfigEditor (props: EditorProps): ReactElement {
-  const { jsonData } = props.options
-  const onApiUrlChange = useChangeOptions(props, 'apiUrl')
-  const onAuthUrlChange = useChangeOptions(props, 'authUrl')
+  const { jsonData, secureJsonFields } = props.options
+  const onEnvironmentChange = useChangeOptions(props, 'environment')
+  const onRegionChange = useChangeOptions(props, 'region')
   const onClientIdChange = useChangeOptions(props, 'clientId')
-  const onClientSecretChange = useChangeOptions(props, 'clientSecret')
+  const onClientSecretChange = useChangeSecureOptions(props, 'clientSecret')
+  const onResetClientSecret = useResetSecureOption(props, 'clientSecret')
+
+  const isDev = jsonData.environment === 'dev'
 
   return (
     <>
       <FieldSet label="General">
-        <InlineField label="Api Url" tooltip="Url for the Propel data Api">
-          <Input
-            onChange={onApiUrlChange}
-            placeholder={defaultApiUrl}
-            width={40}
-            data-testid={testIds.configEditor.apiUrl}
-            default={true}
-            defaultValue={defaultApiUrl}
-            value={jsonData?.apiUrl ?? ''}
-          />
-        </InlineField>
-        <InlineField label="Auth Url" tooltip="Url for the OAuth flow">
-          <Input
-            onChange={onAuthUrlChange}
-            placeholder={defaultAuthUrl}
-            width={40}
-            data-testid={testIds.configEditor.apiUrl}
-            default={true}
-            defaultValue={defaultAuthUrl}
-            value={jsonData?.authUrl ?? ''}
+        {REACT_APP_DEVELOPMENT &&
+            <InlineField
+                label="Dev"
+                labelWidth={16}
+                tooltip="Whether to use the development API or not"
+            >
+                <InlineSwitch
+                    label={'dev'}
+                    value={isDev}
+                    onClick={() => onEnvironmentChange(isDev ? 'prod' : 'dev')}
+                />
+            </InlineField>
+        }
+        <InlineField
+          label="Region"
+          labelWidth={16}
+          tooltip="Region where the data lives"
+        >
+          <Select<PropelRegion>
+            value={jsonData.region ?? PropelRegion.UsEast2}
+            options={Object.values(PropelRegion).map(value => ({ value, label: value }))}
+            onChange={selected => selected.value != null && onRegionChange(selected.value)}
           />
         </InlineField>
       </FieldSet>
@@ -48,12 +53,12 @@ export function ConfigEditor (props: EditorProps): ReactElement {
           tooltip="Client Id for authenticating as an Application"
         >
           <Input
-            onChange={onClientIdChange}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => onClientIdChange(e.target.value)}
+            value={jsonData.clientId}
             placeholder={'Client Id'}
             label={'Client Id'}
             width={40}
             data-testid={testIds.configEditor.clientId}
-            value={jsonData?.clientId ?? ''}
           />
         </InlineField>
         <InlineField
@@ -61,14 +66,15 @@ export function ConfigEditor (props: EditorProps): ReactElement {
           labelWidth={16}
           tooltip="Client Secret for authenticating as an Application"
         >
-          <Input
-            onChange={onClientSecretChange}
+          <SecretInput
+            onReset={onResetClientSecret}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => onClientSecretChange(e.target.value)}
+            isConfigured={secureJsonFields.clientSecret}
             label="Client Secret"
             placeholder="Client Secret"
             type={'password'}
             width={40}
             data-testid={testIds.configEditor.clientSecret}
-            value={jsonData?.clientSecret ?? ''}
           />
         </InlineField>
       </FieldSet>
