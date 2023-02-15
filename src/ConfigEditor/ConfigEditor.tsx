@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ReactElement } from 'react'
-import { FieldSet, InlineField, InlineSwitch, SecretInput, Select } from '@grafana/ui'
+import { FieldSet, InlineField, InlineSwitch, Input, SecretInput, Select } from '@grafana/ui'
 import type { EditorProps } from './types'
 import { useChangeOptions, useChangeSecureOptions, useResetSecureOption } from './useChangeOptions'
 import { testIds } from './testIds'
@@ -11,9 +11,8 @@ export function ConfigEditor (props: EditorProps): ReactElement {
   const { jsonData, secureJsonFields } = props.options
   const onEnvironmentChange = useChangeOptions(props, 'environment')
   const onRegionChange = useChangeOptions(props, 'region')
-  const onClientIdChange = useChangeSecureOptions(props, 'clientId')
+  const onClientIdChange = useChangeOptions(props, 'clientId')
   const onClientSecretChange = useChangeSecureOptions(props, 'clientSecret')
-  const onResetClientId = useResetSecureOption(props, 'clientId')
   const onResetClientSecret = useResetSecureOption(props, 'clientSecret')
 
   const isDev = jsonData.environment === 'dev'
@@ -53,13 +52,11 @@ export function ConfigEditor (props: EditorProps): ReactElement {
           labelWidth={16}
           tooltip="Client Id for authenticating as an Application"
         >
-          <SecretInput
+          <Input
             onChange={(e: ChangeEvent<HTMLInputElement>) => onClientIdChange(e.target.value)}
-            onReset={onResetClientId}
-            isConfigured={secureJsonFields.clientId}
+            value={jsonData.clientId}
             placeholder={'Client Id'}
             label={'Client Id'}
-            type={'password'}
             width={40}
             data-testid={testIds.configEditor.clientId}
           />

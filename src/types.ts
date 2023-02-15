@@ -38,10 +38,10 @@ export enum PropelRegion {
 export interface PropelDataSourceOptions extends DataSourceJsonData {
   environment?: PropelEnvironment
   region?: PropelRegion
+  clientId?: string
 }
 
 export interface PropelDataSourceSecureOptions {
-  clientId?: string
   clientSecret?: string
 }
 

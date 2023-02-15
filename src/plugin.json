@@ -54,7 +54,7 @@
         "url": "https://auth.us-east-2.propeldata.com/oauth2/token",
         "params": {
           "grant_type": "client_credentials",
-          "client_id": "{{ .SecureJsonData.clientId }}",
+          "client_id": "{{ .JsonData.clientId }}",
           "client_secret": "{{ .SecureJsonData.clientSecret }}"
         }
       }
@@ -66,7 +66,7 @@
         "url": "https://auth.us-east-2.dev.propeldata.com/oauth2/token",
         "params": {
           "grant_type": "client_credentials",
-          "client_id": "{{ .SecureJsonData.clientId }}",
+          "client_id": "{{ .JsonData.clientId }}",
           "client_secret": "{{ .SecureJsonData.clientSecret }}"
         }
       }
