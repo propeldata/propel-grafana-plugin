@@ -1,38 +1,20 @@
 import React, { ChangeEvent, ReactElement } from 'react'
-import { FieldSet, InlineField, InlineSwitch, Input, SecretInput, Select } from '@grafana/ui'
+import { FieldSet, InlineField, Input, SecretInput, Select } from '@grafana/ui'
 import type { EditorProps } from './types'
 import { useChangeOptions, useChangeSecureOptions, useResetSecureOption } from './useChangeOptions'
 import { testIds } from './testIds'
 import { PropelRegion } from '../types'
 
-const REACT_APP_DEVELOPMENT = false
-
 export function ConfigEditor (props: EditorProps): ReactElement {
   const { jsonData, secureJsonFields } = props.options
-  const onEnvironmentChange = useChangeOptions(props, 'environment')
   const onRegionChange = useChangeOptions(props, 'region')
   const onClientIdChange = useChangeOptions(props, 'clientId')
   const onClientSecretChange = useChangeSecureOptions(props, 'clientSecret')
   const onResetClientSecret = useResetSecureOption(props, 'clientSecret')
 
-  const isDev = jsonData.environment === 'dev'
-
   return (
     <>
       <FieldSet label="General">
-        {REACT_APP_DEVELOPMENT &&
-            <InlineField
-                label="Dev"
-                labelWidth={16}
-                tooltip="Whether to use the development API or not"
-            >
-                <InlineSwitch
-                    label={'dev'}
-                    value={isDev}
-                    onClick={() => onEnvironmentChange(isDev ? 'prod' : 'dev')}
-                />
-            </InlineField>
-        }
         <InlineField
           label="Region"
           labelWidth={16}

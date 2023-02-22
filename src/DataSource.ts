@@ -9,7 +9,7 @@ import {
 } from '@grafana/data'
 import MetricQueryService from './@services/MetricQueryService'
 import { CounterInput, LeaderboardInput, MetricInfoFragment, TimeSeriesInput } from './generated/graphql'
-import { MetricQuery, PropelDataSourceOptions, PropelEnvironment, PropelQuery, PropelRegion, TestResponse } from './types'
+import { MetricQuery, PropelDataSourceOptions, PropelQuery, PropelRegion, TestResponse } from './types'
 
 export class DataSource extends DataSourceApi<PropelQuery, PropelDataSourceOptions> {
   static queryTypes = ['counter', 'time-series', 'leaderboard'] as Array<MetricQuery['type']>
@@ -20,7 +20,7 @@ export class DataSource extends DataSourceApi<PropelQuery, PropelDataSourceOptio
     super(instanceSettings)
     const { url, jsonData } = instanceSettings
     if (url !== undefined) {
-      const apiUrl = `${url}/${jsonData.region ?? PropelRegion.UsEast2}/${jsonData.environment ?? PropelEnvironment.Prod}`
+      const apiUrl = `${url}/${jsonData.region ?? PropelRegion.UsEast2}`
       this.metricQueryService = new MetricQueryService({ apiUrl })
     } else {
       throw new Error('Internal plugin error: instanceSettings.url is undefined')

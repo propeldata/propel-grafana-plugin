@@ -26,17 +26,11 @@ export interface PropelQuery extends DataQuery {
   query?: MetricQuery
 }
 
-export enum PropelEnvironment {
-  Dev = 'dev',
-  Prod = 'prod'
-}
-
 export enum PropelRegion {
   UsEast2 = 'us-east-2'
 }
 
 export interface PropelDataSourceOptions extends DataSourceJsonData {
-  environment?: PropelEnvironment
   region?: PropelRegion
   clientId?: string
 }
