@@ -1,6 +1,6 @@
 {
   "name": "propeldata-graphql-datasource",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Propel's Grafana Data Source",
   "scripts": {
     "build": "yarn generate && grafana-toolkit plugin:build",
