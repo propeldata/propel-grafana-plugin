@@ -1,6 +1,6 @@
 {
   "name": "propeldata-graphql-datasource",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Propel's Grafana Data Source",
   "scripts": {
     "build": "yarn generate && grafana-toolkit plugin:build",
@@ -14,7 +14,7 @@
   "author": "Gabriel Musat Mestre",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@grafana/toolkit": "latest",
+    "@grafana/toolkit": "^9.3.6",
     "@graphql-codegen/cli": "^2.13.11",
     "@graphql-codegen/typescript": "^2.8.1",
     "@graphql-codegen/typescript-graphql-request": "^4.5.8",
@@ -36,9 +36,9 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "dependencies": {
-    "@grafana/data": "latest",
-    "@grafana/runtime": "^9.2.3",
-    "@grafana/ui": "latest",
+    "@grafana/data": "^9.3.6",
+    "@grafana/runtime": "^9.3.6",
+    "@grafana/ui": "^9.3.6",
     "axios": "^1.1.3",
     "graphql": "^16.6.0",
     "jwt-decode": "^3.1.2",

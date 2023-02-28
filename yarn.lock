@@ -1486,12 +1486,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.1, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.3, @babel/runtime@npm:^7.11.1, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
-  version: 7.20.1
-  resolution: "@babel/runtime@npm:7.20.1"
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.1, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.3, @babel/runtime@npm:^7.11.1, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.20.6, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
+  version: 7.21.0
+  resolution: "@babel/runtime@npm:7.21.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40babel%2Fruntime%2F-%2Fruntime-7.21.0.tgz"
   dependencies:
-    regenerator-runtime: ^0.13.10
-  checksum: 00567a333d3357925742a6f5e39394dcc0af6e6029103fe188158bf7ae8b0b3ee3c6c0f68fccc217f0a6cfa455f6be252298baf56b3f5ff37b34313b170cd9f6
+    regenerator-runtime: ^0.13.11
+  checksum: 7b33e25bfa9e0e1b9e8828bb61b2d32bdd46b41b07ba7cb43319ad08efc6fda8eb89445193e67d6541814627df0ca59122c0ea795e412b99c5183a0540d338ab
   languageName: node
   linkType: hard
 
@@ -1542,10 +1542,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@braintree/sanitize-url@npm:6.0.0":
-  version: 6.0.0
-  resolution: "@braintree/sanitize-url@npm:6.0.0"
-  checksum: 409ce7709dc1a0c67bc887d20af1becd4145d5c62cc5124b1c4c1f3ea2a8d69b0ee9f582d446469c6f5294b56442b99048cbbba6861dd5c834d4e019b95e1f40
+"@braintree/sanitize-url@npm:6.0.1":
+  version: 6.0.1
+  resolution: "@braintree/sanitize-url@npm:6.0.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40braintree%2Fsanitize-url%2F-%2Fsanitize-url-6.0.1.tgz"
+  checksum: 6f9221299aac0c841a17ecb1ebc60eb43c794f05b5136ca9b87116c8472b7e96f21e56ba2da8369f964112c6055fab791a37015bbea4bd5a189cc38206d214ad
   languageName: node
   linkType: hard
 
@@ -1660,7 +1660,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/babel-plugin@npm:^11.10.5, @emotion/babel-plugin@npm:^11.7.1":
+"@emotion/babel-plugin@npm:^11.10.5":
   version: 11.10.5
   resolution: "@emotion/babel-plugin@npm:11.10.5"
   dependencies:
@@ -1682,7 +1682,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/cache@npm:^11.10.5, @emotion/cache@npm:^11.4.0, @emotion/cache@npm:^11.7.1, @emotion/cache@npm:^11.9.3":
+"@emotion/cache@npm:^11.10.5, @emotion/cache@npm:^11.4.0":
   version: 11.10.5
   resolution: "@emotion/cache@npm:11.10.5"
   dependencies:
@@ -1695,21 +1695,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/css@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@emotion/css@npm:11.9.0"
+"@emotion/css@npm:11.10.5":
+  version: 11.10.5
+  resolution: "@emotion/css@npm:11.10.5::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40emotion%2Fcss%2F-%2Fcss-11.10.5.tgz"
   dependencies:
-    "@emotion/babel-plugin": ^11.7.1
-    "@emotion/cache": ^11.7.1
-    "@emotion/serialize": ^1.0.3
-    "@emotion/sheet": ^1.0.3
-    "@emotion/utils": ^1.0.0
+    "@emotion/babel-plugin": ^11.10.5
+    "@emotion/cache": ^11.10.5
+    "@emotion/serialize": ^1.1.1
+    "@emotion/sheet": ^1.2.1
+    "@emotion/utils": ^1.2.0
   peerDependencies:
     "@babel/core": ^7.0.0
   peerDependenciesMeta:
     "@babel/core":
       optional: true
-  checksum: bd83d9af5cf87b82992dea030b5c7db9cc26f8fee508fc8c20257bc040d35b0cc595143c5c8e3f5d6719351f3ae1c53b152899c22b60a2a5ff37d3439304401e
+  checksum: 2f1e953c3519cd69e40d2931cf36c3f1daf33d9f5064cb2612071bd316e38c8debb83d9520db5694ac323b6475f86004f6542919746f005fea0c14a855fc579b
   languageName: node
   linkType: hard
 
@@ -1727,30 +1727,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:11.9.3":
-  version: 11.9.3
-  resolution: "@emotion/react@npm:11.9.3"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@emotion/babel-plugin": ^11.7.1
-    "@emotion/cache": ^11.9.3
-    "@emotion/serialize": ^1.0.4
-    "@emotion/utils": ^1.1.0
-    "@emotion/weak-memoize": ^0.2.5
-    hoist-non-react-statics: ^3.3.1
-  peerDependencies:
-    "@babel/core": ^7.0.0
-    react: ">=16.8.0"
-  peerDependenciesMeta:
-    "@babel/core":
-      optional: true
-    "@types/react":
-      optional: true
-  checksum: 19bc7205e85e87cadebbe5a926d45103b836af70ab6972ea4c333c8dd01b463fc9646d4e4097a36f145a05dd4bc388739667437b990f8cf7f7f925f9610d1aa8
-  languageName: node
-  linkType: hard
-
-"@emotion/react@npm:^11.8.1":
+"@emotion/react@npm:11.10.5, @emotion/react@npm:^11.8.1":
   version: 11.10.5
   resolution: "@emotion/react@npm:11.10.5"
   dependencies:
@@ -1774,7 +1751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/serialize@npm:^1.0.3, @emotion/serialize@npm:^1.0.4, @emotion/serialize@npm:^1.1.1":
+"@emotion/serialize@npm:^1.1.1":
   version: 1.1.1
   resolution: "@emotion/serialize@npm:1.1.1"
   dependencies:
@@ -1787,7 +1764,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/sheet@npm:^1.0.3, @emotion/sheet@npm:^1.2.1":
+"@emotion/sheet@npm:^1.2.1":
   version: 1.2.1
   resolution: "@emotion/sheet@npm:1.2.1"
   checksum: ce78763588ea522438156344d9f592203e2da582d8d67b32e1b0b98eaba26994c6c270f8c7ad46442fc9c0a9f048685d819cd73ca87e544520fd06f0e24a1562
@@ -1810,17 +1787,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/utils@npm:^1.0.0, @emotion/utils@npm:^1.1.0, @emotion/utils@npm:^1.2.0":
+"@emotion/utils@npm:^1.2.0":
   version: 1.2.0
   resolution: "@emotion/utils@npm:1.2.0"
   checksum: 55457a49ddd4db6a014ea0454dc09eaa23eedfb837095c8ff90470cb26a303f7ceb5fcc1e2190ef64683e64cfd33d3ba3ca3109cd87d12bc9e379e4195c9a4dd
-  languageName: node
-  linkType: hard
-
-"@emotion/weak-memoize@npm:^0.2.5":
-  version: 0.2.5
-  resolution: "@emotion/weak-memoize@npm:0.2.5"
-  checksum: 27d402b0c683b94658220b6d47840346ee582329ca2a15ec9c233492e0f1a27687ccb233b76eedc922f2e185e444cc89f7b97a81a1d3e5ae9f075bab08e965ea
   languageName: node
   linkType: hard
 
@@ -1856,6 +1826,22 @@ __metadata:
     minimatch: ^3.1.2
     strip-json-comments: ^3.1.1
   checksum: f03e9d6727efd3e0719da2051ea80c0c73d20e28c171121527dbb868cd34232ca9c1d0525a66e517a404afea26624b1e47895b6a92474678418c2f50c9566694
+  languageName: node
+  linkType: hard
+
+"@floating-ui/core@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@floating-ui/core@npm:1.2.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40floating-ui%2Fcore%2F-%2Fcore-1.2.1.tgz"
+  checksum: 7a263e15abad4cd98ce3938075c90f76bafef71c67964c83dd7cf1e1916c92ccfa46a4f2b95b403bb180f70b3e7ded118db1cbc3426269ec70e948edf0d19ae2
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^1.0.1":
+  version: 1.2.1
+  resolution: "@floating-ui/dom@npm:1.2.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40floating-ui%2Fdom%2F-%2Fdom-1.2.1.tgz"
+  dependencies:
+    "@floating-ui/core": ^1.2.1
+  checksum: ad6928d5dd934ca8b3dcffdfcacde9d147afc0db4db0c0294b23d5f897224d73c7f0ae578b46d813f0d7ae22a86e7a3f8914fdbcdf4a8d42a1b430d0518f45be
   languageName: node
   linkType: hard
 
@@ -1915,68 +1901,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/agent-core@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@grafana/agent-core@npm:0.4.0"
+"@grafana/data@npm:9.3.6, @grafana/data@npm:^9.3.6":
+  version: 9.3.6
+  resolution: "@grafana/data@npm:9.3.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40grafana%2Fdata%2F-%2Fdata-9.3.6.tgz"
   dependencies:
-    "@opentelemetry/api": ^1.1.0
-    "@opentelemetry/api-metrics": ^0.29.1
-    "@opentelemetry/otlp-transformer": ^0.29.1
-    uuid: ^8.3.2
-  checksum: a71669dd0ec00f8e97dcf9e525b77221b64989918ab6a86c606caa87297a559c8da1f886cfa4c7ac7ade483dfaec24cf9733c93962f271c79540828ba06271a3
-  languageName: node
-  linkType: hard
-
-"@grafana/agent-web@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@grafana/agent-web@npm:0.4.0"
-  dependencies:
-    "@grafana/agent-core": ^0.4.0
-    ua-parser-js: ^1.0.2
-    web-vitals: ^2.1.4
-  checksum: 149b23dd387a70dfbc0f555c25712295e0eadcafcd13eb97d88e584b36388ddc819f2c59435101f7747151576cc3f616739efc8ad77eb77b84bd0c02204f9113
-  languageName: node
-  linkType: hard
-
-"@grafana/data@npm:9.2.3, @grafana/data@npm:latest":
-  version: 9.2.3
-  resolution: "@grafana/data@npm:9.2.3"
-  dependencies:
-    "@braintree/sanitize-url": 6.0.0
-    "@grafana/schema": 9.2.3
+    "@braintree/sanitize-url": 6.0.1
+    "@grafana/schema": 9.3.6
     "@types/d3-interpolate": ^1.4.0
     d3-interpolate: 1.4.0
-    date-fns: 2.29.1
+    date-fns: 2.29.3
     eventemitter3: 4.0.7
     fast_array_intersect: 1.1.0
     history: 4.10.1
     lodash: 4.17.21
-    marked: 4.1.0
+    marked: 4.2.0
     moment: 2.29.4
-    moment-timezone: 0.5.35
-    ol: 6.15.1
+    moment-timezone: 0.5.38
+    ol: 7.1.0
     papaparse: 5.3.2
-    regenerator-runtime: 0.13.9
-    rxjs: 7.5.6
+    regenerator-runtime: 0.13.10
+    rxjs: 7.5.7
     tinycolor2: 1.4.2
-    tslib: 2.4.0
-    uplot: 1.6.22
-    xss: 1.0.13
+    tslib: 2.4.1
+    uplot: 1.6.23
+    xss: 1.0.14
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: ff5ee6b5f0b00ce5bc5da2fb779208e5f4bedd02b7052b1177b86836c4a6b3533c2748833609d3c893e9d4d187616655731f381f172fa0d243263e799b201168
+  checksum: f4ebcf86128f0f2cfad5dcd5bc9675ffe8f4052967c0e4d5468142d36885b2a6b0e276e2ad32853ad5bea3df0ec9410cf1d6359852669632a6c4280c41118091
   languageName: node
   linkType: hard
 
-"@grafana/e2e-selectors@npm:9.2.3":
-  version: 9.2.3
-  resolution: "@grafana/e2e-selectors@npm:9.2.3"
+"@grafana/e2e-selectors@npm:9.3.6":
+  version: 9.3.6
+  resolution: "@grafana/e2e-selectors@npm:9.3.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40grafana%2Fe2e-selectors%2F-%2Fe2e-selectors-9.3.6.tgz"
   dependencies:
     "@grafana/tsconfig": ^1.2.0-rc1
-    tslib: 2.4.0
-    typescript: 4.8.2
-  checksum: cc003a235f883b3c6783e5f7215ff859612658042df65d249248235dab20a6c712e56d626b16fc88ac3c6c1830d4c4e75aae9e2503a807e237f5377a2a2fc241
+    tslib: 2.4.1
+    typescript: 4.8.4
+  checksum: e1c42f2f00933f57f86248520d9d144ea8feb26239aff4758d2b4072354c0bbc6b4d1bc01ba8463203d6a53b3d5650c908f3bedd313215322678a3ec665e288f
   languageName: node
   linkType: hard
 
@@ -1996,39 +1959,61 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/runtime@npm:^9.2.3":
-  version: 9.2.3
-  resolution: "@grafana/runtime@npm:9.2.3"
+"@grafana/faro-core@npm:^1.0.0-beta2":
+  version: 1.0.0
+  resolution: "@grafana/faro-core@npm:1.0.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40grafana%2Ffaro-core%2F-%2Ffaro-core-1.0.0.tgz"
   dependencies:
-    "@grafana/agent-web": ^0.4.0
-    "@grafana/data": 9.2.3
-    "@grafana/e2e-selectors": 9.2.3
-    "@grafana/ui": 9.2.3
+    "@opentelemetry/api": ^1.4.0
+    "@opentelemetry/api-metrics": ^0.33.0
+    "@opentelemetry/otlp-transformer": ^0.35.0
+  checksum: 6debd3f85e1fd9b4a48c6327fdf5b603356ac4e9da25ea861e04741b3e4cc4539e8c2e8ab9f34a33321df0f5f13fdb1371b6d67d493980befd300acd8b8acc9b
+  languageName: node
+  linkType: hard
+
+"@grafana/faro-web-sdk@npm:1.0.0-beta2":
+  version: 1.0.0-beta2
+  resolution: "@grafana/faro-web-sdk@npm:1.0.0-beta2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40grafana%2Ffaro-web-sdk%2F-%2Ffaro-web-sdk-1.0.0-beta2.tgz"
+  dependencies:
+    "@grafana/faro-core": ^1.0.0-beta2
+    ua-parser-js: ^1.0.32
+    web-vitals: ^3.0.4
+  checksum: 7919c4856653880c71d384b14e8e8a7fa2edc17cf57bdc55dc6afd8a8c94b6787a0b9186540b6fb1c4f6d720de7ec8b3ddd00517a2e8117ede94de5b3f8c5559
+  languageName: node
+  linkType: hard
+
+"@grafana/runtime@npm:^9.3.6":
+  version: 9.3.6
+  resolution: "@grafana/runtime@npm:9.3.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40grafana%2Fruntime%2F-%2Fruntime-9.3.6.tgz"
+  dependencies:
+    "@grafana/data": 9.3.6
+    "@grafana/e2e-selectors": 9.3.6
+    "@grafana/faro-web-sdk": 1.0.0-beta2
+    "@grafana/ui": 9.3.6
     "@sentry/browser": 6.19.7
     history: 4.10.1
     lodash: 4.17.21
-    rxjs: 7.5.6
+    rxjs: 7.5.7
     systemjs: 0.20.19
-    tslib: 2.4.0
+    tslib: 2.4.1
   peerDependencies:
     react: 17.0.2
     react-dom: 17.0.2
-  checksum: 4c7504f910c001ed201bb28b0af4f3221c54f91fcfa8f4db6c973479ab811d7142e52093485cb8971309903397263e6d8d495ad71dab273a725a9884e5ceb6e7
+  checksum: 26622d42bcc5233fbb8ab0a1d96d422b6a464dbca2551022ff8b6d8e067a18449e0b83969a00a45c27a181102897742a8360ae8a76512d7294486dffab8a1305
   languageName: node
   linkType: hard
 
-"@grafana/schema@npm:9.2.3":
-  version: 9.2.3
-  resolution: "@grafana/schema@npm:9.2.3"
+"@grafana/schema@npm:9.3.6":
+  version: 9.3.6
+  resolution: "@grafana/schema@npm:9.3.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40grafana%2Fschema%2F-%2Fschema-9.3.6.tgz"
   dependencies:
-    tslib: 2.4.0
-  checksum: 7ed48896060d954987ead295863dee9b51dd5d7eb5249571a29b03fe90a1efce6dcdc5883db94bfc8c67142d3d2eb34fcb87c1176b175939d31997945bc45806
+    tslib: 2.4.1
+  checksum: 9382283716ddac58ecb2a9a8642357a2ab35a503cee2817b9c02d22ee1f430d89757df78a4473e92d9f14360df5ac3ab4a26260984aa084b91a26d0fb31cbfea
   languageName: node
   linkType: hard
 
-"@grafana/toolkit@npm:latest":
-  version: 9.2.3
-  resolution: "@grafana/toolkit@npm:9.2.3"
+"@grafana/toolkit@npm:^9.3.6":
+  version: 9.3.6
+  resolution: "@grafana/toolkit@npm:9.3.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40grafana%2Ftoolkit%2F-%2Ftoolkit-9.3.6.tgz"
   dependencies:
     "@babel/core": 7.18.9
     "@babel/plugin-proposal-class-properties": 7.18.6
@@ -2042,10 +2027,10 @@ __metadata:
     "@babel/preset-env": 7.18.9
     "@babel/preset-react": 7.18.6
     "@babel/preset-typescript": 7.18.6
-    "@grafana/data": 9.2.3
+    "@grafana/data": 9.3.6
     "@grafana/eslint-config": 5.0.0
     "@grafana/tsconfig": ^1.2.0-rc1
-    "@grafana/ui": 9.2.3
+    "@grafana/ui": 9.3.6
     "@jest/core": 27.5.1
     "@types/command-exists": ^1.2.0
     "@types/eslint": 8.4.1
@@ -2116,7 +2101,7 @@ __metadata:
     webpack: ^5.72.0
   bin:
     grafana-toolkit: bin/grafana-toolkit.js
-  checksum: 19debe25cf2aaa3dcd0ac2fc0ff171fcba2f3b282bd38ca719ce98fbf9bc07ef950d323c454b66d05185a43929432d460efa71dfc446ab6ffc7ef546e25922dd
+  checksum: 37198948a827c8b263912e0c414b84412f01f842fe7e3bf153d48bcfbd3af04365de9d8dbe8f468a5ad2d55d647c0d39961c36f23a60674fd917783ea7af5fff
   languageName: node
   linkType: hard
 
@@ -2127,17 +2112,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@grafana/ui@npm:9.2.3, @grafana/ui@npm:latest":
-  version: 9.2.3
-  resolution: "@grafana/ui@npm:9.2.3"
+"@grafana/ui@npm:9.3.6, @grafana/ui@npm:^9.3.6":
+  version: 9.3.6
+  resolution: "@grafana/ui@npm:9.3.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40grafana%2Fui%2F-%2Fui-9.3.6.tgz"
   dependencies:
-    "@emotion/css": 11.9.0
-    "@emotion/react": 11.9.3
-    "@grafana/data": 9.2.3
-    "@grafana/e2e-selectors": 9.2.3
-    "@grafana/schema": 9.2.3
-    "@monaco-editor/react": 4.4.5
-    "@popperjs/core": 2.11.5
+    "@emotion/css": 11.10.5
+    "@emotion/react": 11.10.5
+    "@grafana/data": 9.3.6
+    "@grafana/e2e-selectors": 9.3.6
+    "@grafana/schema": 9.3.6
+    "@leeoniya/ufuzzy": 0.8.0
+    "@monaco-editor/react": 4.4.6
+    "@popperjs/core": 2.11.6
     "@react-aria/button": 3.6.1
     "@react-aria/dialog": 3.3.1
     "@react-aria/focus": 3.8.0
@@ -2148,53 +2134,56 @@ __metadata:
     "@sentry/browser": 6.19.7
     ansicolor: 1.1.100
     calculate-size: 1.1.1
-    classnames: 2.3.1
-    core-js: 3.25.1
+    classnames: 2.3.2
+    core-js: 3.26.0
     d3: 5.15.0
-    date-fns: 2.29.1
+    date-fns: 2.29.3
     hoist-non-react-statics: 3.3.2
+    i18next: ^22.0.0
     immutable: 4.1.0
     is-hotkey: 0.2.0
-    jquery: 3.6.0
+    jquery: 3.6.1
     lodash: 4.17.21
     memoize-one: 6.0.0
     moment: 2.29.4
     monaco-editor: 0.34.0
-    ol: 6.15.1
+    ol: 7.1.0
     prismjs: 1.29.0
-    rc-cascader: 3.6.1
+    rc-cascader: 3.7.0
     rc-drawer: 4.4.3
-    rc-slider: 9.7.5
+    rc-slider: 10.0.1
     rc-time-picker: ^3.7.3
-    react-beautiful-dnd: 13.1.0
-    react-calendar: 3.7.0
-    react-colorful: 5.5.1
+    rc-tooltip: 5.2.2
+    react-beautiful-dnd: 13.1.1
+    react-calendar: 3.9.0
+    react-colorful: 5.6.1
     react-custom-scrollbars-2: 4.5.0
-    react-dropzone: 14.2.2
+    react-dropzone: 14.2.3
     react-highlight-words: 0.18.0
     react-hook-form: 7.5.3
-    react-inlinesvg: 3.0.0
+    react-i18next: ^12.0.0
+    react-inlinesvg: 3.0.1
     react-popper: 2.3.0
-    react-popper-tooltip: ^4.3.1
+    react-popper-tooltip: 4.4.2
     react-router-dom: ^5.2.0
-    react-select: 5.4.0
+    react-select: 5.6.0
     react-select-event: ^5.1.0
     react-table: 7.8.0
-    react-transition-group: 4.4.2
+    react-transition-group: 4.4.5
     react-use: 17.4.0
-    react-window: 1.8.7
-    rxjs: 7.5.6
+    react-window: 1.8.8
+    rxjs: 7.5.7
     slate: 0.47.9
-    slate-plain-serializer: 0.7.11
+    slate-plain-serializer: 0.7.13
     slate-react: 0.22.10
     tinycolor2: 1.4.2
-    tslib: 2.4.0
-    uplot: 1.6.22
-    uuid: 8.3.2
+    tslib: 2.4.1
+    uplot: 1.6.23
+    uuid: 9.0.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: 3e4123562bbd0acd0297c11785f056e7a26754bfad1705e08db32d1b0390d3fb4d2bca9c9e029a0e9bdb057f782fa37871a14c06d8e7373bd474189c133b973f
+  checksum: e1d1552c1d180b4d1ec1f6235fc5e05d3f5f3b48691aaca877e820def56632154ea3a52fc2d65aadeb04972689d455b4df2b4290069729b42e4322e7c69cf4ad
   languageName: node
   linkType: hard
 
@@ -3192,6 +3181,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@leeoniya/ufuzzy@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@leeoniya/ufuzzy@npm:0.8.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40leeoniya%2Fufuzzy%2F-%2Fufuzzy-0.8.0.tgz"
+  checksum: 15c2c944beafcd97da8487ea7c0f5b59268ac080e492aa8ad6a53719f02164677725ef228211290433a13efaf4c1abd99b6f286c37c469872863e7e2fee90385
+  languageName: node
+  linkType: hard
+
 "@mapbox/jsonlint-lines-primitives@npm:~2.0.2":
   version: 2.0.2
   resolution: "@mapbox/jsonlint-lines-primitives@npm:2.0.2"
@@ -3245,9 +3241,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monaco-editor/react@npm:4.4.5":
-  version: 4.4.5
-  resolution: "@monaco-editor/react@npm:4.4.5"
+"@monaco-editor/react@npm:4.4.6":
+  version: 4.4.6
+  resolution: "@monaco-editor/react@npm:4.4.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40monaco-editor%2Freact%2F-%2Freact-4.4.6.tgz"
   dependencies:
     "@monaco-editor/loader": ^1.3.2
     prop-types: ^15.7.2
@@ -3255,7 +3251,7 @@ __metadata:
     monaco-editor: ">= 0.25.0 < 1"
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 7a9568e3c6c27ecb7b4e07803a85554a6decbf0ad789b98fe5cb3d65b3a3682356e7553475b3eaeed5376a963bdc60d94ceb79ed6c3dd212d72a5122164590f2
+  checksum: cb25b5ce153608c2a4291390456488e100c5e3ac48a913875c98182836e2a9f315d4f96e85cf6f7d4b1eadff8d08d13356e38891b472894155bcb2c4aeaf3b1c
   languageName: node
   linkType: hard
 
@@ -3306,91 +3302,89 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api-metrics@npm:0.29.2, @opentelemetry/api-metrics@npm:^0.29.1":
-  version: 0.29.2
-  resolution: "@opentelemetry/api-metrics@npm:0.29.2"
+"@opentelemetry/api-metrics@npm:^0.33.0":
+  version: 0.33.0
+  resolution: "@opentelemetry/api-metrics@npm:0.33.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40opentelemetry%2Fapi-metrics%2F-%2Fapi-metrics-0.33.0.tgz"
   dependencies:
     "@opentelemetry/api": ^1.0.0
-  checksum: 6197a1f05c8bfc72db7052b65d0612155f675282d796f4566fc1f99228f6c0b21df52bf9d865456992298d1a1720ea58dd79ec4b27b85563ec13f820dcaf2d3a
+  checksum: 8c4fc342e96bc3bea8d5f152faab7dec479c75b9a9b0796a4a8f17525734dcabab2366c0ea0f3d1f3e575d5e26315086b0ddf6ceda5625f5bd6322f425a2c074
   languageName: node
   linkType: hard
 
-"@opentelemetry/api@npm:^1.0.0, @opentelemetry/api@npm:^1.1.0":
-  version: 1.2.0
-  resolution: "@opentelemetry/api@npm:1.2.0"
-  checksum: 764efa81bf939200a8e80520a4735b23038abafc60c80420b007ae2bbb7ad843d806894414e95d974c2ef1b81d4ae8a3106804e1af7b5090240cfeb2467db099
+"@opentelemetry/api@npm:^1.0.0, @opentelemetry/api@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@opentelemetry/api@npm:1.4.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40opentelemetry%2Fapi%2F-%2Fapi-1.4.0.tgz"
+  checksum: 8dc522194e20d2e8aa6cac155dbce19d3fc9cfac59e953ece1064158c6348ccd9560ee99d2f2381e82c2f8c9a129b57fa7b640027383315504de1fa712b6d7f1
   languageName: node
   linkType: hard
 
-"@opentelemetry/core@npm:1.3.1":
-  version: 1.3.1
-  resolution: "@opentelemetry/core@npm:1.3.1"
+"@opentelemetry/core@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@opentelemetry/core@npm:1.9.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40opentelemetry%2Fcore%2F-%2Fcore-1.9.1.tgz"
   dependencies:
-    "@opentelemetry/semantic-conventions": 1.3.1
+    "@opentelemetry/semantic-conventions": 1.9.1
   peerDependencies:
-    "@opentelemetry/api": ">=1.0.0 <1.2.0"
-  checksum: a59d0e8b7af2054d4b741a076abb992fb9bb241b1e7e2563a7d03b8a810155eb5c5c4eab28ebae39ce67d9ae66ae2a8d5d038de3b7ddc6301ac636840ceb876c
+    "@opentelemetry/api": ">=1.0.0 <1.5.0"
+  checksum: 5581a809e2caff142136734634f45255ce9f1ed701cf38629b9e17d91a8d15449b467fb3a7f3d0d8b076f653090e50cc31d3b1db4cfefeda9b6b901c60581024
   languageName: node
   linkType: hard
 
-"@opentelemetry/otlp-transformer@npm:^0.29.1":
-  version: 0.29.2
-  resolution: "@opentelemetry/otlp-transformer@npm:0.29.2"
+"@opentelemetry/otlp-transformer@npm:^0.35.0":
+  version: 0.35.1
+  resolution: "@opentelemetry/otlp-transformer@npm:0.35.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40opentelemetry%2Fotlp-transformer%2F-%2Fotlp-transformer-0.35.1.tgz"
   dependencies:
-    "@opentelemetry/api-metrics": 0.29.2
-    "@opentelemetry/core": 1.3.1
-    "@opentelemetry/resources": 1.3.1
-    "@opentelemetry/sdk-metrics-base": 0.29.2
-    "@opentelemetry/sdk-trace-base": 1.3.1
+    "@opentelemetry/core": 1.9.1
+    "@opentelemetry/resources": 1.9.1
+    "@opentelemetry/sdk-metrics": 1.9.1
+    "@opentelemetry/sdk-trace-base": 1.9.1
   peerDependencies:
-    "@opentelemetry/api": ">=1.0.0 <1.2.0"
-  checksum: e86dc023c96fcf2faa72d47300bb43d2820a5f3f75446d17b109c4a16accec2257642dbe0856ec65ef4c6a9ba9ac551ace5a429bd7222da64563acd7002f8698
+    "@opentelemetry/api": ">=1.3.0 <1.5.0"
+  checksum: e0a68b2be28d5535aaaa58be31a5e85b268b42025c8b3a34498f00b019fbd172530b1b484c4257fd330c5890007130eedec288b8fe8f2b85176198f9ffc2507e
   languageName: node
   linkType: hard
 
-"@opentelemetry/resources@npm:1.3.1":
-  version: 1.3.1
-  resolution: "@opentelemetry/resources@npm:1.3.1"
+"@opentelemetry/resources@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@opentelemetry/resources@npm:1.9.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40opentelemetry%2Fresources%2F-%2Fresources-1.9.1.tgz"
   dependencies:
-    "@opentelemetry/core": 1.3.1
-    "@opentelemetry/semantic-conventions": 1.3.1
+    "@opentelemetry/core": 1.9.1
+    "@opentelemetry/semantic-conventions": 1.9.1
   peerDependencies:
-    "@opentelemetry/api": ">=1.0.0 <1.2.0"
-  checksum: 2aeb76e23364f2ede34d27c912d3489e219dbdb430c7ae33e30c38d4451f05fc58c0ff05332a8eac428d889f456692450417b8477585089cd047165fb25681ea
+    "@opentelemetry/api": ">=1.0.0 <1.5.0"
+  checksum: cf15e5faa698df3f0abcee35f7b4271c019b6cb81cb521b07793fe622c716d9c6873216219879afd57a28202f748a839ecaf28e04268e490004f14bbb850c96e
   languageName: node
   linkType: hard
 
-"@opentelemetry/sdk-metrics-base@npm:0.29.2":
-  version: 0.29.2
-  resolution: "@opentelemetry/sdk-metrics-base@npm:0.29.2"
+"@opentelemetry/sdk-metrics@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@opentelemetry/sdk-metrics@npm:1.9.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40opentelemetry%2Fsdk-metrics%2F-%2Fsdk-metrics-1.9.1.tgz"
   dependencies:
-    "@opentelemetry/api-metrics": 0.29.2
-    "@opentelemetry/core": 1.3.1
-    "@opentelemetry/resources": 1.3.1
+    "@opentelemetry/core": 1.9.1
+    "@opentelemetry/resources": 1.9.1
     lodash.merge: 4.6.2
   peerDependencies:
-    "@opentelemetry/api": ^1.0.0
-  checksum: 3518b881991ce13bc1a93346889bb4e5e9581528b511151981049b60bf78acf85f44701597e303f23629f2282ba36ac26d55c39740ef288e227d8253658933aa
+    "@opentelemetry/api": ">=1.3.0 <1.5.0"
+  checksum: 08e8215841da74ffc36f2e5c414ab4230e5a2676a4329f9c98fbde4b162b6166612ab48bcc701cebf8ded3e2b5a68981f72987751df4393e0839089fa0c5ee13
   languageName: node
   linkType: hard
 
-"@opentelemetry/sdk-trace-base@npm:1.3.1":
-  version: 1.3.1
-  resolution: "@opentelemetry/sdk-trace-base@npm:1.3.1"
+"@opentelemetry/sdk-trace-base@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@opentelemetry/sdk-trace-base@npm:1.9.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40opentelemetry%2Fsdk-trace-base%2F-%2Fsdk-trace-base-1.9.1.tgz"
   dependencies:
-    "@opentelemetry/core": 1.3.1
-    "@opentelemetry/resources": 1.3.1
-    "@opentelemetry/semantic-conventions": 1.3.1
+    "@opentelemetry/core": 1.9.1
+    "@opentelemetry/resources": 1.9.1
+    "@opentelemetry/semantic-conventions": 1.9.1
   peerDependencies:
-    "@opentelemetry/api": ">=1.0.0 <1.2.0"
-  checksum: 9f3074f226854ff285e15d1f636f6c912b9760306c3617fd731dc2c9cb4816d59b7b74185ce1d3be9131d4852a881599cbba2d721cc02871bdf2827a028f7a62
+    "@opentelemetry/api": ">=1.0.0 <1.5.0"
+  checksum: f9448132686b1a8c1fde7539845a2b31bcb315c3bbabccb20a18142db80eeed433b3713e2761151348c1b626ad00183f4b7e9b9868d1a8ab8c541dce1d082f38
   languageName: node
   linkType: hard
 
-"@opentelemetry/semantic-conventions@npm:1.3.1":
-  version: 1.3.1
-  resolution: "@opentelemetry/semantic-conventions@npm:1.3.1"
-  checksum: 83fa3b8a8198f6a5265a4191a89cfcce042240b92e034cf29631b0fe749993f4f74f4d21d89b10f6b05984246424adf8d037f8be507fcf0adf60933ab7143f07
+"@opentelemetry/semantic-conventions@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@opentelemetry/semantic-conventions@npm:1.9.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40opentelemetry%2Fsemantic-conventions%2F-%2Fsemantic-conventions-1.9.1.tgz"
+  checksum: 6217ba14b8f0068a3400f054c1f9d918b2e22d1cf8d31112baa712b8d196e207aed7421c6df37ed1403f7109f51c7834c230cbe180313eee07db6f7e0a7797bc
   languageName: node
   linkType: hard
 
@@ -3434,14 +3428,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:2.11.5":
-  version: 2.11.5
-  resolution: "@popperjs/core@npm:2.11.5"
-  checksum: fd7f9dca3fb716d7426332b6ee283f88d2724c0ab342fb678865a640bad403dfb9eeebd8204a406986162f7e2b33394f104320008b74d0e9066d7322f70ea35d
-  languageName: node
-  linkType: hard
-
-"@popperjs/core@npm:^2.11.5":
+"@popperjs/core@npm:2.11.6, @popperjs/core@npm:^2.11.5":
   version: 2.11.6
   resolution: "@popperjs/core@npm:2.11.6"
   checksum: 47fb328cec1924559d759b48235c78574f2d71a8a6c4c03edb6de5d7074078371633b91e39bbf3f901b32aa8af9b9d8f82834856d2f5737a23475036b16817f0
@@ -6401,14 +6388,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.3.1":
-  version: 2.3.1
-  resolution: "classnames@npm:2.3.1"
-  checksum: 14db8889d56c267a591f08b0834989fe542d47fac659af5a539e110cc4266694e8de86e4e3bbd271157dbd831361310a8293e0167141e80b0f03a0f175c80960
-  languageName: node
-  linkType: hard
-
-"classnames@npm:2.x, classnames@npm:^2.2.1, classnames@npm:^2.2.5, classnames@npm:^2.2.6, classnames@npm:^2.3.1":
+"classnames@npm:2.3.2, classnames@npm:2.x, classnames@npm:^2.2.1, classnames@npm:^2.2.5, classnames@npm:^2.2.6, classnames@npm:^2.3.1":
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
   checksum: 2c62199789618d95545c872787137262e741f9db13328e216b093eea91c85ef2bfb152c1f9e63027204e2559a006a92eb74147d46c800a9f96297ae1d9f96f4e
@@ -6743,10 +6723,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.25.1":
-  version: 3.25.1
-  resolution: "core-js@npm:3.25.1"
-  checksum: bfacb078e790913841e2d5008b9b6705ae56ed23f83c7f0ae08d330d874561012611089d53b71520105234ed0abba36f28d91b391514a16541a8c8d98c464239
+"core-js@npm:3.26.0":
+  version: 3.26.0
+  resolution: "core-js@npm:3.26.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fcore-js%2F-%2Fcore-js-3.26.0.tgz"
+  checksum: 0149eb9d3909fde9c17626af3a6e625c326e8598d0bb5e6c5b48a18e5fcd4eaf48d4964d873667d8148542ff590fb98eb3f93618da114ca54999d6bc0349734b
   languageName: node
   linkType: hard
 
@@ -7487,10 +7467,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:2.29.1":
-  version: 2.29.1
-  resolution: "date-fns@npm:2.29.1"
-  checksum: 9d07f77dffc1eb8c213391bde39f2963ffe7c0019d9edde14487882d627224f3a39b963e6e99d0cc58afff220a6a1a7e8864d2789958f4eaa77714de94d4d076
+"date-fns@npm:2.29.3":
+  version: 2.29.3
+  resolution: "date-fns@npm:2.29.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fdate-fns%2F-%2Fdate-fns-2.29.3.tgz"
+  checksum: e01cf5b62af04e05dfff921bb9c9933310ed0e1ae9a81eb8653452e64dc841acf7f6e01e1a5ae5644d0337e9a7f936175fd2cb6819dc122fdd9c5e86c56be484
   languageName: node
   linkType: hard
 
@@ -7860,6 +7840,13 @@ __metadata:
   version: 0.1.2
   resolution: "duplexer@npm:0.1.2"
   checksum: 62ba61a830c56801db28ff6305c7d289b6dc9f859054e8c982abd8ee0b0a14d2e9a8e7d086ffee12e868d43e2bbe8a964be55ddbd8c8957714c87373c7a4f9b0
+  languageName: node
+  linkType: hard
+
+"earcut@npm:^2.2.3":
+  version: 2.2.4
+  resolution: "earcut@npm:2.2.4::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fearcut%2F-%2Fearcut-2.2.4.tgz"
+  checksum: aea0466cb2f24e0c3c57148d8d28ac9846f53c4f43ee66780826474303ac851b305ef988152d0bdeb31e8f7ca939dc0df737e7505cfb1c1bdf2ff9d7f9ea2faa
   languageName: node
   linkType: hard
 
@@ -9535,6 +9522,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-parse-stringify@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "html-parse-stringify@npm:3.0.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fhtml-parse-stringify%2F-%2Fhtml-parse-stringify-3.0.1.tgz"
+  dependencies:
+    void-elements: 3.1.0
+  checksum: 334fdebd4b5c355dba8e95284cead6f62bf865a2359da2759b039db58c805646350016d2017875718bc3c4b9bf81a0d11be5ee0cf4774a3a5a7b97cde21cfd67
+  languageName: node
+  linkType: hard
+
 "html-webpack-plugin@npm:^5.5.0":
   version: 5.5.0
   resolution: "html-webpack-plugin@npm:5.5.0"
@@ -9645,6 +9641,15 @@ __metadata:
   version: 1.0.4
   resolution: "hyphenate-style-name@npm:1.0.4"
   checksum: 4f5bf4b055089754924babebaa23c17845937bcca6aee95d5d015f8fa1e6814279002bd6a9e541e3fac2cd02519fc76305396727066c57c8e21a7e73e7a12137
+  languageName: node
+  linkType: hard
+
+"i18next@npm:^22.0.0":
+  version: 22.4.10
+  resolution: "i18next@npm:22.4.10::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fi18next%2F-%2Fi18next-22.4.10.tgz"
+  dependencies:
+    "@babel/runtime": ^7.20.6
+  checksum: 731423e3fafe4ecaf0fc3c5867b69ae5c35c9021f7b5aad8392a9bf5cf56fbf1503376ba5aa935f2b21e12a97862fa31be0e4b35e98eefb747e2008b5808e35c
   languageName: node
   linkType: hard
 
@@ -10965,10 +10970,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jquery@npm:3.6.0":
-  version: 3.6.0
-  resolution: "jquery@npm:3.6.0"
-  checksum: 8fd5fef4aa48fd374ec716dd1c1df1af407814a228e15c1260ca140de3a697c2a77c30c54ff1d238b6a3ab4ddc445ddeef9adce6c6d28e4869d85eb9d3951c0e
+"jquery@npm:3.6.1":
+  version: 3.6.1
+  resolution: "jquery@npm:3.6.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fjquery%2F-%2Fjquery-3.6.1.tgz"
+  checksum: 6177d866a74f1137cad800f142c7cdbd5ab19cd4282546f8bdb4890c9f933b1d542ab96f2aa15d007e43c98de7315b0513e849ec5359d3ac5640f720892fe547
   languageName: node
   linkType: hard
 
@@ -11654,12 +11659,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:4.1.0":
-  version: 4.1.0
-  resolution: "marked@npm:4.1.0"
+"marked@npm:4.2.0":
+  version: 4.2.0
+  resolution: "marked@npm:4.2.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fmarked%2F-%2Fmarked-4.2.0.tgz"
   bin:
     marked: bin/marked.js
-  checksum: f0b3732a9d6208c933541342e60eb78029bd046c143a6ade0e76ed80b6174f92b186205a9dfe805e435070806ec475b0e87e62d04348eafd2f761c24281b192a
+  checksum: d3e3c2d2e192a518060ed6d4a6a78c467d705361ee03f5b3c0ddcf28f530335632340e222662f963935b60f72e40feca992352241bb94c5681106af989337600
   languageName: node
   linkType: hard
 
@@ -11688,14 +11693,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memoize-one@npm:6.0.0":
+"memoize-one@npm:6.0.0, memoize-one@npm:^6.0.0":
   version: 6.0.0
   resolution: "memoize-one@npm:6.0.0"
   checksum: f185ea69f7cceae5d1cb596266dcffccf545e8e7b4106ec6aa93b71ab9d16460dd118ac8b12982c55f6d6322fcc1485de139df07eacffaae94888b9b3ad7675f
   languageName: node
   linkType: hard
 
-"memoize-one@npm:>=3.1.1 <6, memoize-one@npm:^5.0.0, memoize-one@npm:^5.1.1":
+"memoize-one@npm:>=3.1.1 <6, memoize-one@npm:^5.1.1":
   version: 5.2.1
   resolution: "memoize-one@npm:5.2.1"
   checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
@@ -11915,12 +11920,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment-timezone@npm:0.5.35":
-  version: 0.5.35
-  resolution: "moment-timezone@npm:0.5.35"
+"moment-timezone@npm:0.5.38":
+  version: 0.5.38
+  resolution: "moment-timezone@npm:0.5.38::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fmoment-timezone%2F-%2Fmoment-timezone-0.5.38.tgz"
   dependencies:
     moment: ">= 2.9.0"
-  checksum: 0f3907282dc9ae3d405fefaccf486dc4222945ff479127fd269e6c4ddc25e526e7ca9e849d6bf941c871bd17e875b256bdb276137a55db9fce4177c792a003df
+  checksum: ff7077de41f2c41a0026cd2b310154c14df8f918331a4ebe88f5872a599deb5e463b123c96990dc447b7474a81c9f3aef7ac57c3d0dfc3bfb9af2cc5b0bca826
   languageName: node
   linkType: hard
 
@@ -12287,25 +12292,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ol-mapbox-style@npm:^8.0.5":
-  version: 8.2.1
-  resolution: "ol-mapbox-style@npm:8.2.1"
+"ol-mapbox-style@npm:9.1.0":
+  version: 9.1.0
+  resolution: "ol-mapbox-style@npm:9.1.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fol-mapbox-style%2F-%2Fol-mapbox-style-9.1.0.tgz"
   dependencies:
     "@mapbox/mapbox-gl-style-spec": ^13.23.1
     mapbox-to-css-font: ^2.4.1
-  checksum: eeb9d010bec66f7832b3b6b9d20cdf7275ee2856ba5c0c37e502b3235de568a1ff22f603d906adf6233f54a9c6098abfb55d0b1d116e7eee56800b1bca8a451f
+  checksum: 587a41456b76e1bd592b7594c288661ee8c651e9f1cd038a53ff5c01654b68081911088a6feba6ee3ac133f34072d629f171dbf35cd2f13dab3908d519268978
   languageName: node
   linkType: hard
 
-"ol@npm:6.15.1":
-  version: 6.15.1
-  resolution: "ol@npm:6.15.1"
+"ol@npm:7.1.0":
+  version: 7.1.0
+  resolution: "ol@npm:7.1.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fol%2F-%2Fol-7.1.0.tgz"
   dependencies:
+    earcut: ^2.2.3
     geotiff: 2.0.4
-    ol-mapbox-style: ^8.0.5
+    ol-mapbox-style: 9.1.0
     pbf: 3.2.1
     rbush: ^3.0.1
-  checksum: 61199a0cfd11830919861f92cc7dcd50f94077972cd5777691834186991cfc0f59da69a5c35281047c64a8e0b857a228cc37e663b5579c93b5fb08d2eb0f4b4d
+  checksum: 0935be63be953d29e142ea38191e0161c58ec75375bd60640f7e54c4c831dd5d0401c55f4144ede159e90c0bb3c3e6bc7a71c1f82e640208df6dfc9325da5abd
   languageName: node
   linkType: hard
 
@@ -13588,10 +13594,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "propeldata-graphql-datasource@workspace:."
   dependencies:
-    "@grafana/data": latest
-    "@grafana/runtime": ^9.2.3
-    "@grafana/toolkit": latest
-    "@grafana/ui": latest
+    "@grafana/data": ^9.3.6
+    "@grafana/runtime": ^9.3.6
+    "@grafana/toolkit": ^9.3.6
+    "@grafana/ui": ^9.3.6
     "@graphql-codegen/cli": ^2.13.11
     "@graphql-codegen/typescript": ^2.8.1
     "@graphql-codegen/typescript-graphql-request": ^4.5.8
@@ -13769,20 +13775,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-cascader@npm:3.6.1":
-  version: 3.6.1
-  resolution: "rc-cascader@npm:3.6.1"
+"rc-cascader@npm:3.7.0":
+  version: 3.7.0
+  resolution: "rc-cascader@npm:3.7.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Frc-cascader%2F-%2Frc-cascader-3.7.0.tgz"
   dependencies:
     "@babel/runtime": ^7.12.5
     array-tree-filter: ^2.1.0
     classnames: ^2.3.1
     rc-select: ~14.1.0
-    rc-tree: ~5.6.3
+    rc-tree: ~5.7.0
     rc-util: ^5.6.1
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: fb607a23bd68076eed53acaf40f94734271580fa05a90b2df0ce04544c255e2c00d0c8009be5e866b9fbed5bef7770c70959118b67a0a16bd00631a697c8b934
+  checksum: 9bc01c8fb633f6d9af821fad7020ceb829fe71bb9e3517fee2554ca58176b650621e3e9286b2e8208df419c381d6b7696aa801985acdb050c6f36b7c68321cff
   languageName: node
   linkType: hard
 
@@ -13862,19 +13868,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-slider@npm:9.7.5":
-  version: 9.7.5
-  resolution: "rc-slider@npm:9.7.5"
+"rc-slider@npm:10.0.1":
+  version: 10.0.1
+  resolution: "rc-slider@npm:10.0.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Frc-slider%2F-%2Frc-slider-10.0.1.tgz"
   dependencies:
     "@babel/runtime": ^7.10.1
     classnames: ^2.2.5
-    rc-tooltip: ^5.0.1
-    rc-util: ^5.16.1
+    rc-util: ^5.18.1
     shallowequal: ^1.1.0
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: e5b7b8e6036ea51d88e40c11c46e9c1639f5133fd1a6b5353c87547b1bc92393a291f9d0772a0465d1d139c9dbd14a349838861df86d33b1abb6a94593e7b17e
+  checksum: 803f0cc39d43897c0b24549e87232a668d26ff5b0e14b528fd454aa455cdf96ebc60654832c51bb1a6c7b7594ca39017d6c96b3237662471efb863f1723e3d9c
   languageName: node
   linkType: hard
 
@@ -13892,7 +13897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-tooltip@npm:^5.0.1":
+"rc-tooltip@npm:5.2.2":
   version: 5.2.2
   resolution: "rc-tooltip@npm:5.2.2"
   dependencies:
@@ -13906,9 +13911,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-tree@npm:~5.6.3":
-  version: 5.6.9
-  resolution: "rc-tree@npm:5.6.9"
+"rc-tree@npm:~5.7.0":
+  version: 5.7.2
+  resolution: "rc-tree@npm:5.7.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Frc-tree%2F-%2Frc-tree-5.7.2.tgz"
   dependencies:
     "@babel/runtime": ^7.10.1
     classnames: 2.x
@@ -13918,7 +13923,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-dom: "*"
-  checksum: 552954a9038f065d3ea2537ef0fcc57992a8934024a2c731ec07f7f7998a73f5b58a3fc7fca0f3a5f85cbf9c58f5a3643c41f643ccceec9636b3c3dbfd580252
+  checksum: 9b465e1937fdd59987d2e69587b10c3d1415072ed6cd8e953d8975c4d31ddfa3f963d6d824b6d5017bd3a4331d9a0af029886a484af70a861ddda02dcfcb964c
   languageName: node
   linkType: hard
 
@@ -13966,17 +13971,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-util@npm:^5.15.0, rc-util@npm:^5.16.1, rc-util@npm:^5.19.2, rc-util@npm:^5.21.0, rc-util@npm:^5.3.0, rc-util@npm:^5.6.1, rc-util@npm:^5.7.0":
-  version: 5.24.4
-  resolution: "rc-util@npm:5.24.4"
+"rc-util@npm:^5.15.0, rc-util@npm:^5.16.1, rc-util@npm:^5.18.1, rc-util@npm:^5.19.2, rc-util@npm:^5.21.0, rc-util@npm:^5.3.0, rc-util@npm:^5.6.1, rc-util@npm:^5.7.0":
+  version: 5.28.0
+  resolution: "rc-util@npm:5.28.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Frc-util%2F-%2Frc-util-5.28.0.tgz"
   dependencies:
     "@babel/runtime": ^7.18.3
     react-is: ^16.12.0
-    shallowequal: ^1.1.0
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: efda306dcf9eeb0df6d3a8d315d18ec73c653d463174355bd91d34f4d42acc092b2d6ffee47993312841ea4d13b4fe036c764a3a46fa935f307d51a8807e2c10
+  checksum: e60424c37dad7575bb2429e266a81f96003701d719d1fb40128b42ed1c6972896cec09ece8857b36ce9ac74ba95aa2d0a9bdc0609894ba1b3c12c15504a1a886
   languageName: node
   linkType: hard
 
@@ -13995,9 +13999,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-beautiful-dnd@npm:13.1.0":
-  version: 13.1.0
-  resolution: "react-beautiful-dnd@npm:13.1.0"
+"react-beautiful-dnd@npm:13.1.1":
+  version: 13.1.1
+  resolution: "react-beautiful-dnd@npm:13.1.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-beautiful-dnd%2F-%2Freact-beautiful-dnd-13.1.1.tgz"
   dependencies:
     "@babel/runtime": ^7.9.2
     css-box-model: ^1.2.0
@@ -14007,15 +14011,15 @@ __metadata:
     redux: ^4.0.4
     use-memo-one: ^1.1.1
   peerDependencies:
-    react: ^16.8.5 || ^17.0.0
-    react-dom: ^16.8.5 || ^17.0.0
-  checksum: 12b7e9fbe872783e0f899e03f2e80deee085aa1e2cec3d556c1d06bdbafbda7a3c9cf7a3a6b26544617eb2e50d0e3518001bd8300370704bf5a8c9c21f54ec90
+    react: ^16.8.5 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.5 || ^17.0.0 || ^18.0.0
+  checksum: 5f90f7c0ab77a14dfcd496cbd94bbde457612f380c6fc815f3bba7b52effd75132948fcaa661a902a184bb1e6ae5896dcf5b0c77c4ddf809a2c65288f3eed5a7
   languageName: node
   linkType: hard
 
-"react-calendar@npm:3.7.0":
-  version: 3.7.0
-  resolution: "react-calendar@npm:3.7.0"
+"react-calendar@npm:3.9.0":
+  version: 3.9.0
+  resolution: "react-calendar@npm:3.9.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-calendar%2F-%2Freact-calendar-3.9.0.tgz"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.2
     get-user-locale: ^1.2.0
@@ -14024,17 +14028,17 @@ __metadata:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
-  checksum: 368084515bdbc59dddf1a0e367c6bb49e9b9efdc1d01343afeeb412feb52d89b88ac6b09378433cdb3716557ff2cf56751f11183ecd99a5df2a5c48b1691e33d
+  checksum: f178e8afef9e427689472c3792a2e4d60ca959657f12e06ab07a7cc27f64cc5e9531e495d087bfd5c9bc5826f7cec5088fb0e7f15fa4f28482180cc344c8c60f
   languageName: node
   linkType: hard
 
-"react-colorful@npm:5.5.1":
-  version: 5.5.1
-  resolution: "react-colorful@npm:5.5.1"
+"react-colorful@npm:5.6.1":
+  version: 5.6.1
+  resolution: "react-colorful@npm:5.6.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-colorful%2F-%2Freact-colorful-5.6.1.tgz"
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: e60811781716e57f0990379eff20d6f22d4d35b9e858c47ecf857c1dc1c1a2274c924ded7248bad5f1e2fbf2aab06e59b12852910c8dee5e6850f8e4df293670
+  checksum: e432b7cb0df57e8f0bcdc3b012d2e93fcbcb6092c9e0f85654788d5ebfc4442536d8cc35b2418061ba3c4afb8b7788cc101c606d86a1732407921de7a9244c8d
   languageName: node
   linkType: hard
 
@@ -14097,16 +14101,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dropzone@npm:14.2.2":
-  version: 14.2.2
-  resolution: "react-dropzone@npm:14.2.2"
+"react-dropzone@npm:14.2.3":
+  version: 14.2.3
+  resolution: "react-dropzone@npm:14.2.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-dropzone%2F-%2Freact-dropzone-14.2.3.tgz"
   dependencies:
     attr-accept: ^2.2.2
     file-selector: ^0.6.0
     prop-types: ^15.8.1
   peerDependencies:
     react: ">= 16.8 || 18.0.0"
-  checksum: ef9ea7b3b5734e8eade2d29efc26da410dd7d6d046216331f6a51e2df4459c35f3a8f950fa7f723f3db6b0ead8aa68f58f6adbd39b98575c9fc8d8dfe02b671f
+  checksum: 174b744d5ca898cf3d84ec1aeb6cef5211c446697e45dc8ece8287a03d291f8d07253206d5a1247ef156fd385d65e7de666d4d5c2986020b8543b8f2434e8b40
   languageName: node
   linkType: hard
 
@@ -14155,6 +14159,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-i18next@npm:^12.0.0":
+  version: 12.2.0
+  resolution: "react-i18next@npm:12.2.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-i18next%2F-%2Freact-i18next-12.2.0.tgz"
+  dependencies:
+    "@babel/runtime": ^7.20.6
+    html-parse-stringify: ^3.0.1
+  peerDependencies:
+    i18next: ">= 19.0.0"
+    react: ">= 16.8.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: ed2d6a5bb6746c2ea25cca9531b400d62edef6479631c1113eb7a3c3f6b28d493492171d7dc6d87f61a7d7e9b21d4be3bd7eaf0f7af00392fb546d8c50267345
+  languageName: node
+  linkType: hard
+
 "react-immutable-proptypes@npm:^2.1.0":
   version: 2.2.0
   resolution: "react-immutable-proptypes@npm:2.2.0"
@@ -14166,15 +14188,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-inlinesvg@npm:3.0.0":
-  version: 3.0.0
-  resolution: "react-inlinesvg@npm:3.0.0"
+"react-inlinesvg@npm:3.0.1":
+  version: 3.0.1
+  resolution: "react-inlinesvg@npm:3.0.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-inlinesvg%2F-%2Freact-inlinesvg-3.0.1.tgz"
   dependencies:
     exenv: ^1.2.2
     react-from-dom: ^0.6.2
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: ceb34c4c5494e4992a1949c7e6166f373858a40215a8e900f360ce60053b19dd6da8637ca87770b953c449ddfa48c52ec288e09978660de92f51aac25b110a71
+  checksum: 756f704bc70dc44b38f446e1d4a92b51dbce42f6b0121b17cdd2255d4403c2428d01b7aac77d7e2120ced476edef839a91ec1454a7a90a1e672974bd542c60b9
   languageName: node
   linkType: hard
 
@@ -14206,7 +14228,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-popper-tooltip@npm:^4.3.1":
+"react-popper-tooltip@npm:4.4.2":
   version: 4.4.2
   resolution: "react-popper-tooltip@npm:4.4.2"
   dependencies:
@@ -14300,21 +14322,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-select@npm:5.4.0":
-  version: 5.4.0
-  resolution: "react-select@npm:5.4.0"
+"react-select@npm:5.6.0":
+  version: 5.6.0
+  resolution: "react-select@npm:5.6.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-select%2F-%2Freact-select-5.6.0.tgz"
   dependencies:
     "@babel/runtime": ^7.12.0
     "@emotion/cache": ^11.4.0
     "@emotion/react": ^11.8.1
+    "@floating-ui/dom": ^1.0.1
     "@types/react-transition-group": ^4.4.0
-    memoize-one: ^5.0.0
+    memoize-one: ^6.0.0
     prop-types: ^15.6.0
     react-transition-group: ^4.3.0
+    use-isomorphic-layout-effect: ^1.1.2
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: da896f0f8b3c7f6250148ce9ded1ace60abb35b812be50d34cf7ba980b12ca75533c3bbfd9e722530cc0e70c17e8997c3c7e93743877d84c00b0d90e4da521e6
+  checksum: d0a51e618168f3f275fbf96e23eb88ac6066006bcca136e293327f6eddd0b419ef02aaa847bf1670c5f07c8e9d9fc4b975fcae833085e11fc41e29e2b802a75b
   languageName: node
   linkType: hard
 
@@ -14327,22 +14351,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-transition-group@npm:4.4.2":
-  version: 4.4.2
-  resolution: "react-transition-group@npm:4.4.2"
-  dependencies:
-    "@babel/runtime": ^7.5.5
-    dom-helpers: ^5.0.1
-    loose-envify: ^1.4.0
-    prop-types: ^15.6.2
-  peerDependencies:
-    react: ">=16.6.0"
-    react-dom: ">=16.6.0"
-  checksum: b67bf5b3e86dbab72d658b9a52a3589e5960583ab28c7c66272427d8fe30d4c7de422d5046ae96bd2683cdf80cc3264b2516f5ce80cae1dbe6cf3ca6dda392c5
-  languageName: node
-  linkType: hard
-
-"react-transition-group@npm:^4.3.0":
+"react-transition-group@npm:4.4.5, react-transition-group@npm:^4.3.0":
   version: 4.4.5
   resolution: "react-transition-group@npm:4.4.5"
   dependencies:
@@ -14392,16 +14401,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-window@npm:1.8.7":
-  version: 1.8.7
-  resolution: "react-window@npm:1.8.7"
+"react-window@npm:1.8.8":
+  version: 1.8.8
+  resolution: "react-window@npm:1.8.8::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-window%2F-%2Freact-window-1.8.8.tgz"
   dependencies:
     "@babel/runtime": ^7.0.0
     memoize-one: ">=3.1.1 <6"
   peerDependencies:
     react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 1e122c29224781e70359978287a2e850ccdf509cd71ba16b16ea258725687a62f5c16ab69f52f732b4ed20df583196dbe2a04804f3e4a176bb3e62f3fc910452
+  checksum: a19f43b9015fb84e16db983617dac618a8b298881d2ca96ffc2fb00534afd958ee57a00fd0017733b56f8c34dd84e5be59337877aed3c66329ed3b84e8d018ba
   languageName: node
   linkType: hard
 
@@ -14479,10 +14488,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:0.13.9":
-  version: 0.13.9
-  resolution: "regenerator-runtime@npm:0.13.9"
-  checksum: 65ed455fe5afd799e2897baf691ca21c2772e1a969d19bb0c4695757c2d96249eb74ee3553ea34a91062b2a676beedf630b4c1551cc6299afb937be1426ec55e
+"regenerator-runtime@npm:0.13.10":
+  version: 0.13.10
+  resolution: "regenerator-runtime@npm:0.13.10"
+  checksum: 09893f5a9e82932642d9a999716b6c626dc53ef2a01307c952ebbf8e011802360163a37c304c18a6c358548be5a72b448e37209954a18696f21e438c81cbb4b9
   languageName: node
   linkType: hard
 
@@ -14493,10 +14502,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.10":
-  version: 0.13.10
-  resolution: "regenerator-runtime@npm:0.13.10"
-  checksum: 09893f5a9e82932642d9a999716b6c626dc53ef2a01307c952ebbf8e011802360163a37c304c18a6c358548be5a72b448e37209954a18696f21e438c81cbb4b9
+"regenerator-runtime@npm:^0.13.10, regenerator-runtime@npm:^0.13.11":
+  version: 0.13.11
+  resolution: "regenerator-runtime@npm:0.13.11::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fregenerator-runtime%2F-%2Fregenerator-runtime-0.13.11.tgz"
+  checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
   languageName: node
   linkType: hard
 
@@ -14839,16 +14848,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:7.5.6":
-  version: 7.5.6
-  resolution: "rxjs@npm:7.5.6"
-  dependencies:
-    tslib: ^2.1.0
-  checksum: fc05f01364a74dac57490fb3e07ea63b422af04017fae1db641a009073f902ef69f285c5daac31359620dc8d9aee7d81e42b370ca2a8573d1feae0b04329383b
-  languageName: node
-  linkType: hard
-
-"rxjs@npm:^7.5.5":
+"rxjs@npm:7.5.7, rxjs@npm:^7.5.5":
   version: 7.5.7
   resolution: "rxjs@npm:7.5.7"
   dependencies:
@@ -15139,12 +15139,12 @@ __metadata:
 
 "simple-git@npm:^3.6.0":
   version: 3.14.1
-  resolution: "simple-git@npm:3.14.1"
+  resolution: "simple-git@npm:3.16.1"
   dependencies:
     "@kwsites/file-exists": ^1.1.1
     "@kwsites/promise-deferred": ^1.1.1
     debug: ^4.3.4
-  checksum: f9d2282e1483f8f42325a7e80803389eb540101a88968bf9fd277c1eade8621d4c24dcf2677be5d611df8716934fb4c9676356052ac03e2fcec7517b4b922e8b
+  checksum: 02ed36d580ea20efc0d26571742d120ff86edebba5a94cc91c8de17529d4e8cf4ea57fc11cbbae11f4713400fab11df5e4f1639cfbf643fcce5e80e79effa762
   languageName: node
   linkType: hard
 
@@ -15199,17 +15199,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"slate-plain-serializer@npm:0.7.11":
-  version: 0.7.11
-  resolution: "slate-plain-serializer@npm:0.7.11"
-  peerDependencies:
-    immutable: ">=3.8.1"
-    slate: ">=0.46.0"
-  checksum: b8d2989562a140c4c6cada381483aa2f419c3532ebb4ed51abfa5df8128dfd8f3d845ca324d737e3711343d651a95804f91aaa1d2cdd8e96cd9602c747781a5b
-  languageName: node
-  linkType: hard
-
-"slate-plain-serializer@npm:^0.7.11":
+"slate-plain-serializer@npm:0.7.13, slate-plain-serializer@npm:^0.7.11":
   version: 0.7.13
   resolution: "slate-plain-serializer@npm:0.7.13"
   peerDependencies:
@@ -16175,17 +16165,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2.4.1, tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.4.0, tslib@npm:^2.4.1, tslib@npm:~2.4.0":
+  version: 2.4.1
+  resolution: "tslib@npm:2.4.1"
+  checksum: 19480d6e0313292bd6505d4efe096a6b31c70e21cf08b5febf4da62e95c265c8f571f7b36fcc3d1a17e068032f59c269fab3459d6cd3ed6949eafecf64315fca
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^1.8.1, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.4.0, tslib@npm:^2.4.1, tslib@npm:~2.4.0":
-  version: 2.4.1
-  resolution: "tslib@npm:2.4.1"
-  checksum: 19480d6e0313292bd6505d4efe096a6b31c70e21cf08b5febf4da62e95c265c8f571f7b36fcc3d1a17e068032f59c269fab3459d6cd3ed6949eafecf64315fca
   languageName: node
   linkType: hard
 
@@ -16275,6 +16265,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:4.8.4":
+  version: 4.8.4
+  resolution: "typescript@npm:4.8.4::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Ftypescript%2F-%2Ftypescript-4.8.4.tgz"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 3e4f061658e0c8f36c820802fa809e0fd812b85687a9a2f5430bc3d0368e37d1c9605c3ce9b39df9a05af2ece67b1d844f9f6ea8ff42819f13bcb80f85629af0
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@4.6.4#~builtin<compat/typescript>":
   version: 4.6.4
   resolution: "typescript@patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=701156"
@@ -16295,6 +16295,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@patch:typescript@4.8.4#~builtin<compat/typescript>":
+  version: 4.8.4
+  resolution: "typescript@patch:typescript@npm%3A4.8.4%3A%3A__archiveUrl=https%253A%252F%252Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%253A443%252Fnpm%252Fpropel%252Ftypescript%252F-%252Ftypescript-4.8.4.tgz#~builtin<compat/typescript>::version=4.8.4&hash=701156"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 301459fc3eb3b1a38fe91bf96d98eb55da88a9cb17b4ef80b4d105d620f4d547ba776cc27b44cc2ef58b66eda23fe0a74142feb5e79a6fb99f54fc018a696afa
+  languageName: node
+  linkType: hard
+
 "ua-parser-js@npm:^0.7.30":
   version: 0.7.32
   resolution: "ua-parser-js@npm:0.7.32"
@@ -16302,10 +16312,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ua-parser-js@npm:^1.0.2":
-  version: 1.0.32
-  resolution: "ua-parser-js@npm:1.0.32"
-  checksum: 79a80efd9c21511fdafc042ab748e0e93c8cdb0e8925bf6d48ad7dbb08e808c60fcecd49e679670def44ef428c005aa1810810f6773e7d8135a7817338080813
+"ua-parser-js@npm:^1.0.32":
+  version: 1.0.33
+  resolution: "ua-parser-js@npm:1.0.33::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fua-parser-js%2F-%2Fua-parser-js-1.0.33.tgz"
+  checksum: 460adef51235267345b221842979b6b167543725d03f7c9c4f9ca6af4da835a71d016390da139d2b32828063c4730dcfae6e53b9dce815f4000be4e1fe1c7737
   languageName: node
   linkType: hard
 
@@ -16423,10 +16433,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uplot@npm:1.6.22":
-  version: 1.6.22
-  resolution: "uplot@npm:1.6.22"
-  checksum: 4a73835b93fcbd0f62d99c062aac75d0d9d2e3f383fcc77b022abbecd936cd989188ed60da756e45d4306353c6d0e38baaac73b372a674d9e2f47bff7f7d11a6
+"uplot@npm:1.6.23":
+  version: 1.6.23
+  resolution: "uplot@npm:1.6.23::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fuplot%2F-%2Fuplot-1.6.23.tgz"
+  checksum: 4fd2b6340b09f8cbff5c136238962c4e31621267a17c321e0183d021c72338973ba16fd943858248983edc4cf9307e352f99e806b6ffb5eaff7a132adaff2bff
   languageName: node
   linkType: hard
 
@@ -16474,6 +16484,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-isomorphic-layout-effect@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "use-isomorphic-layout-effect@npm:1.1.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fuse-isomorphic-layout-effect%2F-%2Fuse-isomorphic-layout-effect-1.1.2.tgz"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: a6532f7fc9ae222c3725ff0308aaf1f1ddbd3c00d685ef9eee6714fd0684de5cb9741b432fbf51e61a784e2955424864f7ea9f99734a02f237b17ad3e18ea5cb
+  languageName: node
+  linkType: hard
+
 "use-memo-one@npm:^1.1.1":
   version: 1.1.3
   resolution: "use-memo-one@npm:1.1.3"
@@ -16497,7 +16519,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:8.3.2, uuid@npm:^8.3.2":
+"uuid@npm:9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fuuid%2F-%2Fuuid-9.0.0.tgz"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
@@ -16542,6 +16573,13 @@ __metadata:
   version: 1.0.11
   resolution: "value-or-promise@npm:1.0.11"
   checksum: 13f8f2ef620118c73b4d1beee8ce6045d7182bbf15090ecfbcafb677ec43698506a5e9ace6bea5ea35c32bc612c9b1f824bb59b6581cdfb5c919052745c277d5
+  languageName: node
+  linkType: hard
+
+"void-elements@npm:3.1.0":
+  version: 3.1.0
+  resolution: "void-elements@npm:3.1.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fvoid-elements%2F-%2Fvoid-elements-3.1.0.tgz"
+  checksum: 0390f818107fa8fce55bb0a5c3f661056001c1d5a2a48c28d582d4d847347c2ab5b7f8272314cac58acf62345126b6b09bea623a185935f6b1c3bbce0dfd7f7f
   languageName: node
   linkType: hard
 
@@ -16614,10 +16652,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:^2.1.4":
-  version: 2.1.4
-  resolution: "web-vitals@npm:2.1.4"
-  checksum: 03d3f47dbf55c3dce07beb0ff5de8ddd52e2d0a53a8df5c84e7a16dda93543341d67231fa79b1d9772b091419af4ec0fd395b8bcf451a0e26846e3f76b3d0efc
+"web-vitals@npm:^3.0.4":
+  version: 3.1.1
+  resolution: "web-vitals@npm:3.1.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fweb-vitals%2F-%2Fweb-vitals-3.1.1.tgz"
+  checksum: 26d552d7e0bba470e1426bbf55c3c1a701c683bbde4553791a2c7e1bc3a7b7b29bf66ccf67c74872af3aa39e5668728736b90f8b3fee2910c0c566e7eb1b6096
   languageName: node
   linkType: hard
 
@@ -16933,15 +16971,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xss@npm:1.0.13":
-  version: 1.0.13
-  resolution: "xss@npm:1.0.13"
+"xss@npm:1.0.14":
+  version: 1.0.14
+  resolution: "xss@npm:1.0.14::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fxss%2F-%2Fxss-1.0.14.tgz"
   dependencies:
     commander: ^2.20.3
     cssfilter: 0.0.10
   bin:
     xss: bin/xss
-  checksum: 21909bdf60a32a703e2208cf3a942c1f82d281651bacff56d72deaba9ce553295f45540cde94f2f3e215c90efeeff6fbca70f514ea7477c805e6116915cc7c08
+  checksum: 77c6a60a5f96490098ef837c3b49321c0f31963f323c748cb0a01bc02fc6e465a6accbe4c54cad62f8d6ffe647d984be173879433af861883f6213d9416d3f53
   languageName: node
   linkType: hard
 
