@@ -1,6 +1,6 @@
 {
   "name": "propeldata-graphql-datasource",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Propel's Grafana Data Source",
   "scripts": {
     "build": "yarn generate && grafana-toolkit plugin:build",
@@ -9,7 +9,7 @@
     "watch": "grafana-toolkit plugin:dev --watch",
     "sign": "grafana-toolkit plugin:sign",
     "start": "yarn watch",
-    "generate": "rm -rf src/generated && graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "author": "Gabriel Musat Mestre",
   "license": "Apache-2.0",
