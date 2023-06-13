@@ -27,11 +27,9 @@ export type Account = {
 /**
  * The Application object.
  *
- * Applications represent the web or mobile app you are building. They are OAuth 2.0 clients that give you scoped access to the Propel API.
+ * Propel Applications represent the web or mobile app you are building. They provide the API credentials that allow your client- or server-side app to access the Propel API. The Application's Propeller determines the speed and cost of your Metric Queries.
  *
- * The Application's Propeller determines the compute power assigned to the Application: the larger the Propeller, the faster the queries.
- *
- * We recommend every web or mobile app to be its own Propel Application.
+ * [Learn more about Applications](https://www.propeldata.com/docs/applications).
  */
 export type Application = Common & Node & {
   __typename?: 'Application';
@@ -69,11 +67,9 @@ export type Application = Common & Node & {
 /**
  * The Application object.
  *
- * Applications represent the web or mobile app you are building. They are OAuth 2.0 clients that give you scoped access to the Propel API.
+ * Propel Applications represent the web or mobile app you are building. They provide the API credentials that allow your client- or server-side app to access the Propel API. The Application's Propeller determines the speed and cost of your Metric Queries.
  *
- * The Application's Propeller determines the compute power assigned to the Application: the larger the Propeller, the faster the queries.
- *
- * We recommend every web or mobile app to be its own Propel Application.
+ * [Learn more about Applications](https://www.propeldata.com/docs/applications).
  */
 export type ApplicationPoliciesArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -85,22 +81,22 @@ export type ApplicationPoliciesArgs = {
 /**
  * The Application connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type ApplicationConnection = {
   __typename?: 'ApplicationConnection';
-  /** The connection's edges. */
+  /** The Application connection's edges. */
   edges: Array<ApplicationEdge>;
-  /** The connection's nodes. */
+  /** The Application connection's nodes. */
   nodes: Array<Application>;
-  /** The connection's page info. */
+  /** The Application connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The Application edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type ApplicationEdge = {
   __typename?: 'ApplicationEdge';
@@ -127,10 +123,18 @@ export type ApplicationResponse = {
 
 /** The API operations an Application is authorized to perform. */
 export enum ApplicationScope {
-  /** Grant read/write access to Data Sources, Data Pools and Metrics. */
+  /** Grant read/write access to Data Sources, Data Pools, Metrics and Policies. */
   Admin = 'ADMIN',
+  /** Grant read/write access to Applications. */
+  ApplicationAdmin = 'APPLICATION_ADMIN',
+  /** Grant read access to query Data Pools. */
+  DataPoolQuery = 'DATA_POOL_QUERY',
+  /** Grant read access to fetch column statistics from Data Pools. */
+  DataPoolStats = 'DATA_POOL_STATS',
   /** Grant read access to query Metrics. */
   MetricQuery = 'METRIC_QUERY',
+  /** Grant read access to the Metrics metadata. */
+  MetricRead = 'METRIC_READ',
   /** Grant read access to fetch Dimension statistics from Metrics. */
   MetricStats = 'METRIC_STATS'
 }
@@ -188,29 +192,29 @@ export type Booster = Node & {
   recordCount?: Maybe<Scalars['String']>;
   /**  The amount of storage in terabytes used by the Booster.  */
   sizeInTerabytes?: Maybe<Scalars['Float']>;
-  /**  The status of the Booster (once LIVE it will be available for speeding up Metric queries).  */
+  /**  The status of the Booster (once LIVE it will be available for speeding up Metric queries). */
   status: BoosterStatus;
 };
 
 /**
  * The Booster connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type BoosterConnection = {
   __typename?: 'BoosterConnection';
-  /** The connection's edges. */
-  edges?: Maybe<Array<BoosterEdge>>;
-  /** The connection's nodes. */
-  nodes?: Maybe<Array<Booster>>;
-  /** The connection's page info. */
+  /** The Booster connection's edges. */
+  edges: Array<BoosterEdge>;
+  /** The Booster connection's nodes. */
+  nodes: Array<Booster>;
+  /** The Booster connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The Booster edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type BoosterEdge = {
   __typename?: 'BoosterEdge';
@@ -229,11 +233,11 @@ export type BoosterResponse = {
 
 /** The Booster status. */
 export enum BoosterStatus {
-  /**  The Booster has been created. Propel will start optimizing the Data Pool soon.  */
+  /**  The Booster has been created. Propel will start optimizing the Data Pool soon. */
   Created = 'CREATED',
   /**  Propel is deleting the Booster and all of its associated data.  */
   Deleting = 'DELETING',
-  /**  Propel failed to setup the Booster. Please write to support. Alternatively, you can delete the Booster and try again.  */
+  /**  Propel failed to setup the Booster. Please write to support. Alternatively, you can delete the Booster and try again. */
   Failed = 'FAILED',
   /**  The Booster is now live and available to speed up Metric queries.  */
   Live = 'LIVE',
@@ -257,7 +261,7 @@ export type Column = {
   comment?: Maybe<Scalars['String']>;
   /** The time at which the column was created. This is the same as its `cachedAt` time. */
   createdAt: Scalars['DateTime'];
-  /** The columns's creator. This corresponds to the initiator of the table introspection. It can be either a User ID, an Application ID, or "system" if it was created by Propel. */
+  /** The column's creator. This corresponds to the initiator of the table introspection. It can be either a User ID, an Application ID, or "system" if it was created by Propel. */
   createdBy: Scalars['String'];
   /**
    * Information about the column obtained from Snowflake.
@@ -288,6 +292,22 @@ export type Column = {
    * @deprecated This is Snowflake-specific, and will be removed
    */
   policyName?: Maybe<Scalars['String']>;
+  /**
+   * This is the suggested Data Pool column type to use when converting this Data Source column to a Data Pool column.
+   * Propel makes this suggestion based on the Data Source column type. If the Data Source column type is unsupported, this field returns `null`.
+   *
+   * Sometimes, you know better which Data Pool column type to convert to. In these cases, you can refer
+   * to `supportedDataPoolColumnTypes` for the full set of supported conversions.
+   */
+  suggestedDataPoolColumnType?: Maybe<ColumnType>;
+  /**
+   * This is the set of supported Data Pool column types you can use when converting this Data Source column to a Data Pool column. If the Data Source column type is unsupported, this field returns an empty array.
+   *
+   * For example, a numeric Data Source column type could be converted to a narrower or wider numeric Data Pool column type; a string-valued Data Source column type could be mapped to a date or timestamp Data Pool column type.
+   *
+   * To learn more about the supported conversions, refer to [the docs](https://www.propeldata.com/docs) for your particular Data Source.
+   */
+  supportedDataPoolColumnTypes: Array<ColumnType>;
   /** The column's type. */
   type: Scalars['String'];
 };
@@ -295,24 +315,24 @@ export type Column = {
 /**
  * The column connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type ColumnConnection = {
   __typename?: 'ColumnConnection';
   /** The time at which the columns were cached (i.e., the time at which they were introspected). */
   cachedAt: Scalars['DateTime'];
-  /** The connection's edges. */
+  /** The column connection's edges. */
   edges: Array<ColumnEdge>;
-  /** The connection's nodes. */
+  /** The column connection's nodes. */
   nodes: Array<Column>;
-  /** The connection's page info. */
+  /** The column connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The column edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type ColumnEdge = {
   __typename?: 'ColumnEdge';
@@ -340,6 +360,8 @@ export enum ColumnType {
   Int32 = 'INT32',
   /** A 64-bit signed integer, with a minimum value of -2⁶³ and a maximum value of 2⁶³-1. */
   Int64 = 'INT64',
+  /** A JavaScript Object Notation (JSON) document. */
+  Json = 'JSON',
   /** A variable-length string. */
   String = 'STRING',
   /** A date with a timestamp. For example, "yyy-MM-dd HH:mm:ss". */
@@ -356,7 +378,7 @@ export type Common = {
   account: Account;
   /**  The resource's creation date and time in UTC.  */
   createdAt: Scalars['DateTime'];
-  /**  The resource's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.  */
+  /**  The resource's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel. */
   createdBy: Scalars['String'];
   /**  The resource's description.  */
   description: Scalars['String'];
@@ -364,7 +386,7 @@ export type Common = {
   environment: Environment;
   /**  The resource's last modification date and time in UTC.  */
   modifiedAt: Scalars['DateTime'];
-  /**  The resource's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.  */
+  /**  The resource's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel. */
   modifiedBy: Scalars['String'];
   /**  The resource's unique name.  */
   uniqueName: Scalars['String'];
@@ -396,7 +418,19 @@ export type CountMetricSettings = {
 export type CounterInput = {
   /**  The Query Filters to apply before retrieving the counter data. If no Query Filters are provided, all data is included. */
   filters?: InputMaybe<Array<FilterInput>>;
-  /**  Optionally specifies the Propeller to use. This can be set when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.  */
+  /**
+   * The ID of the Metric to query.
+   *
+   * Required if `metricName` is not specified.
+   */
+  metricId?: InputMaybe<Scalars['ID']>;
+  /**
+   * The name of the Metric to query.
+   *
+   * Required if `metricId` is not specified.
+   */
+  metricName?: InputMaybe<Scalars['String']>;
+  /**  Optionally specifies the Propeller to use. This can be set when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application. */
   propeller?: InputMaybe<Propeller>;
   /**  The time range for calculating the counter. */
   timeRange: TimeRangeInput;
@@ -408,7 +442,7 @@ export type CounterResponse = {
   /** The Query statistics and metadata. */
   query: QueryInfo;
   /** The value of the counter. */
-  value: Scalars['String'];
+  value?: Maybe<Scalars['String']>;
 };
 
 /** The fields for creating a new Average Metric. */
@@ -417,9 +451,9 @@ export type CreateAverageMetricInput = {
   dataPool: Scalars['ID'];
   /**  The Metric's description.  */
   description?: InputMaybe<Scalars['String']>;
-  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.  */
+  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time. */
   dimensions?: InputMaybe<Array<DimensionInput>>;
-  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.  */
+  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included. */
   filters?: InputMaybe<Array<FilterInput>>;
   /**  The column to be averaged.  */
   measure: DimensionInput;
@@ -457,11 +491,11 @@ export type CreateCountDistinctMetricInput = {
   dataPool: Scalars['ID'];
   /**  The Metric's description.  */
   description?: InputMaybe<Scalars['String']>;
-  /**  The Dimension over which the count distinct operation is going to be performed.  */
+  /**  The Dimension over which the count distinct operation is going to be performed. */
   dimension: DimensionInput;
-  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.  */
+  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time. */
   dimensions?: InputMaybe<Array<DimensionInput>>;
-  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.  */
+  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included. */
   filters?: InputMaybe<Array<FilterInput>>;
   /**  The Metric's unique name. If not specified, Propel will set the ID as unique name. */
   uniqueName?: InputMaybe<Scalars['String']>;
@@ -473,21 +507,42 @@ export type CreateCountMetricInput = {
   dataPool: Scalars['ID'];
   /**  The Metric's description.  */
   description?: InputMaybe<Scalars['String']>;
-  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.  */
+  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time. */
   dimensions?: InputMaybe<Array<DimensionInput>>;
-  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.  */
+  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included. */
   filters?: InputMaybe<Array<FilterInput>>;
-  /**  The Metric's unique name. If not specified, Propel will set the ID as unique name.  */
+  /**  The Metric's unique name. If not specified, Propel will set the ID as unique name. */
   uniqueName?: InputMaybe<Scalars['String']>;
 };
 
-/** The fields for creating an HTTP Data Source. */
-export type CreateHttpDataSourceInput = {
-  /** The HTTP Data Source connection settings. */
-  connectionSettings: HttpConnectionSettingsInput;
-  /** The Data Source's description. */
+/** Fields for creating a Data Pool. */
+export type CreateDataPoolInputV2 = {
+  /** The list of columns. */
+  columns: Array<DataPoolColumnInput>;
+  /** The table's cursor column. The column to track whether a record should be synced. An example of a cursor would be a timestamp column like `updated_at`. */
+  cursor?: InputMaybe<CursorInput>;
+  /** The Data Source that will be used to create the Data Pool.  */
+  dataSource: Scalars['ID'];
+  /** The Data Pool's description. */
   description?: InputMaybe<Scalars['String']>;
-  /** The Data Source's unique name. */
+  /**  The Data Pool's syncing settings.  */
+  syncing?: InputMaybe<DataPoolSyncingInput>;
+  /**  The table that the Data Pool will sync from.  */
+  table: Scalars['String'];
+  /** An optional Data Pool Tenant ID. When specified, the Metrics powered by the Data Pool will be able to use `TENANT_ACCESS` Policies designed for multi-tenant use cases. */
+  tenant?: InputMaybe<TenantInput>;
+  /**  The table's primary timestamp column.  */
+  timestamp: TimestampInput;
+  /** The Data Pool's unique name. If not specified, Propel will set the ID as the unique name. */
+  uniqueName?: InputMaybe<Scalars['String']>;
+};
+
+export type CreateHttpDataSourceInput = {
+  /** The HTTP Data Source's connection settings */
+  connectionSettings: HttpConnectionSettingsInput;
+  /** The HTTP Data Source's description. */
+  description?: InputMaybe<Scalars['String']>;
+  /** The HTTP Data Source's unique name. If not specified, Propel will set the ID as unique name. */
   uniqueName?: InputMaybe<Scalars['String']>;
 };
 
@@ -497,9 +552,9 @@ export type CreateMaxMetricInput = {
   dataPool: Scalars['ID'];
   /**  The Metric's description.  */
   description?: InputMaybe<Scalars['String']>;
-  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.  */
+  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time. */
   dimensions?: InputMaybe<Array<DimensionInput>>;
-  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.  */
+  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included. */
   filters?: InputMaybe<Array<FilterInput>>;
   /**  The column to calculate the maximum from.  */
   measure: DimensionInput;
@@ -513,9 +568,9 @@ export type CreateMinMetricInput = {
   dataPool: Scalars['ID'];
   /**  The Metric's description.  */
   description?: InputMaybe<Scalars['String']>;
-  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.  */
+  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time. */
   dimensions?: InputMaybe<Array<DimensionInput>>;
-  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.  */
+  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included. */
   filters?: InputMaybe<Array<FilterInput>>;
   /**  The column to calculate the minimum from.  */
   measure: DimensionInput;
@@ -534,11 +589,11 @@ export type CreatePolicyInput = {
 };
 
 export type CreateS3DataSourceInput = {
-  /** The S3 Data Source connection settings. */
-  connectionSettings?: InputMaybe<S3ConnectionSettingsInput>;
-  /** The Data Source's description. */
+  /** The S3 Data Source's connection settings */
+  connectionSettings: S3ConnectionSettingsInput;
+  /** The S3 Data Source's description. */
   description?: InputMaybe<Scalars['String']>;
-  /** The Data Source's unique name. If not specified, Propel will set the ID as unique name. */
+  /** The S3 Data Source's unique name. If not specified, Propel will set the ID as unique name. */
   uniqueName?: InputMaybe<Scalars['String']>;
 };
 
@@ -548,9 +603,9 @@ export type CreateSumMetricInput = {
   dataPool: Scalars['ID'];
   /**  The Metric's description.  */
   description?: InputMaybe<Scalars['String']>;
-  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.  */
+  /**  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time. */
   dimensions?: InputMaybe<Array<DimensionInput>>;
-  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.  */
+  /**  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included. */
   filters?: InputMaybe<Array<FilterInput>>;
   /**  The column to be summed.  */
   measure: DimensionInput;
@@ -558,12 +613,27 @@ export type CreateSumMetricInput = {
   uniqueName?: InputMaybe<Scalars['String']>;
 };
 
+/** The cursor fields. */
+export type Cursor = {
+  __typename?: 'Cursor';
+  /**  The name of the column that represents the cursor.  */
+  columnName: Scalars['String'];
+  /**  The cursor column's type.  */
+  type: ColumnType;
+};
+
+/** The fields for specifying the Data Pool's Cursor. */
+export type CursorInput = {
+  /**  The name of the column that represents the Cursor.  */
+  columnName: Scalars['String'];
+};
+
 /**
  * The Data Pool object.
  *
  * A Data Pool is a cached table hydrated from your data warehouse optimized for high-concurrency and low-latency queries.
  *
- * [Learn more about Data Pools](https://docs.propeldata.com).
+ * [Learn more about Data Pools](https://www.propeldata.com/docs/data-pools).
  */
 export type DataPool = Common & Node & {
   __typename?: 'DataPool';
@@ -574,29 +644,31 @@ export type DataPool = Common & Node & {
    *
    * This list does not include any excluded columns.
    */
-  availableMeasures?: Maybe<ColumnConnection>;
+  availableMeasures?: Maybe<DataPoolColumnConnection>;
   /**
    * A list of columns included in the Data Pool. The specified columns from the underlying table will by synced to the Data Pool.
    *
-   * This list does not include any excluded columns. You can access those via `excludedColumns`.
+   * This list does not include any excluded columns.
    */
-  columns?: Maybe<ColumnConnection>;
+  columns?: Maybe<DataPoolColumnConnection>;
   /** The Data Pool's creation date and time in UTC. */
   createdAt: Scalars['DateTime'];
   /** The Data Pools's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel. */
   createdBy: Scalars['String'];
+  /** The Data Pool's cursor column. The column to track whether a record should be synced. An example of a cursor would be a timestamp column like `updated_at`. */
+  cursor?: Maybe<Cursor>;
   /** The Data Pool's data retention in days (not yet supported). */
   dataRetentionInDays: Scalars['Int'];
   /** The Data Pool's Data Source. */
   dataSource: DataSource;
+  /**  The Deletion Jobs that where historically issued to this Data Pool, sorted by creation time, in descending order.  */
+  deletionJobs?: Maybe<DeletionJobConnection>;
   /** The Data Pool's description. */
   description: Scalars['String'];
   /** The Data Pool's Environment. */
   environment: Environment;
   /** @deprecated Refer to `setupTasks` instead */
   error?: Maybe<Error>;
-  /**  A list of columns to exclude from the Data Pool. The specified columns from the underlying table will not be synced to the Data Pool.  */
-  excludedColumns?: Maybe<ColumnConnection>;
   /** The Data Pool's unique identifier. */
   id: Scalars['ID'];
   metrics?: Maybe<MetricConnection>;
@@ -606,21 +678,21 @@ export type DataPool = Common & Node & {
   modifiedBy: Scalars['String'];
   /**  The number of records in the Data Pool.  */
   recordCount?: Maybe<Scalars['String']>;
-  /**  A list of setup tasks performed on the Data Pool during its most recent setup attempt.  */
+  /**  A list of setup tasks performed on the Data Pool during its most recent setup attempt. */
   setupTasks?: Maybe<Array<DataPoolSetupTask>>;
   /**  The amount of storage in terabytes used by the Data Pool.  */
   sizeInTerabytes?: Maybe<Scalars['Float']>;
   /** The Data Pool's status. */
   status: DataPoolStatus;
-  /**  Indicates whether or not syncing records is enabled for the Data Pool.  */
-  syncing?: Maybe<DataPoolSyncStatus>;
+  /**  Settings related to Data Pool syncing.  */
+  syncing: DataPoolSyncing;
   syncs?: Maybe<SyncConnection>;
   /** The name of the Data Pool's table. */
   table: Scalars['String'];
   /** The Data Pool's Tenant ID, if configured. */
   tenant?: Maybe<Tenant>;
   /** The Data Pool's timestamp column. */
-  timestamp: Dimension;
+  timestamp: Timestamp;
   /** The Data Pool's unique name. */
   uniqueName: Scalars['String'];
 };
@@ -631,7 +703,7 @@ export type DataPool = Common & Node & {
  *
  * A Data Pool is a cached table hydrated from your data warehouse optimized for high-concurrency and low-latency queries.
  *
- * [Learn more about Data Pools](https://docs.propeldata.com).
+ * [Learn more about Data Pools](https://www.propeldata.com/docs/data-pools).
  */
 export type DataPoolAvailableMeasuresArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -646,7 +718,7 @@ export type DataPoolAvailableMeasuresArgs = {
  *
  * A Data Pool is a cached table hydrated from your data warehouse optimized for high-concurrency and low-latency queries.
  *
- * [Learn more about Data Pools](https://docs.propeldata.com).
+ * [Learn more about Data Pools](https://www.propeldata.com/docs/data-pools).
  */
 export type DataPoolColumnsArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -661,9 +733,9 @@ export type DataPoolColumnsArgs = {
  *
  * A Data Pool is a cached table hydrated from your data warehouse optimized for high-concurrency and low-latency queries.
  *
- * [Learn more about Data Pools](https://docs.propeldata.com).
+ * [Learn more about Data Pools](https://www.propeldata.com/docs/data-pools).
  */
-export type DataPoolExcludedColumnsArgs = {
+export type DataPoolDeletionJobsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -676,7 +748,7 @@ export type DataPoolExcludedColumnsArgs = {
  *
  * A Data Pool is a cached table hydrated from your data warehouse optimized for high-concurrency and low-latency queries.
  *
- * [Learn more about Data Pools](https://docs.propeldata.com).
+ * [Learn more about Data Pools](https://www.propeldata.com/docs/data-pools).
  */
 export type DataPoolMetricsArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -691,34 +763,87 @@ export type DataPoolMetricsArgs = {
  *
  * A Data Pool is a cached table hydrated from your data warehouse optimized for high-concurrency and low-latency queries.
  *
- * [Learn more about Data Pools](https://docs.propeldata.com).
+ * [Learn more about Data Pools](https://www.propeldata.com/docs/data-pools).
  */
 export type DataPoolSyncsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
+  filter?: InputMaybe<SyncsFilter>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+};
+
+export type DataPoolColumn = {
+  __typename?: 'DataPoolColumn';
+  /** The name of the Data Source column that this Data Pool column derives from. */
+  columnName: Scalars['String'];
+  /** Whether the column is nullable, meaning whether it accepts a null value. */
+  isNullable: Scalars['Boolean'];
+  /**
+   * The name of the Data Source column that this Data Pool column derives from.
+   * @deprecated Start using `columnName` instead
+   */
+  name?: Maybe<Scalars['String']>;
+  /** The Data Pool column's type. This may differ from the corresponding Data Source column's type. */
+  type: ColumnType;
+};
+
+/**
+ * The Data Pool column connection object.
+ *
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+ */
+export type DataPoolColumnConnection = {
+  __typename?: 'DataPoolColumnConnection';
+  /** The Data Pool column connection's edges. */
+  edges: Array<DataPoolColumnEdge>;
+  /** The Data Pool column connection's nodes. */
+  nodes: Array<DataPoolColumn>;
+  /** The Data Pool column connection's page info. */
+  pageInfo: PageInfo;
+};
+
+/**
+ * The Data Pool column edge object.
+ *
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+ */
+export type DataPoolColumnEdge = {
+  __typename?: 'DataPoolColumnEdge';
+  /** The edge's cursor. */
+  cursor: Scalars['String'];
+  /** The edge's node. */
+  node: DataPoolColumn;
+};
+
+export type DataPoolColumnInput = {
+  /** The name of the Data Source column that this Data Pool column derives from. */
+  columnName: Scalars['String'];
+  /** Whether the column is nullable, meaning whether it accepts a null value. */
+  isNullable: Scalars['Boolean'];
+  /** The Data Pool column's type. This may differ from the corresponding Data Source column's type. */
+  type: ColumnType;
 };
 
 /**
  * The Data Pool connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type DataPoolConnection = {
   __typename?: 'DataPoolConnection';
-  /** The connection's edges. */
-  edges?: Maybe<Array<DataPoolEdge>>;
-  /** The connection's nodes. */
-  nodes?: Maybe<Array<DataPool>>;
-  /** The connection's page info. */
+  /** The Data Pool connection's edges. */
+  edges: Array<DataPoolEdge>;
+  /** The Data Pool connection's nodes. */
+  nodes: Array<DataPool>;
+  /** The Data Pool connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The Data Pool edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type DataPoolEdge = {
   __typename?: 'DataPoolEdge';
@@ -756,11 +881,11 @@ export type DataPoolSetupTask = {
   completedAt?: Maybe<Scalars['DateTime']>;
   /**  A description of the Data Pool Setup Task to be performed.  */
   description?: Maybe<Scalars['String']>;
-  /**  If the Data Pool Setup Task failed, this field includes a descriptive error message.  */
+  /**  If the Data Pool Setup Task failed, this field includes a descriptive error message. */
   error?: Maybe<Error>;
   /**  The name of the Data Pool Setup Task to be performed.  */
   name: Scalars['String'];
-  /**  The status of the Data Pool Setup Task (all setup tasks begin as NOT_STARTED before transitioning to SUCCEEDED or FAILED).  */
+  /**  The status of the Data Pool Setup Task (all setup tasks begin as NOT_STARTED before transitioning to SUCCEEDED or FAILED). */
   status: DataPoolSetupTaskStatus;
 };
 
@@ -786,7 +911,7 @@ export enum DataPoolStatus {
   Created = 'CREATED',
   /**  Propel is deleting the Data Pool and all of its associated data.  */
   Deleting = 'DELETING',
-  /**  The Data Pool is set up and serving data. Check its Syncs to monitor data ingestion.  */
+  /**  The Data Pool is set up and serving data. Check its Syncs to monitor data ingestion. */
   Live = 'LIVE',
   /** @deprecated The ability to pause will move to a new field */
   Paused = 'PAUSED',
@@ -794,8 +919,24 @@ export enum DataPoolStatus {
   Pausing = 'PAUSING',
   /**  Propel is attempting to set up the Data Pool.  */
   Pending = 'PENDING',
-  /**  The Data Pool setup failed. Check its Setup Tasks before re-attempting setup.  */
+  /**  The Data Pool setup failed. Check its Setup Tasks before re-attempting setup. */
   SetupFailed = 'SETUP_FAILED'
+}
+
+/**
+ * The available Data Pool sync intervals. Specify unit of time between attempts to sync data from your data warehouse.
+ *
+ * Note that the syncing interval is approximate. For example, setting the syncing interval to `EVERY_1_HOUR` does not mean that syncing will occur exactly on the hour. Instead, the syncing interval starts relative to when the Data Pool goes `LIVE`, and Propel will attempt to sync approximately every hour. Additionally, if you pause or resume syncing, this too can shift the syncing interval around.
+ */
+export enum DataPoolSyncInterval {
+  Every_1Hour = 'EVERY_1_HOUR',
+  Every_1Minute = 'EVERY_1_MINUTE',
+  Every_4Hours = 'EVERY_4_HOURS',
+  Every_5Minutes = 'EVERY_5_MINUTES',
+  Every_12Hours = 'EVERY_12_HOURS',
+  Every_15Minutes = 'EVERY_15_MINUTES',
+  Every_24Hours = 'EVERY_24_HOURS',
+  Every_30Minutes = 'EVERY_30_MINUTES'
 }
 
 /** The Data Pool Sync Status. It indicates whether a Data Pool is syncing data or not. */
@@ -805,23 +946,44 @@ export enum DataPoolSyncStatus {
   /**  Propel is disabling syncing for the Data Pool.  */
   Disabling = 'DISABLING',
   /**  Syncing is enabled for the Data Pool.  */
-  Enabled = 'ENABLED',
-  /**  Propel is re-enabling syncing for the Data Pool.  */
-  Enabling = 'ENABLING'
+  Enabled = 'ENABLED'
 }
+
+/** Settings related to Data Pool syncing. */
+export type DataPoolSyncing = {
+  __typename?: 'DataPoolSyncing';
+  /**
+   * The syncing interval.
+   *
+   * Note that the syncing interval is approximate. For example, setting the syncing interval to `EVERY_1_HOUR`
+   * does not mean that syncing will occur exactly on the hour. Instead, the syncing interval starts relative to
+   * when the Data Pool goes `LIVE`, and Propel will attempt to sync approximately every hour. Additionally,
+   * if you pause or resume syncing, this too can shift the syncing interval around.
+   */
+  interval: DataPoolSyncInterval;
+  /**  The date and time of the most recent Sync in UTC.  */
+  lastSyncedAt?: Maybe<Scalars['DateTime']>;
+  /**  Indicates whether syncing is enabled or disabled.  */
+  status: DataPoolSyncStatus;
+};
+
+/** The fields for modifying the Data Pool syncing. */
+export type DataPoolSyncingInput = {
+  interval: DataPoolSyncInterval;
+};
 
 /**
  * The Data Source object.
  *
  * A Data Source is a connection to your data warehouse. It has the necessary connection details for Propel to access Snowflake or any other supported Data Source.
  *
- * [Learn more about Data Sources](https://docs.propeldata.com).
+ * [Learn more about Data Sources](https://www.propeldata.com/docs/data-sources).
  */
 export type DataSource = Common & Node & {
   __typename?: 'DataSource';
   /** The Data Source's Account. */
   account: Account;
-  /**  A list of checks performed on the Data Source during its most recent connection attempt.  */
+  /**  A list of checks performed on the Data Source during its most recent connection attempt. */
   checks?: Maybe<Array<DataSourceCheck>>;
   /** The Data Source's connection settings. */
   connectionSettings: ConnectionSettings;
@@ -855,7 +1017,7 @@ export type DataSource = Common & Node & {
   status: DataSourceStatus;
   /** A list of table introspections performed for the Data Source. You can see how tables and columns changed over time by paging through this list. */
   tableIntrospections?: Maybe<TableIntrospectionConnection>;
-  /** The tables contained within the Data Source, according to the most recent table introspection.  */
+  /** The tables contained within the Data Source, according to the most recent table introspection. */
   tables?: Maybe<TableConnection>;
   /** The Data Source's type. */
   type: DataSourceType;
@@ -869,7 +1031,7 @@ export type DataSource = Common & Node & {
  *
  * A Data Source is a connection to your data warehouse. It has the necessary connection details for Propel to access Snowflake or any other supported Data Source.
  *
- * [Learn more about Data Sources](https://docs.propeldata.com).
+ * [Learn more about Data Sources](https://www.propeldata.com/docs/data-sources).
  */
 export type DataSourceDataPoolsArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -884,7 +1046,7 @@ export type DataSourceDataPoolsArgs = {
  *
  * A Data Source is a connection to your data warehouse. It has the necessary connection details for Propel to access Snowflake or any other supported Data Source.
  *
- * [Learn more about Data Sources](https://docs.propeldata.com).
+ * [Learn more about Data Sources](https://www.propeldata.com/docs/data-sources).
  */
 export type DataSourceTableIntrospectionsArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -899,7 +1061,7 @@ export type DataSourceTableIntrospectionsArgs = {
  *
  * A Data Source is a connection to your data warehouse. It has the necessary connection details for Propel to access Snowflake or any other supported Data Source.
  *
- * [Learn more about Data Sources](https://docs.propeldata.com).
+ * [Learn more about Data Sources](https://www.propeldata.com/docs/data-sources).
  */
 export type DataSourceTablesArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -921,11 +1083,11 @@ export type DataSourceCheck = {
   checkedAt?: Maybe<Scalars['DateTime']>;
   /**  A description of the Data Source Check to be performed.  */
   description?: Maybe<Scalars['String']>;
-  /**  If the Data Source Check failed, this field includes a descriptive error message.  */
+  /**  If the Data Source Check failed, this field includes a descriptive error message. */
   error?: Maybe<Error>;
   /**  The name of the Data Source Check to be performed.  */
   name: Scalars['String'];
-  /**  The status of the Data Source Check (all checks begin as NOT_STARTED before transitioning to SUCCEEDED or FAILED).  */
+  /**  The status of the Data Source Check (all checks begin as NOT_STARTED before transitioning to SUCCEEDED or FAILED). */
   status: DataSourceCheckStatus;
 };
 
@@ -942,22 +1104,22 @@ export enum DataSourceCheckStatus {
 /**
  * The Data Source connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type DataSourceConnection = {
   __typename?: 'DataSourceConnection';
-  /** The connection's edges. */
-  edges?: Maybe<Array<DataSourceEdge>>;
-  /** The connection's nodes. */
-  nodes?: Maybe<Array<DataSource>>;
-  /** The connection's page info. */
+  /** The Data Source connection's edges. */
+  edges: Array<DataSourceEdge>;
+  /** The Data Source connection's nodes. */
+  nodes: Array<DataSource>;
+  /** The Data Source connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The Data Source edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type DataSourceEdge = {
   __typename?: 'DataSourceEdge';
@@ -998,13 +1160,106 @@ export enum DataSourceStatus {
 
 /** The types of Data Sources. */
 export enum DataSourceType {
+  /** Indicates a BigQuery Data Source. */
+  Bigquery = 'BIGQUERY',
   /** Indicates an Http Data Source. */
   Http = 'Http',
+  /** Indicates a Redshift Data Source. */
+  Redshift = 'Redshift',
   /** Indicates an S3 Data Source. */
   S3 = 'S3',
   /** Indicates a Snowflake Data Source. */
-  Snowflake = 'Snowflake'
+  Snowflake = 'Snowflake',
+  /** Indicates a Webhook Data Source. */
+  Webhook = 'WEBHOOK'
 }
+
+/**
+ * Deletion Job scheduled for a specific Data Pool.
+ *
+ * The Deletion Job represents the asynchronous process of deleting data
+ * given some filters inside a Data Pool. It tracks the deletion process
+ * until it is finished, showing the progress and the outcome when it is finished.
+ */
+export type DeletionJob = Node & {
+  __typename?: 'DeletionJob';
+  /** Account to which the Deletion Job belongs */
+  account: Account;
+  /** The Deletion Job's creation date and time in UTC */
+  createdAt: Scalars['DateTime'];
+  /** Who created the Deletion Job */
+  createdBy: Scalars['String'];
+  /** The Data Pool whose records will be deleted by the Deletion Job */
+  dataPool: DataPool;
+  /** Environment to which the Deletion Job belongs */
+  environment: Environment;
+  /** The error that occurred while deleting data, if any. */
+  error?: Maybe<Error>;
+  /** The time at which the Deletion Job failed. */
+  failedAt?: Maybe<Scalars['DateTime']>;
+  /** The list of filters that will be used for deleting data. Data matching the filters will be deleted. */
+  filters: Array<Filter>;
+  /** The Deletion Job's ID */
+  id: Scalars['ID'];
+  /** The Deletion Job's last modification date and time in UTC */
+  modifiedAt: Scalars['DateTime'];
+  /** Who last modified the Deletion Job */
+  modifiedBy: Scalars['String'];
+  /** The current progress of the Deletion Job, from 0.0 to 1.0. */
+  progress: Scalars['Float'];
+  /** The time at which the Deletion Job started. */
+  startedAt?: Maybe<Scalars['DateTime']>;
+  /** The current Deletion Job's status */
+  status: DeletionJobStatus;
+  /** The time at which the Deletion Job succeeded. */
+  succeededAt?: Maybe<Scalars['DateTime']>;
+};
+
+/**
+ * The Data Source connection object.
+ *
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+ */
+export type DeletionJobConnection = {
+  __typename?: 'DeletionJobConnection';
+  /** The Data Source connection's edges. */
+  edges: Array<DeletionJobEdge>;
+  /** The Data Source connection's nodes. */
+  nodes: Array<DeletionJob>;
+  /** The Data Source connection's page info. */
+  pageInfo: PageInfo;
+};
+
+/**
+ * The Data Source edge object.
+ *
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+ */
+export type DeletionJobEdge = {
+  __typename?: 'DeletionJobEdge';
+  /** The edge's cursor. */
+  cursor: Scalars['String'];
+  /** The edge's node. */
+  node: DeletionJob;
+};
+
+export enum DeletionJobStatus {
+  /** The Deletion Job was created, but is not yet being executed. */
+  Created = 'CREATED',
+  /** The Deletion Job failed. Check the error message. */
+  Failed = 'FAILED',
+  /** The Deletion Job is executing. */
+  InProgress = 'IN_PROGRESS',
+  /** The Deletion Job succeeded. */
+  Succeeded = 'SUCCEEDED'
+}
+
+export type DeletionRequestInput = {
+  /** The Data Pool that is going to get the data deleted */
+  dataPool: Scalars['ID'];
+  /** The list of filters that will be used for deleting data. Data matching these filters will be deleted. */
+  filters: Array<FilterInput>;
+};
 
 /** The Dimension object that represents a column in a table. */
 export type Dimension = {
@@ -1033,7 +1288,7 @@ export type DimensionInput = {
 /** Statistics about a particular Dimension. */
 export type DimensionStatistics = {
   __typename?: 'DimensionStatistics';
-  /**  The average value of the Dimension. Empty for non-numeric Dimensions.  */
+  /**  The average value of the Dimension. Empty for non-numeric Dimensions. */
   average?: Maybe<Scalars['String']>;
   /**  The maximum value of the Dimension.  */
   max?: Maybe<Scalars['String']>;
@@ -1041,7 +1296,7 @@ export type DimensionStatistics = {
   min?: Maybe<Scalars['String']>;
   /** The Query statistics and metadata. */
   query: QueryInfo;
-  /**  An array of unique values for the Dimension, up to 1,000. Empty if the Dimension contains more than 1,000 unique values. Fetching unique values incurs query costs.  */
+  /**  An array of unique values for the Dimension, up to 1,000. Empty if the Dimension contains more than 1,000 unique values. Fetching unique values incurs query costs. */
   uniqueValues?: Maybe<Array<Scalars['String']>>;
 };
 
@@ -1078,23 +1333,91 @@ export type FailureResponse = {
   error: Error;
 };
 
-/** The fields of a Filter. */
+/**
+ * The fields of a filter.
+ *
+ * You can construct more complex filters using `and` and `or`. For example, to construct a filter equivalent to
+ *
+ * ```
+ * (value > 0 AND value <= 100) OR status = "confirmed"
+ * ```
+ *
+ * you could write
+ *
+ * ```
+ * {
+ *   "column": "value",
+ *   "operator": "GREATER_THAN",
+ *   "value": "0",
+ *   "and": [{
+ *     "column": "value",
+ *     "operator": "LESS_THAN_OR_EQUAL_TO",
+ *     "value": "0"
+ *   }],
+ *   "or": [{
+ *     "column": "status",
+ *     "operator": "EQUALS",
+ *     "value": "confirmed"
+ *   }]
+ * }
+ * ```
+ *
+ * Note that `and` takes precedence over `or`.
+ */
 export type Filter = {
   __typename?: 'Filter';
+  /**  Additional filters to AND with this one. AND takes precedence over OR. */
+  and?: Maybe<Array<Filter>>;
   /**  The name of the column to filter on.  */
   column: Scalars['String'];
-  /**  The operation to perform when comparing the column and filter values.  */
+  /**  The operation to perform when comparing the column and filter values. */
   operator: FilterOperator;
+  /**  Additional filters to OR with this one. AND takes precedence over OR. */
+  or?: Maybe<Array<Filter>>;
   /**  The value to compare the column to.  */
   value: Scalars['String'];
 };
 
-/** The fields for defining a Filter. */
+/**
+ * The fields of a filter.
+ *
+ * You can construct more complex filters using `and` and `or`. For example, to construct a filter equivalent to
+ *
+ * ```
+ * (value > 0 AND value <= 100) OR status = "confirmed"
+ * ```
+ *
+ * you could write
+ *
+ * ```
+ * {
+ *   "column": "value",
+ *   "operator": "GREATER_THAN",
+ *   "value": "0",
+ *   "and": [{
+ *     "column": "value",
+ *     "operator": "LESS_THAN_OR_EQUAL_TO",
+ *     "value": "0"
+ *   }],
+ *   "or": [{
+ *     "column": "status",
+ *     "operator": "EQUALS",
+ *     "value": "confirmed"
+ *   }]
+ * }
+ * ```
+ *
+ * Note that `and` takes precedence over `or`.
+ */
 export type FilterInput = {
+  /**  Additional filters to AND with this one. AND takes precedence over OR. */
+  and?: InputMaybe<Array<FilterInput>>;
   /**  The name of the column to filter on.  */
   column: Scalars['String'];
-  /**  The operation to perform when comparing the column and filter values.  */
+  /**  The operation to perform when comparing the column and filter values. */
   operator: FilterOperator;
+  /**  Additional filters to OR with this one. AND takes precedence over OR. */
+  or?: InputMaybe<Array<FilterInput>>;
   /**  The value to compare the column to.  */
   value: Scalars['String'];
 };
@@ -1138,26 +1461,37 @@ export type HttpConnectionSettings = {
   /**
    * The HTTP Basic authentication settings for uploading new data.
    *
-   * If this parameter is not provided, anyone with the URL to your tables will be able to upload data.
-   * While it's OK to test without HTTP Basic authentication, we recommend enabling it.
+   * If this parameter is not provided, anyone with the URL to your tables will be able to upload data. While it's OK to test without HTTP Basic authentication, we recommend enabling it.
    */
   basicAuth?: Maybe<HttpBasicAuthSettings>;
+  /** The HTTP Data Source's tables. */
+  tables: Array<HttpDataSourceTable>;
 };
 
-/** The fields for creating an HTTP Data Source's connection settings. */
+/** The HTTP Data Source connection settings. */
 export type HttpConnectionSettingsInput = {
   /**
    * The HTTP Basic authentication settings for uploading new data.
    *
-   * If this parameter is not provided, anyone with the URL to your tables will be able to upload data.
-   * While it's OK to test without HTTP Basic authentication, we recommend enabling it.
+   * If this parameter is not provided, anyone with the URL to your tables will be able to upload data. While it's OK to test without HTTP Basic authentication, we recommend enabling it.
    */
   basicAuth?: InputMaybe<HttpBasicAuthInput>;
-  /** The Data Source's tables. */
+  /** The HTTP Data Source's tables. */
   tables: Array<HttpDataSourceTableInput>;
 };
 
-/** The fields for specifying a Column in a Table. */
+/** A column in an HTTP Data Source's table. */
+export type HttpDataSourceColumn = {
+  __typename?: 'HttpDataSourceColumn';
+  /** The column name. It has to be unique within a Table. */
+  name: Scalars['String'];
+  /** Whether the column's type is nullable or not. */
+  nullable: Scalars['Boolean'];
+  /** The column type. */
+  type: ColumnType;
+};
+
+/** The fields for specifying a column in an HTTP Data Source's table. */
 export type HttpDataSourceColumnInput = {
   /** The column name. It has to be unique within a Table. */
   name: Scalars['String'];
@@ -1167,9 +1501,20 @@ export type HttpDataSourceColumnInput = {
   type: ColumnType;
 };
 
-/** The fields for specifying a Table. */
+/** An HTTP Data Source's table. */
+export type HttpDataSourceTable = {
+  __typename?: 'HttpDataSourceTable';
+  /** All the columns present in the table */
+  columns: Array<HttpDataSourceColumn>;
+  /** The ID of the table */
+  id: Scalars['ID'];
+  /** The name of the table */
+  name: Scalars['String'];
+};
+
+/** The fields for specifying an HTTP Data Source's table. */
 export type HttpDataSourceTableInput = {
-  /** All the columns that will be present in the table */
+  /** All the columns present in the table */
   columns: Array<HttpDataSourceColumnInput>;
   /** The name of the table */
   name: Scalars['String'];
@@ -1181,15 +1526,27 @@ export type HttpDataSourceTableInput = {
  * A Metric's leaderboard query returns an ordered table of Dimension and Metric values over a given time range.
  */
 export type LeaderboardInput = {
-  /**  One or many Dimensions to group the Metric values by. Typically, Dimensions in a leaderboard are what you want to compare and rank.  */
+  /**  One or many Dimensions to group the Metric values by. Typically, Dimensions in a leaderboard are what you want to compare and rank. */
   dimensions: Array<DimensionInput>;
   /**  The list of filters to apply before retrieving the leaderboard data. If no Query Filters are provided, all data is included. */
   filters?: InputMaybe<Array<FilterInput>>;
-  /** Optionally specifies the Propeller to use. This can be set by Users when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.  */
+  /**
+   * The ID of the Metric to query.
+   *
+   * Required if `metricName` is not specified.
+   */
+  metricId?: InputMaybe<Scalars['ID']>;
+  /**
+   * The name of the Metric to query.
+   *
+   * Required if `metricId` is not specified.
+   */
+  metricName?: InputMaybe<Scalars['String']>;
+  /** Optionally specifies the Propeller to use. This can be set by Users when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application. */
   propeller?: InputMaybe<Propeller>;
-  /**  The number of rows to be returned. It can be a number between 1 and 1,000.  */
+  /**  The number of rows to be returned. It can be a number between 1 and 1,000. */
   rowLimit: Scalars['Int'];
-  /**  The sort order of the rows. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided.  */
+  /**  The sort order of the rows. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided. */
   sort?: InputMaybe<Sort>;
   /**  The time range for calculating the leaderboard. */
   timeRange: TimeRangeInput;
@@ -1340,22 +1697,22 @@ export type MetricTimeSeriesArgs = {
 /**
  * The Metric connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type MetricConnection = {
   __typename?: 'MetricConnection';
-  /** The connection's edges. */
-  edges?: Maybe<Array<MetricEdge>>;
-  /** The connection's nodes. */
-  nodes?: Maybe<Array<Metric>>;
-  /** The connection's page info. */
+  /** The Metric connection's edges. */
+  edges: Array<MetricEdge>;
+  /** The Metric connection's nodes. */
+  nodes: Array<Metric>;
+  /** The Metric connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The Metric edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type MetricEdge = {
   __typename?: 'MetricEdge';
@@ -1363,6 +1720,110 @@ export type MetricEdge = {
   cursor: Scalars['String'];
   /** The edge's node. */
   node: Metric;
+};
+
+/**
+ * The Metric Report connection object.
+ *
+ * It includes `headers` and `rows` for a single page of a report. It also allows paging forward and backward to other
+ * pages of the report.
+ *
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+ */
+export type MetricReportConnection = {
+  __typename?: 'MetricReportConnection';
+  /** The report connection's edges. */
+  edges: Array<MetricReportEdge>;
+  /** An ordered array of display names for your dimensions and Metrics, as defined in the report input. Use this to display your table's header. */
+  headers: Array<Maybe<Scalars['String']>>;
+  /** The report connection's nodes. */
+  nodes: Array<MetricReportNode>;
+  /** The report connection's page info. */
+  pageInfo: PageInfo;
+  /** The Query statistics and metadata. */
+  query: QueryInfo;
+  /** An ordered array of rows. Each row contains dimension and Metric values, as defined in the report input. Use these to display the rows of your table. */
+  rows: Array<Array<Maybe<Scalars['String']>>>;
+};
+
+/** The fields for specifying a dimension to include in a Metric Report. */
+export type MetricReportDimensionInput = {
+  /**  The column name of the dimension to include in a Metric Report. This must match the name of a Data Pool column. */
+  columnName: Scalars['String'];
+  /**  The name to display in the `headers` array when displaying the report. This defaults to the column name if unspecified. */
+  displayName?: InputMaybe<Scalars['String']>;
+  /**  The sort order for the dimension. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to ascending (`ASC`) order when not provided. */
+  sort?: InputMaybe<Sort>;
+};
+
+/**
+ * The Metric Report edge object.
+ *
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+ */
+export type MetricReportEdge = {
+  __typename?: 'MetricReportEdge';
+  /** The edge's cursor. */
+  cursor: Scalars['String'];
+  /** The edge's node. */
+  node: MetricReportNode;
+};
+
+/**
+ * The fields for querying a Metric Report.
+ *
+ * A Metric Report is a table whose columns include dimensions and Metric values, calculated over a given time range.
+ */
+export type MetricReportInput = {
+  /**  The cursor to use when paging forward.  */
+  after?: InputMaybe<Scalars['String']>;
+  /**  The cursor to use when paging backward.  */
+  before?: InputMaybe<Scalars['String']>;
+  /**  One or many dimensions to group the Metric values by. Typically, dimensions in a report are what you want to compare and rank. */
+  dimensions: Array<MetricReportDimensionInput>;
+  /**  The Query Filters to apply when building the Metric Report. These can be used to filter out rows. */
+  filters?: InputMaybe<Array<FilterInput>>;
+  /**  The number of rows to be returned when paging forward. It can be a number between 1 and 1,000. */
+  first?: InputMaybe<Scalars['Int']>;
+  /**  The number of rows to be returned when paging forward. It can be a number between 1 and 1,000. */
+  last?: InputMaybe<Scalars['Int']>;
+  /**  One or more Metrics to include in the Metric Report. These will be broken down by `dimensions`. */
+  metrics: Array<MetricReportMetricInput>;
+  /**  The index of the column to order the Metric Report by. The index is 1-based and defaults to the first Metric column. In other words, by default, reports are ordered by the first Metric; however, you can order by the second Metric, third Metric, etc., by overriding the `orderByColumn` input. You can also order by dimensions this way. */
+  orderByColumn?: InputMaybe<Scalars['Int']>;
+  /**  Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application. */
+  propeller?: InputMaybe<Propeller>;
+  /**  The time range for calculating the Metric Report. */
+  timeRange: TimeRangeInput;
+};
+
+/** The fields for specifying a Metric to include in a Metric Report. */
+export type MetricReportMetricInput = {
+  /**  The name to display in the `headers` array when displaying the report. This defaults to the Metric's unique name if unspecified. */
+  displayName?: InputMaybe<Scalars['String']>;
+  /**  The Query Filters to apply when calculating the Metric.  */
+  filters?: InputMaybe<Array<FilterInput>>;
+  /**  The Metric's ID. If not specified, Propel will lookup the Metric by unique name. */
+  id?: InputMaybe<Scalars['ID']>;
+  /**  The sort order for the Metric. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided. */
+  sort?: InputMaybe<Sort>;
+  /**  The Metric's unique name. If not specified, Propel will lookup the Metric by ID. */
+  uniqueName?: InputMaybe<Scalars['String']>;
+};
+
+/**
+ * The Metric Report node object.
+ *
+ * This type represents a single row of a report.
+ *
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+ */
+export type MetricReportNode = {
+  __typename?: 'MetricReportNode';
+  /** An ordered array of display names for your dimensions and Metrics, as defined in the report input. Use this to display your table's header. */
+  headers: Array<Maybe<Scalars['String']>>;
+  /** An ordered array of columns. Each column contains the dimension and Metric values for a single row, as defined in the report input. Use this to display a single row within your table. */
+  row: Array<Maybe<Scalars['String']>>;
 };
 
 /** The result of a mutation which creates or modifies a Metric. */
@@ -1408,15 +1869,14 @@ export type MinMetricSettings = {
   measure: Dimension;
 };
 
-/** The fields for modifying an HTTP Data Source. */
 export type ModifyHttpDataSourceInput = {
-  /** The Data Source's new connection settings.  */
+  /** The HTTP Data Source's new connection settings. If not provided this property will not be modified. */
   connectionSettings?: InputMaybe<PartialHttpConnectionSettingsInput>;
-  /** The Data Source's new description.  */
+  /** The HTTP Data Source's new description. If not provided this property will not be modified. */
   description?: InputMaybe<Scalars['String']>;
-  /** The ID or unique name of the Data Source to modify. */
+  /** The ID or unique name of the HTTP Data Source to modify. */
   idOrUniqueName: IdOrUniqueName;
-  /** The Data Source's new unique name.  */
+  /** The HTTP Data Source's new unique name. If not provided this property will not be modified. */
   uniqueName?: InputMaybe<Scalars['String']>;
 };
 
@@ -1445,13 +1905,13 @@ export type ModifyPolicyInput = {
 };
 
 export type ModifyS3DataSourceInput = {
-  /** The Data Source's new connection settings. If not provided this property will not be modified. */
+  /** The S3 Data Source's new connection settings. If not provided this property will not be modified. */
   connectionSettings?: InputMaybe<PartialS3ConnectionSettingsInput>;
-  /** The Data Source's new description. If not provided this property will not be modified. */
+  /** The S3 Data Source's new description. If not provided this property will not be modified. */
   description?: InputMaybe<Scalars['String']>;
-  /** The ID or unique name of the Data Source to modify. */
+  /** The ID or unique name of the S3 Data Source to modify. */
   idOrUniqueName: IdOrUniqueName;
-  /** The Data Source's new unique name. If not provided this property will not be modified. */
+  /** The S3 Data Source's new unique name. If not provided this property will not be modified. */
   uniqueName?: InputMaybe<Scalars['String']>;
 };
 
@@ -1460,7 +1920,7 @@ export type Mutation = {
   /**
    * This mutation creates a new Application and returns the newly created Application (or an error message if creating the Application fails).
    *
-   * An Application is an OAuth 2.0 client that gives you scoped access to the Propel APIs.
+   * [Learn more about Applications](https://www.propeldata.com/docs/applications).
    */
   createApplication?: Maybe<ApplicationOrFailureResponse>;
   /**
@@ -1494,7 +1954,7 @@ export type Mutation = {
    *
    * A Data Pool is a cached table hydrated from your data warehouse optimized for high-concurrency and low-latency queries.
    */
-  createDataPool?: Maybe<DataPoolOrFailureResponse>;
+  createDataPoolV2?: Maybe<DataPoolResponse>;
   /**
    * This mutation creates a new HTTP Data Source from the given settings.
    *
@@ -1538,13 +1998,13 @@ export type Mutation = {
   /**
    * This mutation deletes the specified Application by ID and then returns the same ID if the Application was deleted successfully.
    *
-   * An Application is an OAuth 2.0 client that gives you scoped access to the Propel APIs.
+   * [Learn more about Applications](https://www.propeldata.com/docs/applications).
    */
   deleteApplication?: Maybe<Scalars['ID']>;
   /**
    * This mutation deletes the specified Application by name and then returns the Application's ID if the Application was deleted successfully.
    *
-   * An Application is an OAuth 2.0 client that gives you scoped access to the Propel APIs.
+   * [Learn more about Applications](https://www.propeldata.com/docs/applications).
    */
   deleteApplicationByName?: Maybe<Scalars['ID']>;
   /**
@@ -1611,7 +2071,7 @@ export type Mutation = {
    *
    * If any of the optional arguments are omitted, those properties will be unchanged on the Application.
    *
-   * An Application is an OAuth 2.0 client that gives you scoped access to the Propel APIs; a Propeller significantly increases the query performance of a Metric; and scopes securely specify the permissions allowed to the Application.
+   * [Learn more about Applications](https://www.propeldata.com/docs/applications).
    */
   modifyApplication?: Maybe<ApplicationOrFailureResponse>;
   /**
@@ -1663,6 +2123,8 @@ export type Mutation = {
    * A Data Source is a connection to your data warehouse. It has the necessary connection details for Propel to access Snowflake or any other supported Data Source.
    */
   reconnectDataSource?: Maybe<DataSource>;
+  /** Schedules a new Deletion Job on the specified Data Pool. */
+  requestDelete: RequestDeleteResponse;
   /** Retries to set up the Data Pool identified by the given ID. */
   retryDataPoolSetup?: Maybe<DataPool>;
   /** Retries to set up the Data Pool identified by the given unique name. */
@@ -1699,8 +2161,8 @@ export type MutationCreateCountMetricArgs = {
 };
 
 
-export type MutationCreateDataPoolArgs = {
-  input: CreateDataPoolInput;
+export type MutationCreateDataPoolV2Args = {
+  input: CreateDataPoolInputV2;
 };
 
 
@@ -1859,6 +2321,11 @@ export type MutationReconnectDataSourceArgs = {
 };
 
 
+export type MutationRequestDeleteArgs = {
+  input: DeletionRequestInput;
+};
+
+
 export type MutationRetryDataPoolSetupArgs = {
   id: Scalars['ID'];
 };
@@ -1896,21 +2363,21 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['String']>;
 };
 
-/** The fields for modifying an HTTP Data Source's connection settings. */
+/** The HTTP Data Source connection settings. */
 export type PartialHttpConnectionSettingsInput = {
   /**
    * The HTTP Basic authentication settings for uploading new data.
    *
-   * If this parameter is not provided, anyone with the URL to your tables will be able to upload data.
-   * While it's OK to test without HTTP Basic authentication, we recommend enabling it.
+   * If this parameter is not provided, anyone with the URL to your tables will be able to upload data. While it's OK to test without HTTP Basic authentication, we recommend enabling it. If not provided this property will not be modified.
    */
   basicAuth?: InputMaybe<HttpBasicAuthInput>;
-  /** Set this to `false` to disable HTTP Basic authentication. Any previously stored HTTP Basic authentication settings will be cleared out. */
+  /** Set this to `false` to disable HTTP Basic authentication. Any previously stored HTTP Basic authentication settings will be cleared out. If not provided this property will not be modified. */
   basicAuthEnabled?: InputMaybe<Scalars['Boolean']>;
-  /** The Data Source's new tables. */
+  /** The HTTP Data Source's tables. If not provided this property will not be modified. */
   tables?: InputMaybe<Array<HttpDataSourceTableInput>>;
 };
 
+/** The connection settings for an S3 Data Source. These include the S3 bucket name, the AWS access key ID, and the tables (along with their paths). We do not allow fetching the AWS secret access key after it has been set. */
 export type PartialS3ConnectionSettingsInput = {
   /** The AWS access key ID for an IAM user with sufficient access to the S3 bucket. If not provided this property will not be modified. */
   awsAccessKeyId?: InputMaybe<Scalars['String']>;
@@ -1918,7 +2385,7 @@ export type PartialS3ConnectionSettingsInput = {
   awsSecretAccessKey?: InputMaybe<Scalars['String']>;
   /** The name of the S3 bucket. If not provided this property will not be modified. */
   bucket?: InputMaybe<Scalars['String']>;
-  /** The Data Source's new tables. If not provided this property will not be modified. */
+  /** The S3 Data Source's tables. If not provided this property will not be modified. */
   tables?: InputMaybe<Array<S3DataSourceTableInput>>;
 };
 
@@ -1968,22 +2435,22 @@ export type Policy = Node & {
 /**
  * The Policy connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type PolicyConnection = {
   __typename?: 'PolicyConnection';
-  /** The connection's edges. */
-  edges?: Maybe<Array<PolicyEdge>>;
-  /** The connection's nodes. */
-  nodes?: Maybe<Array<Policy>>;
-  /** The connection's page info. */
+  /** The Policy connection's edges. */
+  edges: Array<PolicyEdge>;
+  /** The Policy connection's nodes. */
+  nodes: Array<Policy>;
+  /** The Policy connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The Policy edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type PolicyEdge = {
   __typename?: 'PolicyEdge';
@@ -2009,12 +2476,9 @@ export enum PolicyType {
 }
 
 /**
- * A Propeller defines the compute power assigned to a Propel Application. The larger its compute power, the faster
- * the queries. With Propellers, you can assign different compute powers (and cost profiles) to different use cases or workloads (with the same data).
+ * A Propeller determines your Application's query processing power. The larger the Propeller, the faster the queries and the higher the cost. Every Propel Application (and therefore every set of API credentials) has a Propeller that determines the speed and cost of queries.
  *
- * Propellers have the following properties:
- *
- * Max RPS: The maximum number of records per second (RPS) that can be processed by the Propeller on a single query.
+ * [Learn more about Data Sources](https://www.propeldata.com/docs/applications#propeller).
  */
 export enum Propeller {
   /** Max records per second: 250,000,000 records per second */
@@ -2034,19 +2498,19 @@ export type Query = {
   /**
    * This query returns the Application specified by the given ID.
    *
-   * An Application is an OAuth 2.0 client that gives you scoped access to the Propel APIs.
+   * [Learn more about Applications](https://www.propeldata.com/docs/applications).
    */
   application?: Maybe<Application>;
   /**
    * This query returns the Application with the given unique name.
    *
-   * An Application is an OAuth 2.0 client that gives you scoped access to the Propel APIs.
+   * [Learn more about Applications](https://www.propeldata.com/docs/applications).
    */
   applicationByName?: Maybe<Application>;
   /**
    * This query returns the Applications within the Environment.
    *
-   * Applications are OAuth 2.0 clients that give you scoped access to the Propel APIs. Environments are independent and isolated Propel workspaces for development, staging (testing), and production workloads.
+   * [Learn more about Applications](https://www.propeldata.com/docs/applications).
    *
    * The `applications` query uses [cursor-based pagination](/docs/api/pagination) typical of GraphQL APIs. You can use the pairs of parameters `first` and `after` or `last` and `before` to page forward or backward through the results, respectively.
    *
@@ -2061,6 +2525,8 @@ export type Query = {
    * A Booster significantly improves the query performance for a Metric.
    */
   booster?: Maybe<Booster>;
+  /** Query a Metric in counter format. A single Metric value for the given time range and filters. */
+  counter?: Maybe<CounterResponse>;
   /**
    * This query returns the Data Pool specified by the given ID.
    *
@@ -2110,6 +2576,15 @@ export type Query = {
    */
   dataSources?: Maybe<DataSourceConnection>;
   /**
+   * This query returns the Deletion Job specified by the given ID.
+   *
+   * The Deletion Job represents the asynchronous process of deleting data
+   * given some filters inside a Data Pool.
+   */
+  deletionJob?: Maybe<DeletionJob>;
+  /** Query a Metric in leaderboard format. A table (array of rows) with the selected dimensions and corresponding Metric values for the given time range and filters. */
+  leaderboard?: Maybe<LeaderboardResponse>;
+  /**
    * This query returns the Metric specified by the given ID.
    *
    * A Metric is a business indicator measured over time.
@@ -2121,6 +2596,17 @@ export type Query = {
    * A Metric is a business indicator measured over time.
    */
   metricByName?: Maybe<Metric>;
+  /**
+   * Build a report, or table, consisting of multiple Metrics broken down by one-or-more dimensions.
+   *
+   * The first few columns of the report are the dimensions you choose to break down by. The subsequent columns are the
+   * Metrics you choose to query. By default, the report sorts on the first Metric in descending order, but you can
+   * configure this with the `orderByMetric` and `sort` inputs.
+   *
+   * Finally, reports use [cursor-based pagination](/docs/api/pagination). You can control page size with the `first` and
+   * `last` inputs.
+   */
+  metricReport?: Maybe<MetricReportConnection>;
   /**
    * This query returns the Metrics within the Environment.
    *
@@ -2139,6 +2625,8 @@ export type Query = {
   sync?: Maybe<Sync>;
   /** Returns a table by ID. */
   table?: Maybe<Table>;
+  /** Query a Metric in time series format. Arrays of timestamps and Metric values for the given time range and filters. */
+  timeSeries?: Maybe<TimeSeriesResponse>;
 };
 
 
@@ -2162,6 +2650,11 @@ export type QueryApplicationsArgs = {
 
 export type QueryBoosterArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryCounterArgs = {
+  input: CounterInput;
 };
 
 
@@ -2201,6 +2694,16 @@ export type QueryDataSourcesArgs = {
 };
 
 
+export type QueryDeletionJobArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryLeaderboardArgs = {
+  input: LeaderboardInput;
+};
+
+
 export type QueryMetricArgs = {
   id: Scalars['ID'];
 };
@@ -2208,6 +2711,11 @@ export type QueryMetricArgs = {
 
 export type QueryMetricByNameArgs = {
   uniqueName: Scalars['String'];
+};
+
+
+export type QueryMetricReportArgs = {
+  input: MetricReportInput;
 };
 
 
@@ -2231,6 +2739,11 @@ export type QuerySyncArgs = {
 
 export type QueryTableArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryTimeSeriesArgs = {
+  input: TimeSeriesInput;
 };
 
 /** The Query Info object. It contains metadata and statistics about a Query performed. */
@@ -2292,6 +2805,10 @@ export enum QuerySubtype {
 export enum QueryType {
   /** Indicates a Metric Query. */
   Metric = 'METRIC',
+  /** Indicates a Record Table Query. */
+  Records = 'RECORDS',
+  /** Indicates a Report Query. */
+  Report = 'REPORT',
   /** Indicates a Dimension Stats Query. */
   Stats = 'STATS'
 }
@@ -2395,24 +2912,24 @@ export enum RelativeTimeRange {
   Yesterday = 'YESTERDAY'
 }
 
-/**
- * The connection settings for an S3 Data Source. These include the S3 bucket name, the AWS access key ID, and the tables
- * (along with their paths). We do not allow fetching the AWS secret access key ID after it has been set.
- */
+export type RequestDeleteResponse = {
+  __typename?: 'RequestDeleteResponse';
+  /** The Deletion Job that was just created. */
+  job: DeletionJob;
+};
+
+/** The connection settings for an S3 Data Source. These include the S3 bucket name, the AWS access key ID, and the tables (along with their paths). We do not allow fetching the AWS secret access key after it has been set. */
 export type S3ConnectionSettings = {
   __typename?: 'S3ConnectionSettings';
   /** The AWS access key ID for an IAM user with sufficient access to the S3 bucket. */
   awsAccessKeyId: Scalars['String'];
   /** The name of the S3 bucket. */
   bucket: Scalars['String'];
-  /** The Data Source's tables. */
-  tables?: Maybe<Array<S3DataSourceTable>>;
+  /** The S3 Data Source's tables. */
+  tables: Array<S3DataSourceTable>;
 };
 
-/**
- * The connection settings for an S3 Data Source. These include the S3 bucket name, the AWS access key ID, the AWS secret
- * access key, and the tables (along with their paths).
- */
+/** The connection settings for an S3 Data Source. These include the S3 bucket name, the AWS access key ID, and the tables (along with their paths). We do not allow fetching the AWS secret access key after it has been set. */
 export type S3ConnectionSettingsInput = {
   /** The AWS access key ID for an IAM user with sufficient access to the S3 bucket. */
   awsAccessKeyId: Scalars['String'];
@@ -2424,6 +2941,7 @@ export type S3ConnectionSettingsInput = {
   tables: Array<S3DataSourceTableInput>;
 };
 
+/** A column in an S3 Data Source's table. */
 export type S3DataSourceColumn = {
   __typename?: 'S3DataSourceColumn';
   /** The column name. */
@@ -2434,6 +2952,7 @@ export type S3DataSourceColumn = {
   type: ColumnType;
 };
 
+/** The fields for specifying a column in an S3 Data Source's table. */
 export type S3DataSourceColumnInput = {
   /** The column name. It has to be unique within a Table. */
   name: Scalars['String'];
@@ -2443,18 +2962,22 @@ export type S3DataSourceColumnInput = {
   type: ColumnType;
 };
 
+/** An S3 Data Source's table. */
 export type S3DataSourceTable = {
   __typename?: 'S3DataSourceTable';
-  /** All the columns that will be present in the table */
+  /** All the columns present in the table */
   columns: Array<S3DataSourceColumn>;
+  /** The ID of the table */
+  id: Scalars['ID'];
   /** The name of the table */
   name: Scalars['String'];
   /** The path to the table's files in S3. */
   path?: Maybe<Scalars['String']>;
 };
 
+/** The fields for specifying an S3 Data Source's table. */
 export type S3DataSourceTableInput = {
-  /** All the columns that will be present in the table */
+  /** All the columns present in the table */
   columns: Array<S3DataSourceColumnInput>;
   /** The name of the table */
   name: Scalars['String'];
@@ -2497,7 +3020,7 @@ export type SnowflakeConnectionSettingsInput = {
   warehouse: Scalars['String'];
 };
 
-/** The sort order options for Metric Queries. */
+/** The available sort orders. */
 export enum Sort {
   /** Sort in ascending order. */
   Asc = 'ASC',
@@ -2531,7 +3054,7 @@ export type Sync = Node & {
   dataPool?: Maybe<DataPool>;
   /** The Sync's Data Pool's Data Source. */
   dataSource?: Maybe<DataSource>;
-  /**  The number of deleted records contained within the Sync, if known. This excludes filtered records.  */
+  /**  The number of deleted records contained within the Sync, if known. This excludes filtered records. */
   deletedRecords?: Maybe<Scalars['String']>;
   /** The Sync's Environment. */
   environment?: Maybe<Environment>;
@@ -2541,45 +3064,45 @@ export type Sync = Node & {
   failedAt?: Maybe<Scalars['DateTime']>;
   /** The Sync's unique identifier. */
   id: Scalars['ID'];
-  /**  The number of filtered records contained within the Sync, due to issues such as a missing timestamp Dimension, if any are known to be invalid.  */
+  /**  The number of filtered records contained within the Sync, due to issues such as a missing timestamp Dimension, if any are known to be invalid. */
   invalidRecords?: Maybe<Scalars['String']>;
   /** The Sync's last modification date and time in UTC. */
   modifiedAt: Scalars['DateTime'];
   /** The Sync's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel. */
   modifiedBy: Scalars['String'];
-  /**  The number of new records contained within the Sync, if known. This excludes filtered records.  */
+  /**  The number of new records contained within the Sync, if known. This excludes filtered records. */
   newRecords?: Maybe<Scalars['String']>;
   /**  The (compressed) size of the Sync, in bytes, if known.  */
   size?: Maybe<Scalars['String']>;
   /**  The time at which the Sync started.  */
   startedAt?: Maybe<Scalars['DateTime']>;
-  /**  The status of the Sync (all Syncs begin as SYNCING before transitioning to SUCCEEDED or FAILED).  */
+  /**  The status of the Sync (all Syncs begin as SYNCING before transitioning to SUCCEEDED or FAILED). */
   status: SyncStatus;
   /**  The time at which the Sync succeeded.  */
   succeededAt?: Maybe<Scalars['DateTime']>;
-  /**  The number of updated records contained within the Sync, if known. This excludes filtered records.  */
+  /**  The number of updated records contained within the Sync, if known. This excludes filtered records. */
   updatedRecords?: Maybe<Scalars['String']>;
 };
 
 /**
  * The Sync connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type SyncConnection = {
   __typename?: 'SyncConnection';
-  /** The connection's edges. */
-  edges?: Maybe<Array<SyncEdge>>;
-  /** The connection's nodes. */
-  nodes?: Maybe<Array<Sync>>;
-  /** The connection's page info. */
+  /** The Sync connection's edges. */
+  edges: Array<SyncEdge>;
+  /** The Sync connection's nodes. */
+  nodes: Array<Sync>;
+  /** The Sync connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The Sync edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type SyncEdge = {
   __typename?: 'SyncEdge';
@@ -2591,14 +3114,27 @@ export type SyncEdge = {
 
 /** The status of a Sync. */
 export enum SyncStatus {
-  /**  Propel is deleting the Sync.  */
+  /**
+   *  Propel is deleting the Sync.
+   * @deprecated No longer used
+   */
   Deleting = 'DELETING',
-  /**  The Sync failed. Propel failed to sync some or all records contained within the Sync.  */
+  /**  The Sync failed. Propel failed to sync some or all records contained within the Sync. */
   Failed = 'FAILED',
-  /**  The Sync succeeded. Propel successfully synced all records contained within the Sync.  */
+  /**  The Sync succeeded. Propel successfully synced all records contained within the Sync. */
   Succeeded = 'SUCCEEDED',
   /**  Propel is actively syncing records contained within the Sync.  */
   Syncing = 'SYNCING'
+}
+
+/** The filter to apply when listing the Syncs for a Data Pool. */
+export enum SyncsFilter {
+  /**  Returns all Syncs, regardless of whether they contain records or not. */
+  All = 'ALL',
+  /**  Returns only Syncs with empty records.  */
+  Empty = 'EMPTY',
+  /**  Returns only Syncs that contain one or more records.  */
+  NotEmpty = 'NOT_EMPTY'
 }
 
 /**
@@ -2719,24 +3255,24 @@ export type TableColumnsArgs = {
 /**
  * The table connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type TableConnection = {
   __typename?: 'TableConnection';
   /** The time at which the tables were cached (i.e., the time at which they were introspected). */
   cachedAt: Scalars['DateTime'];
-  /** The connection's edges. */
+  /** The table connection's edges. */
   edges: Array<TableEdge>;
-  /** The connection's nodes. */
+  /** The table connection's nodes. */
   nodes: Array<Table>;
-  /** The connection's page info. */
+  /** The table connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
  * The table edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type TableEdge = {
   __typename?: 'TableEdge';
@@ -2787,22 +3323,22 @@ export type TableIntrospectionTablesArgs = {
 /**
  * The table introspection connection object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type TableIntrospectionConnection = {
   __typename?: 'TableIntrospectionConnection';
-  /** The connection's edges. */
+  /** The table introspection connection's edges. */
   edges: Array<TableIntrospectionEdge>;
-  /** The connection's nodes. */
+  /** The table introspection connection's nodes. */
   nodes: Array<TableIntrospection>;
-  /** The connection's page info. */
+  /** The table introspection connection's page info. */
   pageInfo: PageInfo;
 };
 
 /**
- * The Application edge object.
+ * The table introspection edge object.
  *
- * Learn more about [pagination in GraphQL](/docs/api/pagination).
+ * Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
  */
 export type TableIntrospectionEdge = {
   __typename?: 'TableIntrospectionEdge';
@@ -2861,9 +3397,9 @@ export type TimeRangeInput = {
   n?: InputMaybe<Scalars['Int']>;
   /** The relative time period. */
   relative?: InputMaybe<RelativeTimeRange>;
-  /**  The optional start timestamp (inclusive). Defaults to the timestamp of the earliest record in the Data Pool.  */
+  /**  The optional start timestamp (inclusive). Defaults to the timestamp of the earliest record in the Data Pool. */
   start?: InputMaybe<Scalars['DateTime']>;
-  /**  The optional end timestamp (exclusive). Defaults to the timestamp of the latest record in the Data Pool.  */
+  /**  The optional end timestamp (exclusive). Defaults to the timestamp of the latest record in the Data Pool. */
   stop?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -2901,11 +3437,23 @@ export enum TimeSeriesGranularity {
  * A Metric's time series query returns the values over a given time range aggregated by a given time granularity; day, month, or year, for example.
  */
 export type TimeSeriesInput = {
-  /**  The Query Filters to apply before retrieving the time series data. If no Query Filters are provided, all data is included.  */
+  /**  The Query Filters to apply before retrieving the time series data. If no Query Filters are provided, all data is included. */
   filters?: InputMaybe<Array<FilterInput>>;
-  /**  The time granularity (hour, day, month, etc.) to aggregate the Metric values by.  */
+  /**  The time granularity (hour, day, month, etc.) to aggregate the Metric values by. */
   granularity: TimeSeriesGranularity;
-  /** Optionally specifies the Propeller to use. This can be set by Users when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.  */
+  /**
+   * The ID of the Metric to query.
+   *
+   * Required if `metricName` is not specified.
+   */
+  metricId?: InputMaybe<Scalars['ID']>;
+  /**
+   * The name of the Metric to query.
+   *
+   * Required if `metricId` is not specified.
+   */
+  metricName?: InputMaybe<Scalars['String']>;
+  /** Optionally specifies the Propeller to use. This can be set by Users when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application. */
   propeller?: InputMaybe<Propeller>;
   /**  The time range for calculating the time series. */
   timeRange: TimeRangeInput;
@@ -2919,7 +3467,22 @@ export type TimeSeriesResponse = {
   /** The Query statistics and metadata. */
   query: QueryInfo;
   /** The time series values. */
-  values: Array<Scalars['String']>;
+  values: Array<Maybe<Scalars['String']>>;
+};
+
+/** The Timestamp fields. */
+export type Timestamp = {
+  __typename?: 'Timestamp';
+  /**  The name of the column that represents the Timestamp.  */
+  columnName: Scalars['String'];
+  /**  The Timestamp column's type.  */
+  type: Scalars['String'];
+};
+
+/** The fields for specifying the Data Pool's Timestamp. */
+export type TimestampInput = {
+  /**  The name of the column that represents the Timestamp.  */
+  columnName: Scalars['String'];
 };
 
 /** The fields for creating an Application. */
@@ -2931,30 +3494,6 @@ export type CreateApplicationInput = {
   /** The Application's API authorization scopes. If specified, at least one scope must be provided; otherwise, all scopes will be granted to the Application by default. */
   scopes?: InputMaybe<Array<ApplicationScope>>;
   /** The Application's unique name. If not specified, Propel will set the ID as unique name. */
-  uniqueName?: InputMaybe<Scalars['String']>;
-};
-
-/** Fields for creating a Data Pool. */
-export type CreateDataPoolInput = {
-  /** The Data Pool's data retention in days. If not specified, records will be kept undefinitely. */
-  dataRetentionInDays?: InputMaybe<Scalars['Int']>;
-  /** The Data Source that will be used to create the Data Pool.  */
-  dataSource: IdOrUniqueName;
-  /** The Data Pool's description. */
-  description?: InputMaybe<Scalars['String']>;
-  /**
-   * The list of columns to exclude from the Data Pool. The specified columns from the underlying table will not be synced to the Data Pool.
-   *
-   * You may not exclude the timestamp column. Additionally, if you specify a `tenant`, that column may not be excluded.
-   */
-  excludedColumns?: InputMaybe<Array<Scalars['String']>>;
-  /**  The table that the Data Pool will sync from.  */
-  table: Scalars['String'];
-  /** An optional Data Pool Tenant ID. When specified, the Metrics powered by the Data Pool will be able to use `TENANT_ACCESS` Policies designed for multi-tenant use cases. */
-  tenant?: InputMaybe<TenantInput>;
-  /**  The table's primary timestamp column.  */
-  timestamp: DimensionInput;
-  /** The Data Pool's unique name. If not specified, Propel will set the ID as the unique name. */
   uniqueName?: InputMaybe<Scalars['String']>;
 };
 
@@ -3002,6 +3541,8 @@ export type ModifyDataPoolInput = {
   description?: InputMaybe<Scalars['String']>;
   /** The ID or unique name of the Data Pool to modify. */
   idOrUniqueName: IdOrUniqueName;
+  /**  The Data Pool's new syncing settings.  */
+  syncing?: InputMaybe<DataPoolSyncingInput>;
   /** The Data Pool's new unique name.  */
   uniqueName?: InputMaybe<Scalars['String']>;
 };
@@ -3022,7 +3563,7 @@ export type DimensionFragment = { __typename?: 'Dimension', columnName: string, 
 
 export type FilterFragment = { __typename?: 'Filter', column: string, operator: FilterOperator, value: string };
 
-export type MetricInfoFragment = { __typename?: 'Metric', id: string, uniqueName: string, type: MetricType, dimensions: Array<{ __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null }>, timestamp: { __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null }, measure?: { __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null } | null };
+export type MetricInfoFragment = { __typename?: 'Metric', id: string, uniqueName: string, type: MetricType, dimensions: Array<{ __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null }>, timestamp: { __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null } };
 
 export type QueryInfoFragment = { __typename?: 'QueryInfo', id: string, bytesProcessed: string, durationInMilliseconds: number, recordsProcessed: string, resultingBytes: number, resultingRecords: number, booster?: { __typename?: 'Booster', id: string } | null };
 
@@ -3032,7 +3573,7 @@ export type MetricCounterQueryVariables = Exact<{
 }>;
 
 
-export type MetricCounterQuery = { __typename?: 'Query', metric?: { __typename?: 'Metric', counter?: { __typename?: 'CounterResponse', value: string, query: { __typename?: 'QueryInfo', id: string, bytesProcessed: string, durationInMilliseconds: number, recordsProcessed: string, resultingBytes: number, resultingRecords: number, booster?: { __typename?: 'Booster', id: string } | null } } | null } | null };
+export type MetricCounterQuery = { __typename?: 'Query', metric?: { __typename?: 'Metric', counter?: { __typename?: 'CounterResponse', value?: string | null, query: { __typename?: 'QueryInfo', id: string, bytesProcessed: string, durationInMilliseconds: number, recordsProcessed: string, resultingBytes: number, resultingRecords: number, booster?: { __typename?: 'Booster', id: string } | null } } | null } | null };
 
 export type MetricLeaderboardQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -3048,12 +3589,12 @@ export type MetricTimeSeriesQueryVariables = Exact<{
 }>;
 
 
-export type MetricTimeSeriesQuery = { __typename?: 'Query', metric?: { __typename?: 'Metric', timeSeries?: { __typename?: 'TimeSeriesResponse', labels: Array<string>, values: Array<string>, query: { __typename?: 'QueryInfo', id: string, bytesProcessed: string, durationInMilliseconds: number, recordsProcessed: string, resultingBytes: number, resultingRecords: number, booster?: { __typename?: 'Booster', id: string } | null } } | null } | null };
+export type MetricTimeSeriesQuery = { __typename?: 'Query', metric?: { __typename?: 'Metric', timeSeries?: { __typename?: 'TimeSeriesResponse', labels: Array<string>, values: Array<string | null>, query: { __typename?: 'QueryInfo', id: string, bytesProcessed: string, durationInMilliseconds: number, recordsProcessed: string, resultingBytes: number, resultingRecords: number, booster?: { __typename?: 'Booster', id: string } | null } } | null } | null };
 
 export type MetricsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MetricsQuery = { __typename?: 'Query', metrics?: { __typename?: 'MetricConnection', nodes?: Array<{ __typename?: 'Metric', id: string, uniqueName: string, type: MetricType, dimensions: Array<{ __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null }>, timestamp: { __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null }, measure?: { __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null } | null }> | null } | null };
+export type MetricsQuery = { __typename?: 'Query', metrics?: { __typename?: 'MetricConnection', nodes: Array<{ __typename?: 'Metric', id: string, uniqueName: string, type: MetricType, dimensions: Array<{ __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null }>, timestamp: { __typename?: 'Dimension', columnName: string, type: string, isNullable?: boolean | null, isUniqueKey?: boolean | null } }> } | null };
 
 export const FilterFragmentDoc = gql`
     fragment FilterFragment on Filter {
@@ -3078,9 +3619,6 @@ export const MetricInfoFragmentDoc = gql`
     ...DimensionFragment
   }
   timestamp {
-    ...DimensionFragment
-  }
-  measure {
     ...DimensionFragment
   }
   type
