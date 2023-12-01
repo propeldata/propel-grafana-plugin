@@ -1829,6 +1829,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fastify/busboy@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "@fastify/busboy@npm:2.1.0"
+  checksum: 3233abd10f73e50668cb4bb278a79b7b3fadd30215ac6458299b0e5a09a29c3586ec07597aae6bd93f5cbedfcef43a8aeea51829cd28fc13850cdbcd324c28d5
+  languageName: node
+  linkType: hard
+
 "@floating-ui/core@npm:^1.2.1":
   version: 1.2.1
   resolution: "@floating-ui/core@npm:1.2.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40floating-ui%2Fcore%2F-%2Fcore-1.2.1.tgz"
@@ -16339,11 +16346,11 @@ __metadata:
   linkType: hard
 
 "undici@npm:^5.12.0, undici@npm:^5.8.0":
-  version: 5.19.1
-  resolution: "undici@npm:5.19.1"
+  version: 5.28.2
+  resolution: "undici@npm:5.28.2"
   dependencies:
-    busboy: ^1.6.0
-  checksum: 57ee94ee74d944faa41dbcb2faf4e0c90069708d3aaae860185884e51376b5d457728352a8396d69a3c9cb752b62ff99a19a664c5aacb7ee61cc488af499a01c
+    "@fastify/busboy": ^2.0.0
+  checksum: f9e9335803f962fff07c3c11c6d50bbc76248bacf97035047155adb29c3622a65bd6bff23a22218189740133149d22e63b68131d8c40e78ac6cb4b6d686a6dfa
   languageName: node
   linkType: hard
 
