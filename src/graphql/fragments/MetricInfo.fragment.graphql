@@ -7,8 +7,5 @@ fragment MetricInfoFragment on Metric {
     timestamp {
         ...DimensionFragment
     }
-    measure {
-        ...DimensionFragment
-    }
     type
 }
